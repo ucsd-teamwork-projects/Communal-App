@@ -43,15 +43,17 @@ router.post('/', (req, res) => {
 //     }
 // )
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
-    console.log('routes/user.js, login, req.body: ');
-    console.log(req.body)
-    console.log('logged in', req.user);
-    var userInfo = {
-        username: req.user.username
-    };
-    res.send(userInfo);
-});
+router.post('/login', passport.authenticate('local', { 
+        successRedirect: '/',
+        failureRedirect: '/login' 
+    }),(req, res, next) => {
+        console.log('logged in', req.user);
+        var userInfo = {
+            username: req.user.username
+        };
+        res.send(userInfo);
+    }
+);
 
 router.get('/', (req, res, next) => {
     console.log('===== user!!======')
