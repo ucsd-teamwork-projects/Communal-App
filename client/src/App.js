@@ -1,12 +1,24 @@
+// src/App.js
+
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TestApp from "./pages/TestApp";
+import NavBar from "./components/Navbar";
+import { useAuth0 } from "./react-auth0-spa";
 
 function App() {
+  const { loading } = useAuth0();
+
+  if (loading) {
+    return (
+      <div>Loading...</div>
+    );
+  }
+
   return (
-      <div>
-        <TestApp />
-      </div>
+    <div className="App">
+      <header>
+        <NavBar />
+      </header>
+    </div>
   );
 }
 
