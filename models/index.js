@@ -1,5 +1,6 @@
 module.exports = {
     User: require("./User"),
-    Event: require("./Event"),
-    Comment: require("./Comment")
+    Social: require("./Event"),
+    Comment: require("./Comment"),
+    Communal: require("./Communal")
 };
