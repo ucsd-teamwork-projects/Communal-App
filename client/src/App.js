@@ -17,8 +17,6 @@ function App() {
     return <div>Loading...</div>;
   }
 
-  const preventDefault = event => event.preventDefault();
-
   return (
     <Router>
       <div className="App">
@@ -30,8 +28,6 @@ function App() {
         </Link>
         <Switch>
           <PrivateRoute exact path="/TestApp" component={TestApp} />
-          {/* <Route exact path="/"/>
-          <Route exact path="/TestApp" component={TestApp}/> */}
         </Switch>
       </div>
     </Router>
