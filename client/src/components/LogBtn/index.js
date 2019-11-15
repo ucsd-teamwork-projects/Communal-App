@@ -1,7 +1,5 @@
 import React from "react";
 import { useAuth0 } from "../../react-auth0-spa";
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
 
 const LogBtn = () => {
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
@@ -10,16 +8,16 @@ const LogBtn = () => {
     <div>
       {/* render if user is logged out */}
       {!isAuthenticated && (
-        <Button variant="contained" color="primary" onClick={() => loginWithRedirect({})}>
+        <button className="btn btn-outline-success" onClick={() => loginWithRedirect({})}>
           Log in
-        </Button>
+        </button>
       )}
 
       {/* render if user is logged in */}
       {isAuthenticated && 
-          <Button variant="contained" color="primary" onClick={() => logout()}>
+          <button className="btn btn-outline-success" onClick={() => logout()}>
             Logout, {user.name}
-          </Button>
+          </button>
       }
     </div>
   );

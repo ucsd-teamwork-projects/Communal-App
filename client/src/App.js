@@ -1,13 +1,11 @@
 // src/App.js
 
 import React from "react";
-import AppBar from "./components/AppBar";
 import { useAuth0 } from "./react-auth0-spa";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import { BrowserRouter as Router, Switch } from "react-router-dom";
 import TestApp from "./pages/TestApp";
 import PrivateRoute from "./components/PrivateRoute";
-import Link from "@material-ui/core/Link";
+import Navbar from "./components/Navbar";
 
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
@@ -21,11 +19,11 @@ function App() {
     <Router>
       <div className="App">
         <header>
-          <AppBar />
+          <Navbar />
         </header>
-        <Link href="/TestApp">
+        <a href="/TestApp">
           protected page
-        </Link>
+        </a>
         <Switch>
           <PrivateRoute exact path="/TestApp" component={TestApp} />
         </Switch>
