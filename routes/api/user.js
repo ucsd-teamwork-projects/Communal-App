@@ -10,7 +10,7 @@ router
 router
   .route("/:id")
   .get(userController.find)
-  .update(userController.update)
+  .put(userController.update)
   .delete(userController.delete)
 
 router
