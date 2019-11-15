@@ -8,7 +8,7 @@ import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
 import FindSocial from "./pages/FindSocial";
 import NoMatch from "./components/NoMatch";
-import { Container } from "./components/Grid";
+import Container from 'react-bootstrap/Container'
 
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
@@ -29,7 +29,7 @@ function App() {
             protected page
           </a>
           <Switch>
-            <PrivateRoute exact path="/" component={Landing} />
+            <Route exact path="/" component={Landing} />
             <PrivateRoute exact path="/find-social" component={FindSocial} />
             <Route component={NoMatch} />
           </Switch>
