@@ -6,7 +6,7 @@ import { useAuth0 } from "./react-auth0-spa";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
-import FindSocial from "./pages/FindSocial";
+import FindSocial from "./pages/FindSocials.jsx";
 import NoMatch from "./components/NoMatch";
 import Container from 'react-bootstrap/Container'
 
