@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import TestApp from "./pages/TestApp";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
+import { Container } from "./components/Grid"
 
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
@@ -21,12 +22,14 @@ function App() {
         <header>
           <Navbar />
         </header>
-        <a href="/TestApp">
-          protected page
-        </a>
-        <Switch>
-          <PrivateRoute exact path="/TestApp" component={TestApp} />
-        </Switch>
+        <Container>
+          <a href="/TestApp">
+            protected page
+          </a>
+          <Switch>
+            <PrivateRoute exact path="/TestApp" component={TestApp} />
+          </Switch>
+        </Container>
       </div>
     </Router>
   );
