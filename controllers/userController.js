@@ -9,19 +9,23 @@ module.exports = {
     },
     find: function(req, res) {
         userDb
-            .findById(req.params.id)
+            .findOne(
+                {
+                    email: req.params.userEmail
+                }
+            )
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     update: function(req, res) {
         userDb
-            .findOneAndUpdate({ _id: req.params.id }, req.body)
+            .findOneAndUpdate({ email: req.params.userEmail }, req.body)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     pushLikes: function(req, res) {
         userDb
-            .findOneAndUpdate({ _id: req.params.id }, 
+            .findOneAndUpdate({ email: req.params.userEmail }, 
             {
                 $push: {
                     likes: req.body.id
@@ -32,7 +36,7 @@ module.exports = {
     },
     pushDislikes: function(req, res) {
         userDb
-            .findOneAndUpdate({ _id: req.params.id }, 
+            .findOneAndUpdate({ email: req.params.userEmail }, 
             {
                 $push: {
                     dislikes: req.body.id
@@ -43,7 +47,7 @@ module.exports = {
     },
     delete: function(req, res) {
         userDb
-            .findById({ _id: req.params.id })
+            .findOne({ email: req.params.userEmail })
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));

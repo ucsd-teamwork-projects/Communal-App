@@ -1,4 +1,8 @@
 import axios from "axios";
+import { useAuth0 } from "../react-auth0-spa";
+
+const { user } = useAuth0();
+
 
 export default {
   // Gets all socials
@@ -6,18 +10,18 @@ export default {
     return axios.get("/api/socials");
   },
   // Gets user Social likes & dislikes
-  getUserSocialPref: function(userId) {
-    return axios.get(`/api/${userId}/socialPref`);
+  getUserSocialPref: function() {
+    return axios.get(`/api/${user.email}/socialPref`);
 
   },
   postUserSocialLike: function(socialId) {
-    return axios.post(`/api/${userId}/likes`, {
+    return axios.post(`/api/${user.email}/likes`, {
       id: socialId
     });
 
   },
   postUserSocialDislike: function(socialId) {
-    return axios.post(`/api/${userId}/dislikes`, {
+    return axios.post(`/api/${user.email}/dislikes`, {
       id: socialId
     });
 
