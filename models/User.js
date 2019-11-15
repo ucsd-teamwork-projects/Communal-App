@@ -24,6 +24,14 @@ const userSchema = new Schema({
   },
   image: {
     type: String
+  },
+  likes: {
+    type: [Schema.Types.ObjectId], 
+    ref: "Social" 
+  },
+  dislikes: {
+    type: [Schema.Types.ObjectId], 
+    ref: "Social" 
   }
 });
 

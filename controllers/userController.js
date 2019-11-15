@@ -19,6 +19,28 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+    pushLikes: function(req, res) {
+        userDb
+            .findOneAndUpdate({ _id: req.params.id }, 
+            {
+                $push: {
+                    likes: req.body.id
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    pushDislikes: function(req, res) {
+        userDb
+            .findOneAndUpdate({ _id: req.params.id }, 
+            {
+                $push: {
+                    dislikes: req.body.id
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
     delete: function(req, res) {
         userDb
             .findById({ _id: req.params.id })
