@@ -6,7 +6,7 @@ import { Navbar, Nav, NavDropdown, Form } from 'react-bootstrap';
 function NavMenu() {
   const { user } = useAuth0();
   return (
-    <Navbar bg="primary" expand="lg">
+    <Navbar style={{"z-index": "1000"}} bg="primary" expand="lg">
       <Navbar.Brand href="/">Communal</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
