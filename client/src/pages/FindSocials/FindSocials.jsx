@@ -75,10 +75,11 @@ class FindSocials extends Component {
           <div id="stacked-cards-block" className="stackedcards stackedcards--animatable init">
             <div className="stackedcards-container">
               {/* Render filtered social cards here */}
-              
+        
               {
                 this.state.socials.map(social => (
                   <div className="card">
+                    <Link to={`social/${social._id}`}>
                   <div className="card-content">
                     <div className="card-image"><img src={social.img} width="100%" height="100%" /></div>
                     <div className="card-titles">
@@ -86,6 +87,7 @@ class FindSocials extends Component {
                       <h5 className="flow-text break-word"><i class="fas fa-calendar-week text-secondary"></i>&nbsp;&nbsp;{social.date}</h5>
                     </div>
                   </div>
+                </Link>
                   <div className="card-footer">
                       <Container>
                         <Row className="mb-4 mt-3">
