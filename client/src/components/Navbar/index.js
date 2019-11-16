@@ -6,7 +6,7 @@ import { useAuth0 } from "../../react-auth0-spa";
 function Navbar() {
   const { user } = useAuth0();
   return (
-    <Nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+    <Nav style={{"z-index": "1000"}} className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="/">
         Communal
       </a>
