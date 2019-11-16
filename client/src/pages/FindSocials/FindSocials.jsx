@@ -87,7 +87,7 @@ class FindSocials extends Component {
       <div>
         {/* Main card container */}
         <div className="stage">
-          <div className="title">Events Near You &nbsp;&nbsp;<i class="fas fa-street-view"></i> </div>
+          <div className="title">Events Near You &nbsp;&nbsp;<i className="fas fa-street-view"></i> </div>
           <div id="stacked-cards-block" className="stackedcards stackedcards--animatable init">
             <div className="stackedcards-container">
               {/* Render filtered social cards here */}
@@ -100,7 +100,7 @@ class FindSocials extends Component {
                     <div className="card-image"><img src={social.img} width="100%" height="100%" /></div>
                     <div className="card-titles">
                       <h4 className="flow-text break-word">{social.title}</h4>
-                      <h5 className="flow-text break-word"><i class="fas fa-calendar-week text-secondary"></i>&nbsp;&nbsp;{social.date}</h5>
+                      <h5 className="flow-text break-word"><i className="fas fa-calendar-week text-secondary"></i>&nbsp;&nbsp;{social.date}</h5>
                     </div>
                   </div>
                 </Link>
