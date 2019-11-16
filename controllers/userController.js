@@ -51,5 +51,27 @@ module.exports = {
             .then(dbModel => dbModel.remove())
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
+    },
+    pullLikes: function(req, res) {
+        userDb
+            .findOneAndUpdate({ email: req.params.userEmail }, 
+            {
+                $pull: {
+                    likes: req.body.id
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    pullDislikes: function(req, res) {
+        userDb
+            .findOneAndUpdate({ email: req.params.userEmail }, 
+            {
+                $pull: {
+                    dislikes: req.body.id
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     }
 }

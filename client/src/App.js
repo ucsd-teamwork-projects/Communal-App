@@ -6,13 +6,13 @@ import { useAuth0 } from "./react-auth0-spa";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
-import FindSocial from "./pages/FindSocial";
+import FindSocials from "./pages/FindSocials/index";
 import NoMatch from "./components/NoMatch";
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
 
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
-  const { loading } = useAuth0();
+  const { loading, user } = useAuth0();
 
   if (loading) {
     return <div>Loading...</div>;
@@ -25,12 +25,9 @@ function App() {
           <Navbar />
         </header>
         <Container>
-          <a href="/TestApp">
-            protected page
-          </a>
           <Switch>
             <Route exact path="/" component={Landing} />
-            <PrivateRoute exact path="/find-social" component={FindSocial} />
+            <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
             <Route component={NoMatch} />
           </Switch>
         </Container>
