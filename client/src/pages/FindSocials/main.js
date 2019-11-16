@@ -109,8 +109,9 @@ export function documentReady() {
 
 		//Add listeners to call global action for swipe cards
 		let pushLikeButton = document.querySelector('.push-like-action');
-		// let buttonTop = document.querySelector('.top-action');
 		let pushDislikeButton = document.querySelector('.push-dislike-action');
+		let pushGoingButton = document.querySelector('.push-going-action');
+
 
 		//Remove class init
 		setTimeout(function () {
@@ -680,6 +681,7 @@ export function documentReady() {
 				if (translateY < (elementHeight * -1) && translateX > ((listElNodesWidth / 2) * -1) && translateX < (listElNodesWidth / 2)) {  //is Top?
 
 					if (translateY < (elementHeight * -1) || (Math.abs(translateY) / timeTaken > velocity)) { // Did It Move To Top?
+						pushGoingButton.click();
 						onSwipeTop();
 					} else {
 						backToMiddle();

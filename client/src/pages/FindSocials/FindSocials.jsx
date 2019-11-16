@@ -11,10 +11,14 @@ import { documentReady } from "./main.js";
 import "../../utils/flowHeaders.min.css";
 
 class FindSocials extends Component {
+  constructor(props) {
+    super(props);
+    this.currSocialIdx = 0;
+  }
+
   state = {
     socials: [],
-    user: this.props.user,
-    currSocialId: 0
+    user: this.props.user
   };
 
   filterSocials = socials => {
@@ -33,7 +37,8 @@ class FindSocials extends Component {
 
         this.setState({
           socials: filtered
-        })
+        });
+
       });
   }
 
@@ -49,19 +54,30 @@ class FindSocials extends Component {
 
   dislikeSocial = () => {
     // Add Social to user dislikes
-    API.putUserSocialDislike(this.state.user.email, this.state.currSocial);
-
+    API.putUserSocialDislike(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    this.currSocialIdx++;
   }
 
   likeSocial = () => {
     // Add Social to user likes
-    API.putUserSocialLike(this.state.user.email, this.state.currSocial);
+    API.putUserSocialLike(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    this.currSocialIdx++;
+  }
 
+  markGoingSocial = () => {
+    // Add Social to user going
+    API.putUserSocialGoing(this.state.user.email, this.state.socials[this.currSocialIdx]);
+
+    // Add user to Social going
+    API.putSocialUserGoing(this.state.user.email, this.state.socials[this.currSocialIdx]);
+
+    this.currSocialIdx++;
   }
 
   componentDidMount() {
     // Pull socials from database that user has not seen
     this.pullSocials();
+    // Call page functions after component rendered 
     documentReady();
   }
 
@@ -110,7 +126,7 @@ class FindSocials extends Component {
           </div>
           <div className="global-actions">
             <div className="left-action" ><div onClick={() => this.dislikeSocial()} className="push-dislike-action"><img src="https://image.ibb.co/heTxf7/20_status_close_3x.png" width="26" height="26" /></div></div>
-            <div className="top-action" ><img src="https://image.ibb.co/m1ykYS/rank_army_star_2_3x.png" width="18" height="16" /></div>
+            <div className="top-action" ><div onClick={() => this.markGoingSocial()} className="push-going-action"><img src="https://image.ibb.co/m1ykYS/rank_army_star_2_3x.png" width="18" height="16" /></div></div>
             <div className="right-action" ><div onClick={() => this.likeSocial()} className="push-like-action"><img src="https://image.ibb.co/dCuESn/Path_3x.png" width="30" height="28" /></div></div>
           </div>
         </div>

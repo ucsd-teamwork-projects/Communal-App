@@ -5,4 +5,7 @@ const socialController = require("../../controllers/socialController");
 router.route("/")
   .get(socialController.findAll)
 
+router.route("/:id/going")
+  .put(socialController.pushGoing)
+
 module.exports = router;
