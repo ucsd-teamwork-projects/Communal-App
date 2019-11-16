@@ -10,7 +10,7 @@
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
-    "build": "npm run seed && cd client && npm run build",
+    "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "author": "",
