@@ -167,7 +167,7 @@ export function documentReady() {
 
 		//Change states
 		function changeStages() {
-			if (currentPosition == maxElements) {
+			if (currentPosition === maxElements) {
 				//Event listener created to know when transition ends and changes states
 				listElNodesObj[maxElements - 1].addEventListener('transitionend', function () {
 					showFinalMessage()

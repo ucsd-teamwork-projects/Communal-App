@@ -6,7 +6,7 @@ import { Navbar, Nav, NavDropdown, Form } from 'react-bootstrap';
 function NavMenu() {
   const { user } = useAuth0();
   return (
-    <Navbar style={{"z-index": "1000"}} bg="primary" expand="lg">
+    <Navbar style={{"zIndex": "1000"}} bg="primary" expand="lg">
       <Navbar.Brand href="/">Communal</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -15,7 +15,7 @@ function NavMenu() {
           <Nav.Link href="/profile">My Profile</Nav.Link>
           <NavDropdown title="Socials" id="basic-nav-dropdown">
             <NavDropdown.Item href="/find-social">Explore Socials</NavDropdown.Item>
-            <NavDropdown.Item href="/add social">Add New Social</NavDropdown.Item>
+            <NavDropdown.Item href="/add-social">Add New Social</NavDropdown.Item>
           </NavDropdown>
         </Nav>
         <Form inline>

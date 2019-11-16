@@ -8,6 +8,7 @@ import Loading from "./components/Loading";
 import NavMenu from "./components/NavMenu";
 import Landing from "./pages/Landing";
 import FindSocials from "./pages/FindSocials/index";
+import AddSocial from "./pages/AddSocial";
 import NoMatch from "./components/NoMatch";
 import Container from 'react-bootstrap/Container';
 
@@ -37,6 +38,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
+            <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/>
             <Route component={NoMatch} />
           </Switch>
         </Container>

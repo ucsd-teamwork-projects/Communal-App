@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { Col, Card } from "react-bootstrap";
-// import bino from "../components/img/bino.png";
-// import car from "../components/img/car.png";
-// import people from "../components/img/people.png";
 
 export class Landing extends Component {
   render() {
@@ -21,15 +18,15 @@ export class Landing extends Component {
                 </Card.Header>
                 <Card.Body className="text-left mx-auto">
                   <Card.Text>
-                    <i class="fas fa-binoculars fa-2x mr-4"></i>
+                    <i className="fas fa-binoculars fa-2x mr-4"></i>
                     <span>Find hidden gems in places you visit regularly</span>
                   </Card.Text>
                   <Card.Text>
-                    <i class="fas fa-car fa-2x mr-4"></i>
+                    <i className="fas fa-car fa-2x mr-4"></i>
                     <span>Share places you have found for others to explore</span>
                   </Card.Text>
                   <Card.Text>
-                    <i class="fas fa-users fa-2x mr-4"></i>
+                    <i className="fas fa-users fa-2x mr-4"></i>
                     <span>Create groups for meetups</span>
                   </Card.Text>
                 </Card.Body>
