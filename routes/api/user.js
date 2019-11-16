@@ -15,12 +15,12 @@ router
 
 router
   .route("/:id/likes")
-  .post(userController.pushLikes)
-  // .delete(userController.pullLikes)
+  .put(userController.pushLikes)
+  .delete(userController.pullLikes)
 
 router
   .route("/:id/dislikes")
-  .post(userController.pushDisikes)
-  // .delete(userController.pullDislikes)
+  .put(userController.pushDislikes)
+  .delete(userController.pullDislikes)
 
 module.exports = router;
