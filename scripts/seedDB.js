@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const db = require("../models");
 
-// This file empties the Books collection and inserts the books below
 
 mongoose.connect(
   process.env.MONGODB_URI ||
@@ -67,7 +66,7 @@ const socialSeed = [
   }
 ];
 
-db.socialDb
+db.Social
   .remove({})
   .then(() => db.socialDb.collection.insertMany(socialSeed))
   .then(data => {
