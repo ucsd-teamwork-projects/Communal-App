@@ -21,5 +21,17 @@ export default {
       id: socialId
     });
 
+  },
+  putUserSocialGoing: function(userEmail, socialId) {
+    return axios.put(`/api/user/${userEmail}/going`, {
+      id: socialId
+    });
+
+  },
+  putSocialUserGoing: function(userEmail, socialId) {
+    return axios.put(`/api/socials/${socialId}/going`, {
+      email: userEmail
+    });
+
   }
 };

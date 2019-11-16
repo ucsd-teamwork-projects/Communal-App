@@ -26,6 +26,17 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  pushGoing: function(req, res) {
+    socialDb
+            .findById({ _id: req.params.id }, 
+            {
+                $push: {
+                    going: req.body.email
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+  },
   remove: function(req, res) {
     socialDb
       .findById({ _id: req.params.id })

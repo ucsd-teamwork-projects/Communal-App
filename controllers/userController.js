@@ -45,6 +45,17 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+    pushGoing: function(req, res) {
+        userDb
+            .findOneAndUpdate({ email: req.params.userEmail }, 
+            {
+                $push: {
+                    going: req.body.id
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+      },
     delete: function(req, res) {
         userDb
             .findOne({ email: req.params.userEmail })
