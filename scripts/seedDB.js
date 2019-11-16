@@ -68,7 +68,7 @@ const socialSeed = [
 
 db.Social
   .remove({})
-  .then(() => db.socialDb.collection.insertMany(socialSeed))
+  .then(() => db.Social.collection.insertMany(socialSeed))
   .then(data => {
     console.log(data.result.n + " records inserted!");
     process.exit(0);
