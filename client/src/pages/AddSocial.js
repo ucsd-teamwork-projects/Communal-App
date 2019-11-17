@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class TestApp extends Component {
+export class AddSocial extends Component {
     render() {
         return (
             <div>
@@ -11,4 +11,4 @@ export class TestApp extends Component {
     }
 }
 
-export default TestApp
+export default AddSocial

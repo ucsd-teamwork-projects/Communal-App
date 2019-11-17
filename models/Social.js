@@ -19,6 +19,9 @@ const socialSchema = new Schema({
   dislikes: {
     type: Number
   },
+  image: {
+    type: String
+  },
   creator: {
     type: [Schema.Types.ObjectId], 
     ref: "User" 

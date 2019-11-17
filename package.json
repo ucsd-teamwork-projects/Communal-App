@@ -10,7 +10,7 @@
     "client": "cd client && npm run start",
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
-    "build": "npm run seed && cd client && npm run build",
+    "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
   "author": "",
@@ -22,10 +22,12 @@
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.5.0",
     "axios": "^0.19.0",
+    "events": "^3.0.0",
     "express": "^4.17.1",
     "if-env": "^1.0.4",
-    "mongoose": "^5.7.10",
     "react-horizontal-scrolling-menu": "^0.7.3",
+    "mongoose": "^5.7.11",
+    "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.1.2"
   }
 }

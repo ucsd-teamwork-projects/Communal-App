@@ -1,20 +1,37 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
-  getBooks: function() {
-    return axios.get("/api/books");
+  // Gets all socials
+  getSocials: function() {
+    return axios.get("/api/socials");
   },
-  // Gets the book with the given id
-  getBook: function(id) {
-    return axios.get("/api/books/" + id);
+  // Gets user Social likes & dislikes
+  getUserSocialPref: function(userEmail) {
+    return axios.get(`/api/user/${userEmail}/socialPref`);
+
   },
-  // Deletes the book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
+  putUserSocialLike: function(userEmail, socialId) {
+    return axios.put(`/api/user/${userEmail}/likes`, {
+      id: socialId
+    });
+
   },
-  // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
+  putUserSocialDislike: function(userEmail, socialId) {
+    return axios.put(`/api/user/${userEmail}/dislikes`, {
+      id: socialId
+    });
+
+  },
+  putUserSocialGoing: function(userEmail, socialId) {
+    return axios.put(`/api/user/${userEmail}/going`, {
+      id: socialId
+    });
+
+  },
+  putSocialUserGoing: function(userEmail, socialId) {
+    return axios.put(`/api/socials/${socialId}/going`, {
+      email: userEmail
+    });
+
   }
 };
