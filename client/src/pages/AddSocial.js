@@ -4,8 +4,8 @@ export class AddSocial extends Component {
     render() {
         return (
             <div>
-                <h1>My TEST APP</h1>
-                <p>HELLO WORLD!!!</p>
+                <h1>Lets get people together!</h1>
+                <p>Add Social</p>
             </div>
         )
     }

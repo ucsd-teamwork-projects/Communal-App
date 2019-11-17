@@ -8,8 +8,8 @@ import {
   ListGroup,
   ListGroupItem
 } from "react-bootstrap";
-import Logo from "../components/img/logo.png";
-import SocialCard from "../components/SocialCard";
+import Logo from "../assets/img/logo.png";
+// import SocialCard from "../components/SocialCard";
 import HorizontalScroll from "../components/HorizontalScroll";
 
 export class UserPage extends Component {

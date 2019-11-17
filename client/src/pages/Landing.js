@@ -14,7 +14,7 @@ export class Landing extends Component {
               <Card className="text-center">
                 <Card.Header>
                   <h1 className="Display-1">Communal</h1>
-                  <h3 className="Display-3">Find out where you belong</h3>
+                  <h3 className="Display-3">Find People, Do Stuff</h3>
                 </Card.Header>
                 <Card.Body className="text-left mx-auto">
                   <Card.Text>

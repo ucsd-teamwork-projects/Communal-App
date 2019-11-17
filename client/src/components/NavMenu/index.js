@@ -4,11 +4,23 @@ import { useAuth0 } from "../../react-auth0-spa";
 import { Navbar, Nav, NavDropdown, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import Logo from "../../assets/img/logo.png";
+import "./style.css";
+
 function NavMenu() {
   const { user, isAuthenticated } = useAuth0();
   return (
-    <Navbar style={{"zIndex": "1000"}} bg="primary" expand="lg">
-      <Navbar.Brand href="/">Communal</Navbar.Brand>
+    <Navbar style={{"zIndex": "1000"}} className="bg" expand="lg">
+      <Navbar.Brand href="/">
+        <img
+          src={Logo}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+          alt=""
+        />
+        {` Communal`}
+      </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
@@ -24,7 +36,7 @@ function NavMenu() {
           )}
         </Nav>
         <Form inline>
-          <span className="mr-2">{user?"Welcome, " + user.name:""}</span>
+          <span className="mr-4">{user?"Welcome, " + user.name:""}</span>
           <LogBtn />
         </Form>
       </Navbar.Collapse>
