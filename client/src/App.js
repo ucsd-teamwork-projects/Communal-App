@@ -7,6 +7,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Loading from "./components/Loading";
 import NavMenu from "./components/NavMenu";
 import Landing from "./pages/Landing";
+import UserPage from "./pages/UserPage";
 import FindSocials from "./pages/FindSocials/index";
 import AddSocial from "./pages/AddSocial";
 import NoMatch from "./components/NoMatch";
@@ -39,6 +40,7 @@ function App() {
             <Route exact path="/" component={Landing} />
             <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
             <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/>
+            <PrivateRoute exact path="/profile" component={UserPage} />
             <Route component={NoMatch} />
           </Switch>
         </Container>
