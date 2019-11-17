@@ -44,7 +44,8 @@ class FindSocials extends Component {
 
   pullSocials = () => {
     //   Pull numSocials from the database 
-    API.getSocials()
+    let fields = ["creator"]
+    API.getSocials(fields)
       .then( (allSocials) => {
         //   Filter returned Socials based off what user has already seen
         this.filterSocials(allSocials);
@@ -95,11 +96,11 @@ class FindSocials extends Component {
               {
                 this.state.socials.map(social => (
                   <div className="card">
-                    <Link to={`social/${social._id}`}>
+                    <Link to={`socials/${social._id}`}>
                   <div className="card-content">
                     <div className="card-image"><img src={social.img} width="100%" height="100%" /></div>
                     <div className="card-titles">
-                      <h4 className="flow-text break-word">{social.title}</h4>
+                      <h4 className="flow-text break-word">{social.name}</h4>
                       <h5 className="flow-text break-word"><i className="fas fa-calendar-week text-secondary"></i>&nbsp;&nbsp;{social.date}</h5>
                     </div>
                   </div>
@@ -107,7 +108,7 @@ class FindSocials extends Component {
                   <div className="card-footer">
                       <Container>
                         <Row className="mb-4 mt-3">
-                        <div> <i className="fas fa-user-circle fa-lg text-info"></i> &nbsp; <span className="text-muted"> {social.authorName} </span> </div>
+                        <div> <i className="fas fa-user-circle fa-lg text-info"></i> &nbsp; <span className="text-muted"> {social.creator.name} </span> </div>
                         </Row>
                         <Row className="mb-4">
                         <div> <i className="fas fa-thumbtack fa-lg text-danger"></i> &nbsp; <span className="text-muted"> {social.location} </span> </div>

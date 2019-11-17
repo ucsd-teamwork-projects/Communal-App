@@ -2,21 +2,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-  text: { 
-    type: String, 
-    required: true 
+  text: {
+    type: String,
+    required: true
   },
-  author: { 
-    type: Schema.Types.ObjectId,
-     ref: "User" 
-    },
-  social: { 
-    type: Schema.Types.ObjectId, 
-    ref: "Social" 
+  authorName: {
+    type: String,
+    required: true
   },
-  communal: { 
-    type: Schema.Types.ObjectId, 
-    ref: "Communal"
+  authorPhoto: {
+    type: String,
+    required: true
+  },
+  created: {
+    type: Date,
+    default: Date.now
   }
 });
 

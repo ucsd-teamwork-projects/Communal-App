@@ -2,8 +2,22 @@ import axios from "axios";
 
 export default {
   // Gets all socials
-  getSocials: function() {
-    return axios.get("/api/socials");
+  getSocials: function(populateFields) {
+    return axios.get("/api/socials", 
+    {
+      fields: populateFields.join(" ")
+    });
+  },
+  // Get social by ID
+  getSocialById: function(socialId, populateFields) {
+    return axios.get(`/api/socials/:${socialId}`, 
+    {
+      fields: populateFields.join(" ")
+    });
+  },
+  // Post comment to Social
+  postCommentToSocial: function(socialId, commentObj) {
+    return axios.get(`/api/socials/:${socialId}/comment`, commentObj);
   },
   // Gets user Social likes & dislikes
   getUserSocialPref: function(userEmail) {
