@@ -29,7 +29,7 @@ function App() {
   }
 
   return (
-    <Router>
+    // <Router>
       <div className="App">
         <header>
           <NavMenu />
@@ -43,7 +43,7 @@ function App() {
           </Switch>
         </Container>
       </div>
-    </Router>
+    // </Router>
   );
 }
 
