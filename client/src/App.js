@@ -6,6 +6,7 @@ import { useAuth0 } from "./react-auth0-spa";
 import PrivateRoute from "./components/PrivateRoute";
 import Navbar from "./components/Navbar";
 import Landing from "./pages/Landing";
+import UserPage from "./pages/UserPage";
 import FindSocial from "./pages/FindSocial";
 import NoMatch from "./components/NoMatch";
 import { Container } from "./components/Grid";
@@ -31,6 +32,7 @@ function App() {
           <Switch>
             <PrivateRoute exact path="/" component={Landing} />
             <PrivateRoute exact path="/find-social" component={FindSocial} />
+            <PrivateRoute exact path="/UserPage" component={UserPage} />
             <Route component={NoMatch} />
           </Switch>
         </Container>
