@@ -1,7 +1,7 @@
 // src/App.js
 
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "./react-auth0-spa";
 import PrivateRoute from "./components/PrivateRoute";
 import Loading from "./components/Loading";
@@ -30,7 +30,6 @@ function App() {
   }
 
   return (
-    // <Router>
       <div className="App">
         <header>
           <NavMenu />
@@ -45,7 +44,6 @@ function App() {
           </Switch>
         </Container>
       </div>
-    // </Router>
   );
 }
 

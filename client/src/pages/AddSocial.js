@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export class AddSocial extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Lets get people together!</h1>
-                <p>Add Social</p>
-            </div>
-        )
-    }
+export default function AddSocial() {
+    return (
+        <div>
+            <h1>Lets get people together!</h1>
+            <p>Add Social</p>
+        </div>
+    )
 }
 
-export default AddSocial
+
+
+
+
+
