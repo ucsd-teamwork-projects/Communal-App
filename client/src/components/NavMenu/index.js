@@ -34,6 +34,7 @@ function NavMenu() {
               </NavDropdown>
             </React.Fragment>
           )}
+          <Nav.Link as={Link} to="/about">About</Nav.Link>
         </Nav>
         <Form inline>
           <span className="mr-4">{user?"Welcome, " + user.name:""}</span>

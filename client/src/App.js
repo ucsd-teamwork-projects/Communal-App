@@ -10,9 +10,9 @@ import Landing from "./pages/Landing";
 import UserPage from "./pages/UserPage";
 import FindSocials from "./pages/FindSocials/index";
 import AddSocial from "./pages/AddSocial";
+import About from './pages/About';
 import NoMatch from "./components/NoMatch";
 import Container from 'react-bootstrap/Container';
-
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
   const { loading, user } = useAuth0();
@@ -37,6 +37,7 @@ function App() {
         <Container>
           <Switch>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/about" component={About} />
             <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
             <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/>
             <PrivateRoute exact path="/profile" component={UserPage} />
