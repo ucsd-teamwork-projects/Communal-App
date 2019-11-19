@@ -38,7 +38,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
-            <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/>
+            <Route exact path="/add-social" component={AddSocial} user={user}/>
             <Route component={NoMatch} />
           </Switch>
         </Container>
