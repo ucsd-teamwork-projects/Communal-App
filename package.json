@@ -28,6 +28,7 @@
     "mongoose": "^5.7.11",
     "pusher": "^3.0.0",
     "pusher-js": "^5.0.2",
+    "react-autosize-textarea": "^7.0.0",
     "react-router-dom": "^5.1.2"
   }
 }

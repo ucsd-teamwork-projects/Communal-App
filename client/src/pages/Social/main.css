@@ -1,3 +1,8 @@
 .break-word {
     word-wrap: break-word;
   }
+
+.hover-underline:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}

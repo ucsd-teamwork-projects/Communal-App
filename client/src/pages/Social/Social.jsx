@@ -5,6 +5,8 @@ import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import "./main.css";
 import { Container, Row, Col, Card, Button, ButtonGroup } from 'react-bootstrap';
+import GoingListModal from "../../components/GoingListModal"
+import SocialDiscussion from "../../components/SocialDiscussion"
 
 // Import responsive header tags
 import "../../utils/flowHeaders.min.css";
@@ -27,7 +29,9 @@ class Social extends Component {
     comments: [],
     commentInput: "",
     userGoing: false,
-    userInterested: false
+    userInterested: false,
+    modalShow: false,
+    going: []
   };
 
   getSocial = () => {
@@ -37,14 +41,22 @@ class Social extends Component {
     // Retrieve this Social object 
     API.getSocialById(this.socialId, fields)
       .then(currSocial => {
+        this.social.creator = currSocial.creator;
+        this.social.time = currSocial.time;
+        this.social.location = currSocial.location;
+        this.social.description = currSocial.description;
+
         this.setState({
-          social: currSocial
+          comments: currSocial.comments
+
         });
       })
 
   };
 
-  postComment = () => {
+  postComment = (e) => {
+    // Prevent page refresh
+    e.preventDefault();    
     // Create Comment to be inserted
     const newComment = {
       text: this.state.commentInput,
@@ -138,6 +150,7 @@ class Social extends Component {
             <p style={{ "word-wrap": "break-word" }}>
             {this.social.description}
             </p>
+            <p className="hover-underline mb-1 font-weight-bold" onClick={() => this.setState({modalShow: true})}> {this.state.going.length} going</p>
             <ButtonGroup className="mt-1" size="sm" >
               {this.state.userGoing ?
                 <Button onClick={() => this.unmarkGoing()} variant="success"><i class="fas fa-check-circle"></i>&nbsp;I'm going!</Button>
@@ -154,9 +167,9 @@ class Social extends Component {
           </Card.Body>
         </Card>
 
-        {/* List of people going */}
+        <GoingListModal going={this.state.going} show={this.state.modalShow} onHide={() => this.setState({modalShow: false})} />
+        <SocialDiscussion  title="Comments" inputPlaceholder="Enter your comment here..." posts={this.state.comments} handleChange={(e) => this.setState({commentInput: e.target.value})} handleSubmit={() => this.postComment()} />
 
-        {/* Comment Form */}
       </div>
     );
   }
