@@ -23,7 +23,7 @@ const NoMatch = () => {
                 <form>
                     <p></p>
                     <Button as={Link} to="/" style={{ backgroundColor: "#ffc038", outlineColor: "#000", color: "#000" }}>
-                        ...Lets get you home.  <i class="fas fa-home fa-2x"></i>
+                        ...Lets get you home.  <i className="fas fa-home fa-2x"></i>
                     </Button>
                 </form>
             </div>
