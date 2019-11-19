@@ -51,12 +51,12 @@ function ImgCarousel() {
             alt="First slide"
           />
           <Carousel.Caption>
+              <Badge pill variant="dark" className="p-4" style={{opacity: 0.8}}>
             <h1>
-              <Badge pill variant="dark">
                 {image.name}
-              </Badge>
             </h1>
             <h3 style={{color: "#ffc038"}}>{image.caption}</h3>
+              </Badge>
           </Carousel.Caption>
       </Carousel.Item>
     );
