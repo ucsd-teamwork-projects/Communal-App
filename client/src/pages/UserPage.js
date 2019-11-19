@@ -4,9 +4,7 @@ import {
   Row,
   Col,
   Image,
-  Card,
   ListGroup,
-  ListGroupItem
 } from "react-bootstrap";
 import Logo from "../assets/img/logo.png";
 // import SocialCard from "../components/SocialCard";
