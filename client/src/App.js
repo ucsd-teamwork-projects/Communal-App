@@ -34,7 +34,7 @@ function App() {
         <header>
           <NavMenu />
         </header>
-        <Container>
+        {/* <Container> */}
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
@@ -43,7 +43,7 @@ function App() {
             <PrivateRoute exact path="/profile" component={UserPage} />
             <Route component={NoMatch} />
           </Switch>
-        </Container>
+        {/* </Container> */}
       </div>
   );
 }
