@@ -141,10 +141,10 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">React horizontal scrolling menu</h1>
+          <h1 className="App-title">Your Socials!</h1>
         </header>
         <p className="App-intro">
-          Horizontal scrolling menu example. Click arrow or drag items.
+         Don't forget! Take a pic of your adventure and post it on the Event Page!
         </p>
 
         <ScrollMenu
@@ -164,116 +164,8 @@ class App extends Component {
           clickWhenDrag={clickWhenDrag}
           wheel={wheel}
         />
-
-        <form className="properties">
-          <label style={checkboxStyle}>
-            Align center
-            <input
-              name="alignCenter"
-              type="checkbox"
-              checked={alignCenter}
-              onChange={() => this.setState({ alignCenter: !alignCenter })}
-            />
-          </label>
-          <label style={checkboxStyle}>
-            Dragging
-            <input
-              name="dragging"
-              type="checkbox"
-              checked={dragging}
-              onChange={() => this.setState({ dragging: !dragging })}
-            />
-          </label>
-          <label style={checkboxStyle}>
-            Click when drag end
-            <input
-              name="clickWhenDrag"
-              type="checkbox"
-              checked={clickWhenDrag}
-              onChange={() => this.setState({ clickWhenDrag: !clickWhenDrag })}
-            />
-          </label>
-          <label style={checkboxStyle}>
-            Use mouse wheel
-            <input
-              name="wheel"
-              type="checkbox"
-              checked={wheel}
-              onChange={() => this.setState({ wheel: !wheel })}
-            />
-          </label>
-          <label style={checkboxStyle}>
-            Hide arrows if items width less than menu width
-            <input
-              name="hideArrows"
-              type="checkbox"
-              checked={hideArrows}
-              onChange={() => this.setState({ hideArrows: !hideArrows })}
-            />
-          </label>
-          <label style={checkboxStyle}>
-            Hide left/right arrows if first/last item visible
-            <input
-              name="hideSingleArrow"
-              type="checkbox"
-              checked={hideSingleArrow}
-              onChange={() =>
-                this.setState({ hideSingleArrow: !hideSingleArrow })
-              }
-            />
-          </label>
-          <br />
-          <div style={valueStyle}>Translate: {translate.toFixed(2)}</div>
-          <label style={valueStyle}>
-            Selected:
-            <input
-              style={{ margin: "0 5px" }}
-              name="selected"
-              type="text"
-              value={selected}
-              onChange={this.setSelected}
-            />
-          </label>
-          <label style={valueStyle}>
-            Transition duration:
-            <input
-              style={{ margin: "0 5px" }}
-              name="transition"
-              type="number"
-              value={transition || 0}
-              min={0}
-              max={10}
-              onChange={ev =>
-                this.setState({
-                  transition: !isNaN(ev.target.value) ? +ev.target.value : 0
-                })
-              }
-            />
-          </label>
-          <label style={valueStyle}>
-            Items count:
-            <input
-              style={{ margin: "0 5px" }}
-              name="itemsCount"
-              type="number"
-              value={itemsCount}
-              min={0}
-              max={list.length}
-              onChange={this.setItemsCount}
-            />
-          </label>
-        </form>
         <hr />
-        <div>
-          <a
-            /* eslint-disable react/jsx-no-target-blank */
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/asmyshlyaev177/react-horizontal-scrolling-menu"
-          >
-            Project on GitHub
-          </a>
-        </div>
+    
       </div>
     );
   }
