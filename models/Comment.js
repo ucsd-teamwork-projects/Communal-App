@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const commentSchema = new Schema({
-  text: {
-    type: String,
-    required: true
+  created: {
+    type: Date,
+    default: Date.now
   },
   authorName: {
     type: String,
@@ -14,9 +14,9 @@ const commentSchema = new Schema({
     type: String,
     required: true
   },
-  created: {
-    type: Date,
-    default: Date.now
+  text: {
+    type: String,
+    required: true
   }
 });
 
