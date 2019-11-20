@@ -42,7 +42,7 @@ function ImgCarousel() {
     ];
 
     const CarouselItems = images.map((image, index) => 
-        <Carousel.Item key="index">
+        <Carousel.Item key={index}>
           <img
             className="d-block w-100 rounded-lg"
             src={image.img}

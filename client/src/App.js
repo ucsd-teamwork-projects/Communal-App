@@ -7,12 +7,14 @@ import PrivateRoute from "./components/PrivateRoute";
 import Loading from "./components/Loading";
 import NavMenu from "./components/NavMenu";
 import Landing from "./pages/Landing";
-import TestApp from "./pages/TestApp";
 import FindSocials from "./pages/FindSocials/index";
 import Social from "./pages/Social/index";
-
+import About from "./pages/About";
+import AddSocial from "./pages/AddSocial";
+import UserPage from "./pages/UserPage";
 import NoMatch from "./components/NoMatch";
 import Container from 'react-bootstrap/Container';
+
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
   const { loading, user } = useAuth0();
