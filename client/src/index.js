@@ -8,6 +8,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter } from 'react-router-dom';
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { Auth0Provider } from "./react-auth0-spa";
@@ -34,7 +35,9 @@ ReactDOM.render(
         redirect_uri={window.location.origin}
         onRedirectCallback={onRedirectCallback}
     >
-    <App />
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
     </Auth0Provider>,
     document.getElementById("root")
 );
