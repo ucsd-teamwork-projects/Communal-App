@@ -14,18 +14,18 @@ class FindSocials extends Component {
   constructor(props) {
     super(props);
     this.currSocialIdx = 0;
+    this.user = this.props.user;
   }
 
   state = {
-    socials: [],
-    user: this.props.user
+    socials: []
   };
 
   filterSocials = socials => {
     // Pull user's likes and dislikes
-    API.getUserSocialPref(this.state.user.email)
-      .then( (pref) => {
-        const { likes, dislikes } = pref;
+    API.getUser(this.user.email)
+      .then( (userObj) => {
+        const { likes, dislikes } = userObj;
         const seen = likes.concat(dislikes);
         const filtered = socials.filter(function (social) {
           if (seen.includes(social._id)) {
@@ -42,9 +42,10 @@ class FindSocials extends Component {
       });
   }
 
-  pullSocials = () => {
+  getSocials = () => {
     //   Pull numSocials from the database 
-    API.getSocials()
+    let fields = ["creator"]
+    API.getSocials(fields)
       .then( (allSocials) => {
         //   Filter returned Socials based off what user has already seen
         this.filterSocials(allSocials);
@@ -54,31 +55,41 @@ class FindSocials extends Component {
 
   dislikeSocial = () => {
     // Add Social to user dislikes
-    API.putUserSocialDislike(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    API.putUserSocialDislike(this.user.email, this.state.socials[this.currSocialIdx]);
     this.currSocialIdx++;
   }
 
   likeSocial = () => {
     // Add Social to user likes
-    API.putUserSocialLike(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    API.putUserSocialLike(this.user.email, this.state.socials[this.currSocialIdx]);
     this.currSocialIdx++;
   }
 
   markGoingSocial = () => {
     // Add Social to user going
-    API.putUserSocialGoing(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    API.putUserSocialGoing(this.user.email, this.state.socials[this.currSocialIdx]);
 
     // Add user to Social going
-    API.putSocialUserGoing(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    API.putSocialUserGoing(this.user.email, this.state.socials[this.currSocialIdx]);
 
     this.currSocialIdx++;
   }
 
   componentDidMount() {
-    // Pull socials from database that user has not seen
-    this.pullSocials();
+    // Get socials from database that user has not seen
+    this.getSocials();
     // Call page functions after component rendered 
     documentReady();
+
+    // Listen for new Socials (Uncomment when adding socials is complete)
+    // const pusher = new Pusher('APP_KEY', {
+    //   cluster: 'APP_CLUSTER',
+    //   encrypted: true
+    // });
+    // const channel = pusher.subscribe(`socials`);
+    // channel.bind(`New Social`, data => {
+    //   this.setState({ socials: [...this.state.socials, data] });
+    // });
   }
 
   render() {
@@ -95,11 +106,11 @@ class FindSocials extends Component {
               {
                 this.state.socials.map(social => (
                   <div className="card">
-                    <Link to={`social/${social._id}`}>
+                    <Link to={`socials/${social._id}`}>
                   <div className="card-content">
                     <div className="card-image"><img src={social.img} width="100%" height="100%" /></div>
                     <div className="card-titles">
-                      <h4 className="flow-text break-word">{social.title}</h4>
+                      <h4 className="flow-text break-word">{social.name}</h4>
                       <h5 className="flow-text break-word"><i className="fas fa-calendar-week text-secondary"></i>&nbsp;&nbsp;{social.date}</h5>
                     </div>
                   </div>
@@ -107,7 +118,7 @@ class FindSocials extends Component {
                   <div className="card-footer">
                       <Container>
                         <Row className="mb-4 mt-3">
-                        <div> <i className="fas fa-user-circle fa-lg text-info"></i> &nbsp; <span className="text-muted"> {social.authorName} </span> </div>
+                        <div> <i className="fas fa-user-circle fa-lg text-info"></i> &nbsp; <span className="text-muted"> {social.creator.name} </span> </div>
                         </Row>
                         <Row className="mb-4">
                         <div> <i className="fas fa-thumbtack fa-lg text-danger"></i> &nbsp; <span className="text-muted"> {social.location} </span> </div>

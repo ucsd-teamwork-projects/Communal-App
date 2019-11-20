@@ -6,24 +6,32 @@ const socialSchema = new Schema({
     type: String, 
     required: true 
   },
-  categories: { 
-    type: String
+  category: { 
+    type: String,
+    required: true
   },
   location: { 
     type: String,
     required: true 
   },
-  likes: {
-    type: Number
+  time: {
+    type: String,
+    required: true
   },
-  dislikes: {
-    type: Number
+  going: {
+    type: [Schema.Types.ObjectId], 
+    ref: "User"   
   },
-  image: {
-    type: String
+  comments: {
+    type: [Schema.Types.ObjectId], 
+    ref: "Comment"   
+  },
+  img: {
+    type: String,
+    required: true
   },
   creator: {
-    type: [Schema.Types.ObjectId], 
+    type: Schema.Types.ObjectId, 
     ref: "User" 
   }
 });
