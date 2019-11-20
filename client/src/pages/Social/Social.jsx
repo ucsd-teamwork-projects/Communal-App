@@ -56,7 +56,7 @@ class Social extends Component {
 
   postComment = (e) => {
     // Prevent page refresh
-    e.preventDefault();    
+    e.preventDefault();
     // Create Comment to be inserted
     const newComment = {
       text: this.state.commentInput,
@@ -71,6 +71,24 @@ class Social extends Component {
 
   getUserEventInfo = () => {
     // Determine if user is going or interested in the event
+    API.getUser(this.user.email)
+      .then((userObj) => {
+        const { likes, going } = userObj;
+        let isInterested = false;
+        let isGoing = false;
+
+        if (likes.includes(this.socialId)) {
+          isInterested = true;
+        }
+        if (going.includes(this.socialId)) {
+          isGoing = true;
+        }
+
+        this.setState({
+          userGoing: isGoing,
+          userInterested: isInterested
+        });
+      })
   }
 
   unmarkGoing = () => {
@@ -79,8 +97,11 @@ class Social extends Component {
     })
 
     // Remove Social from User going 
+    API.pullUserSocialGoing(this.user.email, this.socialId);
 
     // Remove User from Social going
+    API.pullSocialUserGoing(this.user.email, this.socialId);
+
   }
 
   markGoing = () => {
@@ -88,28 +109,31 @@ class Social extends Component {
       userGoing: true
     })
 
-    // Add Social to User going 
+    // Add Social to user going
+    API.putUserSocialGoing(this.user.email, this.socialId);
 
-    // Add User to Social going
+    // Add user to Social going
+    API.putSocialUserGoing(this.user.email, this.socialId);
   }
+
 
   unmarkInterested = () => {
     this.setState({
       userInterested: false
     })
 
-    // Remove Social from User interested 
+    // Remove Social from User likes 
+    API.pullUserSocialLike(this.user.email, this.socialId);
 
-    // Remove User from Social interested
   }
 
   markInterested = () => {
     this.setState({
       userInterested: true
     })
-    // Add Social to User interested 
+    // Add Social to User likes 
+    API.putUserSocialLike(this.user.email, this.socialId);
 
-    // Add User to Social interested
   }
 
   componentDidMount() {
@@ -119,14 +143,14 @@ class Social extends Component {
     this.getSocial();
 
     // Listen for new comments 
-    const pusher = new Pusher('APP_KEY', {
-      cluster: 'APP_CLUSTER',
-      encrypted: true
-    });
-    const channel = pusher.subscribe(`comments`);
-    channel.bind(`social-${this.socialId}`, data => {
-      this.setState({ comments: [...this.state.comments, data] });
-    });
+    // const pusher = new Pusher('APP_KEY', {
+    //   cluster: 'APP_CLUSTER',
+    //   encrypted: true
+    // });
+    // const channel = pusher.subscribe(`comments`);
+    // channel.bind(`social-${this.socialId}`, data => {
+    //   this.setState({ comments: [...this.state.comments, data] });
+    // });
   }
 
   render() {
@@ -148,9 +172,9 @@ class Social extends Component {
             <hr />
             <h6 className="flow-text text-muted font-weight-bold">Description</h6>
             <p style={{ "word-wrap": "break-word" }}>
-            {this.social.description}
+              {this.social.description}
             </p>
-            <p className="hover-underline mb-1 font-weight-bold" onClick={() => this.setState({modalShow: true})}> {this.state.going.length} going</p>
+            <p className="hover-underline mb-1 font-weight-bold" onClick={() => this.setState({ modalShow: true })}> {this.state.going.length} going</p>
             <ButtonGroup className="mt-1" size="sm" >
               {this.state.userGoing ?
                 <Button onClick={() => this.unmarkGoing()} variant="success"><i class="fas fa-check-circle"></i>&nbsp;I'm going!</Button>
@@ -167,8 +191,8 @@ class Social extends Component {
           </Card.Body>
         </Card>
 
-        <GoingListModal going={this.state.going} show={this.state.modalShow} onHide={() => this.setState({modalShow: false})} />
-        <SocialDiscussion  title="Comments" inputPlaceholder="Enter your comment here..." posts={this.state.comments} handleChange={(e) => this.setState({commentInput: e.target.value})} handleSubmit={() => this.postComment()} />
+        <GoingListModal going={this.state.going} show={this.state.modalShow} onHide={() => this.setState({ modalShow: false })} />
+        <SocialDiscussion title="Comments" inputPlaceholder="Enter your comment here..." posts={this.state.comments} handleChange={(e) => this.setState({ commentInput: e.target.value })} handleSubmit={() => this.postComment()} />
 
       </div>
     );

@@ -14,18 +14,18 @@ class FindSocials extends Component {
   constructor(props) {
     super(props);
     this.currSocialIdx = 0;
+    this.user = this.props.user;
   }
 
   state = {
-    socials: [],
-    user: this.props.user
+    socials: []
   };
 
   filterSocials = socials => {
     // Pull user's likes and dislikes
-    API.getUserSocialPref(this.state.user.email)
-      .then( (pref) => {
-        const { likes, dislikes } = pref;
+    API.getUser(this.user.email)
+      .then( (userObj) => {
+        const { likes, dislikes } = userObj;
         const seen = likes.concat(dislikes);
         const filtered = socials.filter(function (social) {
           if (seen.includes(social._id)) {
@@ -42,7 +42,7 @@ class FindSocials extends Component {
       });
   }
 
-  pullSocials = () => {
+  getSocials = () => {
     //   Pull numSocials from the database 
     let fields = ["creator"]
     API.getSocials(fields)
@@ -55,31 +55,41 @@ class FindSocials extends Component {
 
   dislikeSocial = () => {
     // Add Social to user dislikes
-    API.putUserSocialDislike(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    API.putUserSocialDislike(this.user.email, this.state.socials[this.currSocialIdx]);
     this.currSocialIdx++;
   }
 
   likeSocial = () => {
     // Add Social to user likes
-    API.putUserSocialLike(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    API.putUserSocialLike(this.user.email, this.state.socials[this.currSocialIdx]);
     this.currSocialIdx++;
   }
 
   markGoingSocial = () => {
     // Add Social to user going
-    API.putUserSocialGoing(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    API.putUserSocialGoing(this.user.email, this.state.socials[this.currSocialIdx]);
 
     // Add user to Social going
-    API.putSocialUserGoing(this.state.user.email, this.state.socials[this.currSocialIdx]);
+    API.putSocialUserGoing(this.user.email, this.state.socials[this.currSocialIdx]);
 
     this.currSocialIdx++;
   }
 
   componentDidMount() {
-    // Pull socials from database that user has not seen
-    this.pullSocials();
+    // Get socials from database that user has not seen
+    this.getSocials();
     // Call page functions after component rendered 
     documentReady();
+
+    // Listen for new Socials (Uncomment when adding socials is complete)
+    // const pusher = new Pusher('APP_KEY', {
+    //   cluster: 'APP_CLUSTER',
+    //   encrypted: true
+    // });
+    // const channel = pusher.subscribe(`socials`);
+    // channel.bind(`New Social`, data => {
+    //   this.setState({ socials: [...this.state.socials, data] });
+    // });
   }
 
   render() {

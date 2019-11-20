@@ -47,6 +47,17 @@ module.exports = {
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
   },
+  pullGoing: function(req, res) {
+    socialDb
+            .findById({ _id: req.params.id }, 
+            {
+                $pull: {
+                    going: req.body.email
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+  },
   pushComment: function(req, res) {
     // create Comment
     commentDb

@@ -10,6 +10,7 @@ router.route("/")
 
 router.route("/:id/going")
   .put(socialController.pushGoing)
+  .delete(socialController.pullGoing)
 
 router.route("/:id/comment")
   .put(socialController.pushComment)

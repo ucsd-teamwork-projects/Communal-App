@@ -23,4 +23,9 @@ router
   .put(userController.pushDislikes)
   .delete(userController.pullDislikes)
 
+router
+  .route("/:id/going")
+  .put(userController.pushGoing)
+  .delete(userController.pullGoing)
+
 module.exports = router;

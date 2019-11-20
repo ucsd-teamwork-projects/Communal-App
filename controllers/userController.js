@@ -84,5 +84,17 @@ module.exports = {
             })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
-    }
+    }, 
+    pullGoing: function(req, res) {
+        userDb
+            .findOneAndUpdate({ email: req.params.userEmail }, 
+            {
+                $pull: {
+                    going: req.body.id
+                }
+            })
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+      }
+    
 }
