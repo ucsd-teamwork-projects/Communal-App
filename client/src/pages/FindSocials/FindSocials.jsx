@@ -26,7 +26,11 @@ class FindSocials extends Component {
     API.getUser(this.user.email)
       .then( (userObj) => {
         const { likes, dislikes } = userObj;
-        const seen = likes.concat(dislikes);
+        let seen;
+
+        if(likes)
+          seen = likes.concat(dislikes);
+
         const filtered = socials.filter(function (social) {
           if (seen.includes(social._id)) {
             return false;
