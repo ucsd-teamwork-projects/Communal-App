@@ -5,7 +5,7 @@ export default function About() {
     return (
         <div className="about">
                 <div className="container-about">
-                    <h1>What the heck is <span className="logo">Communal</span>!?</h1>
+                    <p>What the heck is <span className="logo">Communal</span>!?</p>
                     <h4>What is a Social!?</h4>
                     <h4>What's with the bee!?</h4>
                     <p>We're glad you asked.</p>
