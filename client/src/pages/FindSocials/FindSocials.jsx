@@ -31,7 +31,7 @@ class FindSocials extends Component {
         if(likes)
           seen = likes.concat(dislikes);
 
-        const filtered = socials.filter(function (social) {
+        const filtered = this.state.socials.filter(function (social) {
           if (seen.includes(social._id)) {
             return false;
           } else {
