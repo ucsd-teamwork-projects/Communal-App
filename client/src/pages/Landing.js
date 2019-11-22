@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
-import { Col, Card, Carousel, Badge } from "react-bootstrap";
+import { Col, Card } from "react-bootstrap";
 import ImgCarousel from "../components/ImgCarousel";
 import Logo from "../assets/img/logo.png";
 

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Col, Card, Carousel, Badge } from "react-bootstrap";
+import React from "react";
+import { Carousel, Badge } from "react-bootstrap";
 import Balboa from "../../assets/img/Balboa.jpg";
 import Midway from "../../assets/img/midway.png";
 import SunsetCliffs from "../../assets/img/SunsetCliffs.jpg";
