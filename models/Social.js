@@ -2,11 +2,15 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const socialSchema = new Schema({
+  creator: {
+    type: Schema.Types.ObjectId, 
+    ref: "User" 
+  },
   name: { 
     type: String, 
     required: true 
   },
-  category: { 
+  time: {
     type: String,
     required: true
   },
@@ -14,7 +18,15 @@ const socialSchema = new Schema({
     type: String,
     required: true 
   },
-  time: {
+  image: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  category: { 
     type: String,
     required: true
   },
@@ -25,15 +37,8 @@ const socialSchema = new Schema({
   comments: {
     type: [Schema.Types.ObjectId], 
     ref: "Comment"   
-  },
-  img: {
-    type: String,
-    required: true
-  },
-  creator: {
-    type: Schema.Types.ObjectId, 
-    ref: "User" 
   }
+  
 });
 
 const Social = mongoose.model("Social", socialSchema);
