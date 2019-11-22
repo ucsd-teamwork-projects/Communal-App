@@ -54,7 +54,7 @@ Arrow.propTypes = {
 export const ArrowLeft = Arrow({ text: "<", className: "arrow-prev" });
 export const ArrowRight = Arrow({ text: ">", className: "arrow-next" });
 
-class App extends Component {
+class HorizontalScroll extends Component {
   state = {
     alignCenter: true,
     clickWhenDrag: false,
@@ -171,6 +171,4 @@ class App extends Component {
   }
 }
 
-export default App;
-
-ReactDOM.render(<App />, document.getElementById("root"));
+export default HorizontalScroll;

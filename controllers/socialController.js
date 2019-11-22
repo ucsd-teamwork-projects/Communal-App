@@ -8,7 +8,7 @@ module.exports = {
     const fields = req.body.fields;
 
     socialDb
-      .findAll()
+      .find({})
       .populate(fields)
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))

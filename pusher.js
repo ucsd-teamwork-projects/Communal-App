@@ -5,7 +5,7 @@ const pusher = new Pusher({
     key: 'APP_KEY',
     secret: 'APP_SECRET',
     cluster: 'APP_CLUSTER',
-    encrypted: true
+    useTLS: true
   });
 
 module.exports = pusher;
