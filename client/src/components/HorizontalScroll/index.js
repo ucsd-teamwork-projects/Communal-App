@@ -3,44 +3,31 @@ import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import "./styles.css";
+import SocialCard from "../SocialCard";
 
 const list = [
-  { name: "item1" },
-  { name: "item2" },
-  { name: "item3" },
-  { name: "item4" },
-  { name: "item5" },
-  { name: "item6" },
-  { name: "item7" },
-  { name: "item8" },
-  { name: "item9" },
-  { name: "item10" },
-  { name: "item11" },
-  { name: "item12" },
-  { name: "item13" },
-  { name: "item14" },
-  { name: "item15" },
-  { name: "item16" },
-  { name: "item17" },
-  { name: "item18" },
-  { name: "item19" },
-  { name: "item20" },
-  { name: "item21" },
-  { name: "item22" },
-  { name: "item23" },
-  { name: "item24" },
-  { name: "item25" }
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>,
+  <SocialCard/>
 ];
 
-const MenuItem = ({ text, selected }) => {
-  return <div className={`menu-item ${selected ? "active" : ""}`}>{text}</div>;
+const MenuItem = ({ children, selected }) => {
+  return <div className={`menu-item ${selected ? "active" : ""}`}>{children}</div>;
 };
 
 export const Menu = list =>
-  list.map(el => {
-    const { name } = el;
+  list.map((el, idx) => {
 
-    return <MenuItem text={name} key={name} />;
+    return (<MenuItem key={idx} > {el} </MenuItem>);
+    
   });
 
 const Arrow = ({ text, className }) => {

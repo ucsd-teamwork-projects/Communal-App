@@ -1,5 +1,5 @@
 import React from "react";
-import Midway from "../img/midway.png";
+import Midway from "../../assets/img/midway.png";
 import { Card, Container, Row, Col } from 'react-bootstrap';
 
 
