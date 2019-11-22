@@ -145,7 +145,7 @@ class FindSocials extends Component {
             <div className="right-action" ><div onClick={() => this.likeSocial()} className="push-like-action"><img src="https://image.ibb.co/dCuESn/Path_3x.png" width="30" height="28" /></div></div>
           </div>
         </div>
-        <h2 className="final-state hidden">There are no more events in your area. <br/> Check again later!</h2>
+        <h2 className="final-state hidden text-dark">There are no more events in your area. <br/> Check again later!</h2>
 
       </div>
     );
