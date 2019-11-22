@@ -12,14 +12,18 @@ const LogBtn = () => {
     <div>
       {/* render if user is logged out */}
       {!isAuthenticated && (
-        <button className="btn btn-dark" onClick={() => loginWithRedirect({redirect_uri: `${window.location.protocol}//${window.location.host}/profile`})}>
+        <button className="btn btn-dark" onClick={() => loginWithRedirect({
+          // redirect_uri: `${window.location.protocol}//${window.location.host}/profile`
+          })}>
           LOGIN
         </button>
       )}
 
       {/* render if user is logged in */}
       {isAuthenticated && 
-          <button className="btn btn-dark" onClick={() => logout({redirect_uri: `${window.location.protocol}//${window.location.host}/`})}>
+          <button className="btn btn-dark" onClick={() => logout({
+            // redirect_uri: `${window.location.protocol}//${window.location.host}/`
+            })}>
             LOGOUT
           </button>
       }
