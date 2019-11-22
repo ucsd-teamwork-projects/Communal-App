@@ -19,7 +19,7 @@ function NavMenu() {
           className="d-inline-block align-top"
           alt=""
         />
-        {` Communal`}
+        <span style={{"font-family": "'Bungee', cursive"}}>{` Communal`}</span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
