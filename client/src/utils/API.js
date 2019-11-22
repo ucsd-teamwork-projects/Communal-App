@@ -1,9 +1,12 @@
 import axios from "axios";
 
 export default {
-  // Gets all socials
+  // finds User by email
   getUser: function (userEmail) {
     return axios.get(`/api/user/${userEmail}`);
+  },
+  postNewUser: function (name, email) {
+    return axios.post(`/api/user/`, { name, email });
   },
   getSocials: function (populateFields) {
     return axios.get("/api/socials", {

@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LogBtn from "../LogBtn";
 import { useAuth0 } from "../../react-auth0-spa";
 import { Navbar, Nav, NavDropdown, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
+import API from "../../utils/API";
 import Logo from "../../assets/img/logo.png";
 import "./style.css";
 
 function NavMenu() {
-  const { user, isAuthenticated } = useAuth0();
+  const { user, isAuthenticated, loading } = useAuth0();
+
+  useEffect(() => {
+    // Create user account in our DB if one does new exist
+    if(isAuthenticated && user && !loading){
+      API.getUser(user.email).then(userQry => {
+        console.log("User Qry Data: ", userQry)
+        if(userQry.data === null){
+          //create user account
+          API.postNewUser(user.name, user.email);
+        }
+      });
+    }
+  });
+
   return (
     <Navbar style={{"zIndex": "1000"}} className="bg" expand="lg">
       <Navbar.Brand href="/">
@@ -19,7 +33,7 @@ function NavMenu() {
           className="d-inline-block align-top"
           alt=""
         />
-        <span style={{"font-family": "'Bungee', cursive"}}>{` Communal`}</span>
+        <span style={{"fontFamily": "'Bungee', cursive"}}>{` Communal`}</span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

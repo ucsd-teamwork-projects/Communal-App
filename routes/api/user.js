@@ -8,23 +8,23 @@ router
 
 // Matches with "/api/user/:id"
 router
-  .route("/:id")
+  .route("/:userEmail")
   .get(userController.find)
   .put(userController.update)
   .delete(userController.delete)
 
 router
-  .route("/:id/likes")
+  .route("/:userEmail/likes")
   .put(userController.pushLikes)
   .delete(userController.pullLikes)
 
 router
-  .route("/:id/dislikes")
+  .route("/:userEmail/dislikes")
   .put(userController.pushDislikes)
   .delete(userController.pullDislikes)
 
 router
-  .route("/:id/going")
+  .route("/:userEmail/going")
   .put(userController.pushGoing)
   .delete(userController.pullGoing)
 
