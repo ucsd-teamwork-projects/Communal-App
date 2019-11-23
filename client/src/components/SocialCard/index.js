@@ -1,6 +1,6 @@
 import React from "react";
 import Midway from "../../assets/img/midway.png";
-import { Card, Container, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 
 function SocialCard(props) {

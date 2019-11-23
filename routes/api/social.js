@@ -5,7 +5,7 @@ const socialController = require("../../controllers/socialController");
 router.route("/")
   .get(socialController.findAll)
 
-  router.route("/:id")
+router.route("/:id")
   .get(socialController.findOne)
 
 router.route("/:id/going")

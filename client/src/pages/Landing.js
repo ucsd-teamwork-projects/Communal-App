@@ -1,15 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import { Row } from "react-bootstrap";
-import { Col, Card, Carousel, Badge } from "react-bootstrap";
+import { Col, Card } from "react-bootstrap";
 import ImgCarousel from "../components/ImgCarousel";
 import Logo from "../assets/img/logo.png";
-import Balboa from "../assets/img/Balboa.jpg";
-import Midway from "../assets/img/midway.png";
-import SunsetCliffs from "../assets/img/SunsetCliffs.jpg";
-import BorregoFlowers from "../assets/img/BorregoFlowers.jpg";
-import MountLaguna from "../assets/img/MountLaguna.jpg";
-import Lajollacaves from "../assets/img/Lajollacaves.jpeg";
 
 function Landing() {
   return (
@@ -19,7 +13,7 @@ function Landing() {
         <Col xs={10}>
           <Card>
             <Card.Header className="text-center">
-              <h1 className="Display-1">COMMUNAL</h1>
+              <h1 className="Display-1"  style={{"fontFamily": "'Bungee', cursive"}}>COMMUNAL</h1>
               <img src={Logo} width="150" height="150" alt="logo" />
               <h3 className="Display-3">Find People, Do Stuff</h3>
             </Card.Header>
