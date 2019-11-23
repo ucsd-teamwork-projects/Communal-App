@@ -10,7 +10,6 @@ import "../../utils/flowHeaders.min.css";
 
 import Logo from "../../assets/img/logo.png";
 import "./main.css";
-import { userInfo } from 'os';
 import API from '../../utils/API';
 
 
@@ -18,7 +17,7 @@ export class AddSocial extends Component {
     state = {
         name: "",
         description: "",
-        // category: "",
+        category: "",
         location: "",
         image: "",
         alertOpen: false,
@@ -36,6 +35,7 @@ export class AddSocial extends Component {
 
     handleInputChange = event => {
         let { value, name } = event.target;
+        
 
         this.setState({
             [name]: value,
@@ -54,6 +54,22 @@ export class AddSocial extends Component {
             })
         }
     };
+
+    handleDropdownSelect = e => {
+        let { value, name } = e.input;
+
+        this.setState({
+            [name]: value,
+        });
+
+        if (this.state.alertOpen) {
+            this.setState({
+                alertOpen: false,
+                errorAlertOpen: false
+            })
+        }
+
+    }
 
     handleDateChange = (name, d) => {
         this.setState({
@@ -115,18 +131,18 @@ export class AddSocial extends Component {
             endDate: this.state.endDate,
             location: this.state.location,
             image: this.state.image,
-            // category: this.state.category,
+            category: "this.state.category",
             description: this.state.description
         }
 
         API.createSocial(newSocial)
             .then((obj) => {
-                console.log(obj);
+                if(obj.data) {
                 // Reset state variables
                 this.setState({
                     name: "",
                     description: "",
-                    // category: "",
+                    category: "",
                     location: "",
                     image: "",
                     errorImgMsg: "",
@@ -141,10 +157,14 @@ export class AddSocial extends Component {
                         endDate: false
                     }
                 });
+            } 
             })
 
 
     };
+
+    componentDidMount() {
+    }
 
     render() {
         return (
@@ -183,7 +203,7 @@ export class AddSocial extends Component {
                                             placeholder="My Social will be at..."
                                             googleAPIKey="AIzaSyDxStRoOM-60GmRhXIWnOgw-MFNnzT8xwc"
                                             onChange={(e) => this.handleInputChange(e)}
-                                            onDropdownSelect={() => { }}
+                                            onDropdownSelect={(e) => this.handleDropdownSelect(e)}
                                         />
                                     </div>
                                     <Form.Label
@@ -218,7 +238,7 @@ export class AddSocial extends Component {
                                         />
                                     </div>
 
-                                    <Form.Label className="font-weight-light mt-3 w-100"> Social Image (required)</Form.Label>
+                                    <Form.Label className="font-weight-light mt-3 w-100"> Social Image URL (required)</Form.Label>
                                     <Form.Control
                                         isInvalid={this.state.invalid.image}
                                         value={this.state.image}
@@ -228,7 +248,9 @@ export class AddSocial extends Component {
                                         placeholder="My social's cover photo can be found at..."
                                     ></Form.Control>
                                     <span style={{ "fontSize": "0.8rem" }} className="text-danger">{this.state.errorImgMsg}</span>
-                                    <img onError={this.addDefaultSrc} className="mt-2 img-fluid" src={this.state.image} alt={"This is a preview of your image"} />
+                                    <div className="text-center">
+                                        <img onError={this.addDefaultSrc} className="mt-2 img-fluid mx-auto" src={this.state.image} alt={"This is a preview of your image"} />
+                                    </div>
                                     {/* <Form.Label> Category:</Form.Label>
                                     <Form.Control as="select"
                                         name="category"
