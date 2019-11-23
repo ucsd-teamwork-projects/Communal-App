@@ -28,7 +28,7 @@ function App() {
       API.getUser(user.email).then(userQry => {
         if(userQry.data === null){
           //create user account
-          API.postNewUser(user.name, user.email)
+          API.postNewUser(user.name, user.email, user.picture)
           .then(userQry => { userInfo._id = userQry.data._id; });
         } else {
           userInfo._id = userQry.data._id;
@@ -58,11 +58,11 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
-            <PrivateRoute exact path="/add-social" component={AddSocial} user={userInfo}/>
-            {/* <Route exact path="/add-social" component={AddSocial} user={userInfo}/> */}
+            {/* <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/> */}
+            <Route exact path="/add-social" component={AddSocial} user={user}/>
             <PrivateRoute exact path="/profile" component={UserPage} />
-            <PrivateRoute exact path="/find-social" component={FindSocials} user={userInfo}/>
-            <PrivateRoute exact path="/socials/:id" component={Social} user={userInfo}/>
+            <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
+            <PrivateRoute exact path="/socials/:id" component={Social} user={user}/>
             <Route component={NoMatch} />
           </Switch>
         {/* </Container> */}

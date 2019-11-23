@@ -1,55 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
   Col,
   Image,
-  ListGroup,
+  Card
 } from "react-bootstrap";
 import Logo from "../assets/img/logo.png";
-// import SocialCard from "../components/SocialCard";
 import HorizontalScroll from "../components/HorizontalScroll";
+import { useAuth0 } from "../react-auth0-spa";
+import API from "../utils/API";
+
 
 function UserPage() {
+  const { user, loading, isAuthenticated } = useAuth0();
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    if(!loading && user && isAuthenticated){
+      API.getUser(user.email).then(user => {
+        setCurrentUser(user.data);
+      });
+    }
+  })
+
   return (
     <div className="mt-5">
       <Container>
-        {/* Stack the columns on mobile by making one full-width and the other half-width */}
-        <Row>
-          <Col></Col>
-          <Col xs={6}>
-            {" "}
-            <Image
-              className="mx-auto d-block rounded-circle "
-              src={Logo}
-              roundedCircle
-              width="225px"
-              height="225px"
-            />
-          </Col>
-          <Col> </Col>
-        </Row>
-        <Row>
-          <Col></Col>
-          <Col xs={5}>
-            {" "}
-            <ListGroup variant="flush">
-              <ListGroup.Item>Name: Winnie the Poo</ListGroup.Item>
-              <ListGroup.Item>Location: San Diego, Ca</ListGroup.Item>
-              <ListGroup.Item>
-                Hobbies and activites: OutDoors, Games, Honey
-              </ListGroup.Item>
-            </ListGroup>
-          </Col>
-
-          <Col></Col>
-        </Row>
-        <br></br>
-        <Row>
-          <Col>
-            <HorizontalScroll />
-          </Col>
-        </Row>
+        <Card className="p-3">
+          <Card.Body>
+            {/* User Image */}
+            <Row>
+                <Image
+                  className="mx-auto d-block rounded-circle mb-3"
+                  src={currentUser.image || Logo}
+                  roundedCircle
+                  width="225px"
+                  height="225px"
+                />
+            </Row>
+            {/* User Info */}
+            <Row>
+              <div className="mx-auto">
+                <h2 className="h2">{currentUser.name}</h2>
+                <h3 className="h3">{currentUser.email}</h3>
+              </div>
+            </Row>
+            <hr></hr>
+            {/* Social Info */}
+            <Row>
+              <Col>
+                <HorizontalScroll />
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
       </Container>
     </div>
   );

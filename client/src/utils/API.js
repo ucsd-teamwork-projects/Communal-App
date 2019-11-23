@@ -5,8 +5,11 @@ export default {
   getUser: function (userEmail) {
     return axios.get(`/api/user/${userEmail}`);
   },
-  postNewUser: function (name, email) {
-    return axios.post(`/api/user/`, { name, email });
+  postNewUser: function (name, email, image) {
+    return axios.post(`/api/user/`, { name, email, image });
+  },
+  getAllSocials: function () {
+    return axios.get("/api/socials/");
   },
   getSocials: function (populateFields) {
     return axios.get("/api/socials", {
@@ -69,11 +72,12 @@ export default {
     return axios.delete(`/api/socials/${socialId}/going`, {
       email: userEmail
     });
-
   },
+  // Create a new Social
   createSocial: function(newSocial) {
     return axios.post(`/api/socials`, newSocial);
   },
+  // Create a new Communal
   createNewCommunal: function (title, description, members) {
     return axios.post(`/api/communal`, {
       title,

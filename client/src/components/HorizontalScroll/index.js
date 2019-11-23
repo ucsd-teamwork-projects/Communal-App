@@ -3,20 +3,9 @@ import PropTypes from "prop-types";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import "./styles.css";
 import SocialCard from "../SocialCard";
+import API from "../../utils/API";
 
-const list = [
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>
-];
+const list = [];
 
 const MenuItem = ({ children, selected }) => {
   return <div className={`menu-item ${selected ? "active" : ""}`}>{children}</div>;
@@ -78,6 +67,14 @@ class HorizontalScroll extends Component {
     }
   }
 
+  componentDidMount() {
+    API.getAllSocials().then(socials => {
+      let userSocials = socials.data.filter(social => {
+        if(social.going.includes()){}//need to get user ID then filter socials
+      });
+    });
+  }
+
   setItemsCount = ev => {
     const { itemsCount = list.length, selected } = this.state;
     const val = +ev.target.value;
@@ -125,9 +122,9 @@ class HorizontalScroll extends Component {
     // };
 
     return (
-      <div className="App">
+      <div className="scrollApp">
         <header className="App-header">
-          <h1 className="App-title">Your Socials!</h1>
+          <h1 className="App-title h1">Your Socials!</h1>
         </header>
         <p className="App-intro">
          Don't forget! Take a pic of your adventure and post it on the Event Page!
