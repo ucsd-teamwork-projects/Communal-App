@@ -35,7 +35,7 @@ function UserPage() {
           <Col xs={5}>
             {" "}
             <ListGroup variant="flush">
-              <ListGroup.Item>Name: Winnie the Poo</ListGroup.Item>
+              <ListGroup.Item >Name: Winnie the Poo</ListGroup.Item>
               <ListGroup.Item>Location: San Diego, Ca</ListGroup.Item>
               <ListGroup.Item>
                 Hobbies and activites: OutDoors, Games, Honey

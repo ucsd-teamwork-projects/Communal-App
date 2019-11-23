@@ -5,7 +5,7 @@ import Midway from "../../assets/img/midway.png";
 import SunsetCliffs from "../../assets/img/SunsetCliffs.jpg";
 import BorregoFlowers from "../../assets/img/BorregoFlowers.jpg";
 import MountLaguna from "../../assets/img/MountLaguna.jpg";
-import Lajollacaves from "../../assets/img/Lajollacaves.jpeg";
+import Lajollacaves from "../../assets/img/Lajollacaves.jpg";
 
 function ImgCarousel() {
     const images = [

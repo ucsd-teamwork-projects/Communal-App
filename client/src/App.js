@@ -14,6 +14,7 @@ import AddSocial from "./pages/AddSocial";
 import UserPage from "./pages/UserPage";
 import NoMatch from "./components/NoMatch";
 import Container from 'react-bootstrap/Container';
+import "./App.css";
 
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
