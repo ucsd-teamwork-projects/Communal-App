@@ -10,7 +10,7 @@ function NavMenu() {
   const { user, isAuthenticated } = useAuth0();
 
   return (
-    <Navbar style={{"zIndex": "1000"}} className="bg" expand="lg">
+    <Navbar fixed="top" style={{"zIndex": "1000"}} className="bg" expand="lg">
       <Navbar.Brand href="/">
         <img
           src={Logo}

@@ -9,11 +9,10 @@ import {
 import Logo from "../assets/img/logo.png";
 // import SocialCard from "../components/SocialCard";
 import HorizontalScroll from "../components/HorizontalScroll";
-import CreateCommunalBtn from "../components/CreateCommunalBtn";
 
 function UserPage() {
   return (
-    <div>
+    <div className="mt-5">
       <Container>
         {/* Stack the columns on mobile by making one full-width and the other half-width */}
         <Row>
