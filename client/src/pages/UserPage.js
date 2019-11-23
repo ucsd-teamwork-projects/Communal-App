@@ -9,6 +9,7 @@ import {
 import Logo from "../assets/img/logo.png";
 // import SocialCard from "../components/SocialCard";
 import HorizontalScroll from "../components/HorizontalScroll";
+import CreateCommunalBtn from "../components/CreateCommunalBtn";
 
 function UserPage() {
   return (

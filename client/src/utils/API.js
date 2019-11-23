@@ -64,6 +64,12 @@ export default {
     return axios.delete(`/api/socials/${socialId}/going`, {
       email: userEmail
     });
-
+  },
+  createNewCommunal: function (title, description, members) {
+    return axios.post(`/api/communal`, {
+      title,
+      description,
+      members
+    })
   }
 };
