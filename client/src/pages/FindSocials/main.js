@@ -33,7 +33,7 @@ export function documentReady() {
 
 		countElements();
 		currentElement();
-		changeBackground();
+		// changeBackground();
 
 		listElNodesWidth = stackedCardsObj.offsetWidth;
 		currentElementObj = listElNodesObj[0];
@@ -159,7 +159,7 @@ export function documentReady() {
 		};
 
 		function showFinalMessage() {
-			document.body.classList.add("background-7");
+			// document.body.classList.add("background-7");
 			document.querySelector('.stage').classList.add('hidden');
 			document.querySelector('.final-state').classList.remove('hidden');
 			document.querySelector('.final-state').classList.add('active');
@@ -243,7 +243,7 @@ export function documentReady() {
 			currentPosition = currentPosition + 1;
 			updateUi();
 			currentElement();
-			changeBackground();
+			// changeBackground();
 			changeStages();
 			setActiveHidden();
 		};
@@ -262,7 +262,7 @@ export function documentReady() {
 			currentPosition = currentPosition + 1;
 			updateUi();
 			currentElement();
-			changeBackground();
+			// changeBackground();
 			changeStages();
 			setActiveHidden();
 		};
@@ -281,7 +281,7 @@ export function documentReady() {
 			currentPosition = currentPosition + 1;
 			updateUi();
 			currentElement();
-			changeBackground();
+			// changeBackground();
 			changeStages();
 			setActiveHidden();
 		};

@@ -233,9 +233,7 @@ class FindSocials extends Component {
             </div>
           </div>
         </div>
-        <h2 className="final-state hidden">
-          There are no more events in your area. <br /> Check again later!
-        </h2>
+        <h2 className="final-state hidden text-dark">There are no more events in your area. <br/> Check again later!</h2>
       </div>
     );
   }

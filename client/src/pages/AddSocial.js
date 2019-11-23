@@ -88,17 +88,17 @@ export class AddSocial extends Component {
                 <DatePicker
                     selected={this.state.startDate}
                     onChange={this.handleChange}
-                    showTimeSelect
-                    timeIntervals={30}
-                    timeCaption="time"
+                    showTimeInput
+                    timeInputLabel="Time: "
                     dateFormat="MMMM d, yyyy h:mm aa"
                 />                
                 <br></br>
                 Would you like to upload an image for your event?
                 <ImageUploader
                 withIcon={true}
+                withPreview={true}
                 buttonText='Choose images'
-                onChange={this.onDrop}
+                onChange={(pic) => this.onDrop(pic)}
                 imgExtension={['.jpg', '.gif', '.png', '.gif']}
                 maxFileSize={5242880}
                 />                
