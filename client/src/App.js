@@ -1,6 +1,6 @@
 // src/App.js
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "./react-auth0-spa";
 import PrivateRoute from "./components/PrivateRoute";
@@ -14,10 +14,23 @@ import AddSocial from "./pages/AddSocial";
 import UserPage from "./pages/UserPage";
 import NoMatch from "./components/NoMatch";
 import Container from 'react-bootstrap/Container';
+import API from "../src/utils/API";
 
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
-  const { loading, user } = useAuth0();
+  const { loading, user, isAuthenticated } = useAuth0();
+
+  useEffect(() => {
+    // Create user account in our DB if one does new exist
+    if(isAuthenticated && user && !loading){
+      API.getUser(user.email).then(userQry => {
+        if(userQry.data === null){
+          //create user account
+          API.postNewUser(user.name, user.email);
+        }
+      });
+    }
+  });
 
   if (loading) {
     return (

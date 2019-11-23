@@ -14,6 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // A function that routes the user to the right place
 // after login
 const onRedirectCallback = appState => {
+    console.log(window.location.href)
     History.push(
         appState && appState.targetUrl
             ? appState.targetUrl
