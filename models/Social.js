@@ -10,8 +10,12 @@ const socialSchema = new Schema({
     type: String, 
     required: true 
   },
-  time: {
-    type: String,
+  startDate: {
+    type: Date,
+    required: true
+  },
+  endDate: {
+    type: Date,
     required: true
   },
   location: { 
@@ -23,8 +27,7 @@ const socialSchema = new Schema({
     required: true
   },
   description: {
-    type: String,
-    required: true
+    type: String
   },
   category: { 
     type: String,

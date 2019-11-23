@@ -53,7 +53,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
-            <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/>
+            {/* <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/> */}
+            <Route exact path="/add-social" component={AddSocial} user={user}/>
             <PrivateRoute exact path="/profile" component={UserPage} />
             <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
             <PrivateRoute exact path="/socials/:id" component={Social} user={user}/>
