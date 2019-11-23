@@ -19,6 +19,7 @@ import API from "../src/utils/API";
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
   const { loading, user, isAuthenticated } = useAuth0();
+  let userInfo = user;
 
   useEffect(() => {
     // Create user account in our DB if one does new exist
@@ -26,7 +27,10 @@ function App() {
       API.getUser(user.email).then(userQry => {
         if(userQry.data === null){
           //create user account
-          API.postNewUser(user.name, user.email);
+          API.postNewUser(user.name, user.email)
+          .then(userQry => { userInfo._id = userQry.data._id; });
+        } else {
+          userInfo._id = userQry.data._id;
         }
       });
     }
@@ -53,11 +57,11 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
-            {/* <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/> */}
-            <Route exact path="/add-social" component={AddSocial} user={user}/>
+            <PrivateRoute exact path="/add-social" component={AddSocial} user={userInfo}/>
+            {/* <Route exact path="/add-social" component={AddSocial} user={userInfo}/> */}
             <PrivateRoute exact path="/profile" component={UserPage} />
-            <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
-            <PrivateRoute exact path="/socials/:id" component={Social} user={user}/>
+            <PrivateRoute exact path="/find-social" component={FindSocials} user={userInfo}/>
+            <PrivateRoute exact path="/socials/:id" component={Social} user={userInfo}/>
             <Route component={NoMatch} />
           </Switch>
         {/* </Container> */}
