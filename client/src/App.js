@@ -14,6 +14,7 @@ import AddSocial from "./pages/AddSocial";
 import UserPage from "./pages/UserPage";
 import NoMatch from "./components/NoMatch";
 import Container from 'react-bootstrap/Container';
+import API from './utils/API';
 import "./App.css";
 
 function App() {

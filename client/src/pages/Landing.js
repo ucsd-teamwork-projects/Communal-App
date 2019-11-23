@@ -8,10 +8,10 @@ import Logo from "../assets/img/logo.png";
 function Landing() {
   return (
     // <div>
-    <Container >
+    <Container>
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Card className="mx-auto">
+          <Card className="mx-auto my-5">
             <Card.Header className="text-center">
               <h1 className="Display-1"  style={{"fontFamily": "'Bungee', cursive"}}>COMMUNAL</h1>
               <img src={Logo} width="150" height="150" alt="logo" />

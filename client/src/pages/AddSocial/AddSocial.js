@@ -149,7 +149,7 @@ export class AddSocial extends Component {
     render() {
         return (
             <div>
-                <Container className="mt-5">
+                <Container className="mt-5 pb-5">
                     <Card className="justify-content-center text-center p-3 mx-auto" style={{ "backgroundImage": "radial-gradient(circle, rgb(248, 208, 148), rgb(248, 226, 194))", "boxShadow": "0px 0px 30px 20px rgb(255, 230, 161)", "maxWidth": "700px" }}>
                         <h1 className="mt-3"> <strong>Create Social</strong> </h1>
                         <img className="mx-auto" src={Logo} width="100" height="100" alt="logo" />
