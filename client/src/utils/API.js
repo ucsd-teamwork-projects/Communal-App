@@ -1,11 +1,13 @@
 import axios from "axios";
 
 export default {
-  // Retrieve user info by email
+  // finds User by email
   getUser: function (userEmail) {
     return axios.get(`/api/user/${userEmail}`);
   },
-  // Gets all socials
+  postNewUser: function (name, email) {
+    return axios.post(`/api/user/`, { name, email });
+  },
   getSocials: function (populateFields) {
     return axios.get("/api/socials", {
       fields: populateFields.join(" ")
@@ -71,5 +73,12 @@ export default {
   },
   createSocial: function(newSocial) {
     return axios.post(`/api/socials`, newSocial);
+  },
+  createNewCommunal: function (title, description, members) {
+    return axios.post(`/api/communal`, {
+      title,
+      description,
+      members
+    })
   }
 };

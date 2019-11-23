@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import "./styles.css";
@@ -108,7 +107,7 @@ class HorizontalScroll extends Component {
       hideArrows,
       dragging,
       hideSingleArrow,
-      itemsCount,
+      // itemsCount,
       selected,
       translate,
       transition,
@@ -117,13 +116,13 @@ class HorizontalScroll extends Component {
 
     const menu = this.menuItems;
 
-    const checkboxStyle = {
-      margin: "5px 10px"
-    };
-    const valueStyle = {
-      margin: "5px 10px",
-      display: "inline-block"
-    };
+    // const checkboxStyle = {
+    //   margin: "5px 10px"
+    // };
+    // const valueStyle = {
+    //   margin: "5px 10px",
+    //   display: "inline-block"
+    // };
 
     return (
       <div className="App">

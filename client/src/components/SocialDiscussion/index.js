@@ -1,7 +1,7 @@
 import React from "react";
 import DynamicTextArea from 'react-autosize-textarea';
 import UserProfilePicture from "../UserProfileCircle";
-import { Container, Row, Col, Card, Button, ButtonGroup } from 'react-bootstrap';
+// import { Container, Row, Col, Card, Button, ButtonGroup } from 'react-bootstrap';
 
 
 // Import responsive header tags

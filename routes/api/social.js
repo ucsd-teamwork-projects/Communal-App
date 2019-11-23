@@ -6,7 +6,7 @@ router.route("/")
   .get(socialController.findAll)
   .post(socialController.create)
 
-  router.route("/:id")
+router.route("/:id")
   .get(socialController.findOne)
 
 router.route("/:id/going")
