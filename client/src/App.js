@@ -1,6 +1,6 @@
 // src/App.js
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "./react-auth0-spa";
 import PrivateRoute from "./components/PrivateRoute";
@@ -18,7 +18,19 @@ import "./App.css";
 
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
-  const { loading, user } = useAuth0();
+  const { loading, user, isAuthenticated } = useAuth0();
+
+  useEffect(() => {
+    // Create user account in our DB if one does new exist
+    if(isAuthenticated && user && !loading){
+      API.getUser(user.email).then(userQry => {
+        if(userQry.data === null){
+          //create user account
+          API.postNewUser(user.name, user.email);
+        }
+      });
+    }
+  });
 
   if (loading) {
     return (
@@ -41,7 +53,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
-            <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/>
+            {/* <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/> */}
+            <Route exact path="/add-social" component={AddSocial} user={user}/>
             <PrivateRoute exact path="/profile" component={UserPage} />
             <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
             <PrivateRoute exact path="/socials/:id" component={Social} user={user}/>
