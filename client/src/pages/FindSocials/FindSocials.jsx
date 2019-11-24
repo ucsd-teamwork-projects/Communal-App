@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
+import Moment from "react-moment";
+import moment from "moment";
 import "./main.css";
 import { Container, Row } from "react-bootstrap";
+import Loading from "../../components/Loading";
 import { documentReady } from "./main.js";
 import "../../utils/flowHeaders.min.css";
+
 
 class FindSocials extends Component {
   constructor(props) {
@@ -14,20 +18,22 @@ class FindSocials extends Component {
   }
 
   state = {
-    socials: []
+    socials: [],
+    loading: true
+
   };
 
   filterSocials = socials => {
     let socialsList = socials.data;
     // Pull user's likes and dislikes
     API.getUser(this.user.email).then(userObj => {
-      const { likes, dislikes } = userObj.data;
+      const { likes, dislikes, going } = userObj.data;
       let seen = [];
 
-      if (likes && dislikes) {seen = likes.concat(dislikes)};
-      
-      const filtered = socialsList.filter(function(social) {
-        if (seen.includes(social._id)) {
+      if (likes && dislikes && going) { seen = likes.concat(dislikes).concat(going) };
+
+      const filtered = socialsList.filter(function (social) {
+        if (seen.includes(social._id) || moment(social.startDate).isBefore(new Date())) {
           return false;
         } else {
           return true;
@@ -35,10 +41,9 @@ class FindSocials extends Component {
       });
 
       this.setState({
-        socials: filtered
+        socials: filtered,
+        loading: false
       });
-
-      console.log(filtered);
 
       // Call page functions after component rendered
       documentReady();
@@ -47,11 +52,10 @@ class FindSocials extends Component {
 
   getSocials = () => {
     //   Pull numSocials from the database
-    let fields = ["creator"];
-    API.getSocials(fields).then(allSocials => {
+    API.getSocials().then(allSocials => {
       //   Filter returned Socials based off what user has already seen
       this.filterSocials(allSocials)
-      
+
     });
 
   };
@@ -60,7 +64,7 @@ class FindSocials extends Component {
     // Add Social to user dislikes
     API.putUserSocialDislike(
       this.user.email,
-      this.state.socials[this.currSocialIdx]
+      this.state.socials[this.currSocialIdx]._id
     );
     this.currSocialIdx++;
   };
@@ -69,7 +73,7 @@ class FindSocials extends Component {
     // Add Social to user likes
     API.putUserSocialLike(
       this.user.email,
-      this.state.socials[this.currSocialIdx]
+      this.state.socials[this.currSocialIdx]._id
     );
     this.currSocialIdx++;
   };
@@ -78,13 +82,13 @@ class FindSocials extends Component {
     // Add Social to user going
     API.putUserSocialGoing(
       this.user.email,
-      this.state.socials[this.currSocialIdx]
+      this.state.socials[this.currSocialIdx]._id
     );
 
     // Add user to Social going
     API.putSocialUserGoing(
-      this.user.email,
-      this.state.socials[this.currSocialIdx]
+      this.user._id,
+      this.state.socials[this.currSocialIdx]._id
     );
 
     this.currSocialIdx++;
@@ -93,7 +97,7 @@ class FindSocials extends Component {
   componentDidMount() {
     // Get socials from database that user has not seen
     this.getSocials()
-  
+
 
     // Listen for new Socials (Uncomment when adding socials is complete)
     // const pusher = new Pusher('APP_KEY', {
@@ -107,12 +111,16 @@ class FindSocials extends Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return <Loading />
+    } else {
+
     return (
       <div>
         {/* Main card container */}
         <div className="stage">
           <div className="title">
-            Events Near You &nbsp;&nbsp;<i className="fas fa-street-view"></i>{" "}
+            <i className="fas fa-street-view"></i>&nbsp;&nbsp;Events Near You {" "}
           </div>
           <div
             id="stacked-cards-block"
@@ -123,26 +131,27 @@ class FindSocials extends Component {
 
               {this.state.socials.map((social) => (
                 <div key={social._id} className="card">
-                  <Link  to={`socials/${social._id}`}>
-                    <div className="card-content">
+                  <Link to={`socials/${social._id}`}>
+                    <div className="card-content" style={{ "padding": "0px" }}>
                       <div className="card-image">
                         <img
                           src={social.image}
                           width="100%"
                           height="100%"
                           alt=""
+                          style={{ "minHeight": "200px", "maxHeight": "300px" }}
                         />
                       </div>
-                      <div className="card-titles">
-                        <h4 className="flow-text break-word">{social.name}</h4>
-                        <h5 className="flow-text break-word">
-                          <i className="fas fa-calendar-week text-secondary"></i>
-                          &nbsp;&nbsp;{social.startDate}
-                        </h5>
+                      <div className="card-titles w-100" style={{ "backgroundImage": "linear-gradient( transparent, rgb(255, 192, 56, 0.8) 30%)", "padding": "20px 30px" }}>
+                        <h5 className="text-left flow-text font-weight-bold break-word">{social.name}</h5>
+                        <h6 className="text-left flow-text break-word font-weight-bold">
+                          <i className="fas fa-calendar-week" style={{ "color": "#fae625" }}></i>
+                          &nbsp;&nbsp;<Moment format="dddd, MMMM Do YYYY, h:mm a">{social.startDate}</Moment>
+                        </h6>
                       </div>
                     </div>
                   </Link>
-                  <div className="card-footer">
+                  <div className="card-footer" >
                     <Container>
                       <Row className="mb-4 mt-3">
                         <div>
@@ -156,7 +165,7 @@ class FindSocials extends Component {
                         </div>
                       </Row>
                       <Row className="mb-4">
-                        <div>
+                        <div className="text-left">
                           {" "}
                           <i className="fas fa-thumbtack fa-lg text-danger"></i>{" "}
                           &nbsp;{" "}
@@ -199,11 +208,11 @@ class FindSocials extends Component {
             </div>
           </div>
           <div className="global-actions">
-            <div className="left-action">
-              <div
-                onClick={() => this.dislikeSocial()}
-                className="push-dislike-action"
-              >
+            <div
+              onClick={() => this.dislikeSocial()}
+              className="push-dislike-action"
+            >
+              <div className="left-action">
                 <img
                   src="https://image.ibb.co/heTxf7/20_status_close_3x.png"
                   width="26"
@@ -212,11 +221,11 @@ class FindSocials extends Component {
                 />
               </div>
             </div>
-            <div className="top-action">
-              <div
-                onClick={() => this.markGoingSocial()}
-                className="push-going-action"
-              >
+            <div
+              onClick={() => this.markGoingSocial()}
+              className="push-going-action"
+            >
+              <div className="top-action">
                 <img
                   src="https://image.ibb.co/m1ykYS/rank_army_star_2_3x.png"
                   width="18"
@@ -225,11 +234,11 @@ class FindSocials extends Component {
                 />
               </div>
             </div>
-            <div className="right-action">
-              <div
-                onClick={() => this.likeSocial()}
-                className="push-like-action"
-              >
+            <div
+              onClick={() => this.likeSocial()}
+              className="push-like-action"
+            >
+              <div className="right-action">
                 <img
                   src="https://image.ibb.co/dCuESn/Path_3x.png"
                   width="30"
@@ -240,9 +249,9 @@ class FindSocials extends Component {
             </div>
           </div>
         </div>
-        <h2 className="final-state hidden text-dark">There are no more events in your area. <br/> Check again later!</h2>
+        <h2 className="final-state hidden text-dark">There are no more events in your area. <br /> Check again later!</h2>
       </div>
-    );
+    )};
   }
 }
 

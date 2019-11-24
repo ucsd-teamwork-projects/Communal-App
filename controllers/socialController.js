@@ -5,21 +5,18 @@ const pusher = require("../pusher");
 
 module.exports = {
   findAll: function(req, res) {
-    const fields = req.body.fields;
-
     socialDb
       .find({})
-      .populate(fields)
+      .populate("creator")
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findOne: function(req, res) {
-    const fields = req.body.fields;
 
     socialDb
       .findById(req.params.id)
-      .populate(fields)
+      .populate("creator going comments")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -38,21 +35,23 @@ module.exports = {
   },
   pushGoing: function(req, res) {
     socialDb
-            .findById({ _id: req.params.id }, 
+            .findOneAndUpdate({ _id: req.params.id }, 
             {
                 $push: {
-                    going: req.body.email
+                    going: req.body.userId
                 }
             })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
   },
   pullGoing: function(req, res) {
+    console.log(req.body);
+    console.log(req.params.id);
     socialDb
-            .findById({ _id: req.params.id }, 
+            .findOneAndUpdate({ _id: req.params.id }, 
             {
                 $pull: {
-                    going: req.body.email
+                    going: req.body.userId
                 }
             })
             .then(dbModel => res.json(dbModel))

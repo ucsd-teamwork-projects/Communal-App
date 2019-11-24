@@ -43,7 +43,6 @@ function App() {
         <NavMenu />
         <Container className="mt-5">
           <Loading />
-          <h1 className="h1">Loading...</h1>
         </Container>
       </div>
     );
