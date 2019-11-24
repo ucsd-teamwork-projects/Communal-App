@@ -5,7 +5,7 @@ import Logo from "../../assets/img/logo.png";
 function SocialCard(props) {
   return (
       <Card >
-        <Card.Img variant="top" src={props.img ? props.img : Logo} />
+        <Card.Img variant="top" src={props.img ? props.img : Logo} alt="Social Image" />
         <Card.Body>
           <Card.Title>
             <font size="3">

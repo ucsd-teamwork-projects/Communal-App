@@ -20,7 +20,7 @@ import "./App.css";
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
   const { loading, user, isAuthenticated } = useAuth0();
-  const [userInfo, setUserInfo] = useState({});
+  const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
     // Create user account in our DB if one does new exist
@@ -30,7 +30,6 @@ function App() {
           //create user account
           API.postNewUser(user.name, user.email, user.picture)
           .then(newUserQry => { 
-            console.log(newUserQry.data)
             setUserInfo(newUserQry.data);
           });
         } else {
@@ -38,7 +37,7 @@ function App() {
         }
       });
     }
-  });
+  }, [loading]);
 
   if (loading) {
     return (

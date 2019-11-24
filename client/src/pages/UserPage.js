@@ -11,12 +11,16 @@ function UserPage(props) {
   const [currentUserSocials, setCurrentUserSocials] = useState([]);
 
   useEffect(() => {
-    if (!loading && user && isAuthenticated) {
-      API.getUser(props.user.email).then(user => {
-        setCurrentUser(user.data);
-      });
-    }
+    // if (!loading && user && isAuthenticated) {
+    //   API.getUser(props.user.email).then(user => {
+    //     setCurrentUser(user.data);
+    //   });
+    // }
+    setCurrentUser(props.user);
+    console.log(props.user)
+  },[]);
 
+  useEffect(() => {
     API.getAllSocials().then(async socials => {
       let list = [];
 
@@ -26,21 +30,20 @@ function UserPage(props) {
       });
 
       await userSocials.forEach(social => {
+        console.log(social)
         list.push(
-          // <div className="col-6">
           <SocialCard
             key={props.user.id + social.name}
             title={social.name}
-            img={social.img || "No Image"}
+            img={social.image || Logo}
             location={social.location}
           />
-          // </div>
         );
       });
 
       setCurrentUserSocials(list);
     });
-  });
+  }, []);
 
   return (
     <div className="mt-5">
@@ -51,7 +54,7 @@ function UserPage(props) {
             <Row>
               <Image
                 className="mx-auto d-block rounded-circle mb-3"
-                src={currentUser.image || Logo}
+                src={currentUser.image?currentUser.image:Logo}
                 roundedCircle
                 width="225px"
                 height="225px"
@@ -72,7 +75,9 @@ function UserPage(props) {
                 Don't forget! Take a pic of your adventure and post it on the
                 Event Page!
               </p>
-              <CardColumns>{currentUserSocials}</CardColumns>
+              <CardColumns>
+                {currentUserSocials}
+              </CardColumns>
             </Row>
           </Card.Body>
         </Card>
