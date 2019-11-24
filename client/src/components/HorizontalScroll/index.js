@@ -3,35 +3,26 @@ import PropTypes from "prop-types";
 import ScrollMenu from "react-horizontal-scrolling-menu";
 import "./styles.css";
 import SocialCard from "../SocialCard";
+import API from "../../utils/API";
 
-const list = [
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>,
-  <SocialCard/>
-];
+const list = [{item: "item1"}];
 
 const MenuItem = ({ children, selected }) => {
   return <div className={`menu-item ${selected ? "active" : ""}`}>{children}</div>;
 };
 
-export const Menu = list =>
+export const Menu = list => {
   list.map((el, idx) => {
 
     return (<MenuItem key={idx} > {el} </MenuItem>);
     
   });
+};
 
 const Arrow = ({ text, className }) => {
   return <div className={className}>{text}</div>;
 };
+
 Arrow.propTypes = {
   text: PropTypes.string,
   className: PropTypes.string
@@ -76,6 +67,25 @@ class HorizontalScroll extends Component {
     if (alignCenter !== alignCenterNew) {
       this.menu.setInitial();
     }
+  }
+
+  componentDidMount() {
+    // API.getAllSocials().then(async socials => {
+    //   let userSocials = await socials.data.filter(social => {
+    //     // Need to filter so that only socials that the user is appart of will be returned
+    //     const user = this.props.user;
+    //     return social;
+    //   });
+
+    //   await userSocials.forEach(social => {
+    //     console.log(social)
+    //     list.push(
+    //       <SocialCard title={social.name} img={social.img || "No Image"} location={social.location}  />
+    //     );
+    //   });
+      
+    //   this.setState.itemsCount = list.length;
+    // });
   }
 
   setItemsCount = ev => {
@@ -125,9 +135,9 @@ class HorizontalScroll extends Component {
     // };
 
     return (
-      <div className="App">
+      <div className="scrollApp">
         <header className="App-header">
-          <h1 className="App-title">Your Socials!</h1>
+          <h1 className="App-title h1">Your Socials!</h1>
         </header>
         <p className="App-intro">
          Don't forget! Take a pic of your adventure and post it on the Event Page!

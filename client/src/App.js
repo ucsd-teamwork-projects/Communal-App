@@ -1,6 +1,6 @@
 // src/App.js
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useAuth0 } from "./react-auth0-spa";
 import PrivateRoute from "./components/PrivateRoute";
@@ -20,7 +20,7 @@ import "./App.css";
 function App() {
   // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
   const { loading, user, isAuthenticated } = useAuth0();
-  let userInfo = user;
+  const [userInfo, setUserInfo] = useState({});
 
   useEffect(() => {
     // Create user account in our DB if one does new exist
@@ -30,8 +30,9 @@ function App() {
           //create user account
           API.postNewUser(user.name, user.email, user.picture)
           .then(userQry => { userInfo._id = userQry.data._id; });
+          setUserInfo(userQry.data);
         } else {
-          userInfo._id = userQry.data._id;
+          setUserInfo(userQry.data);
         }
       });
     }
@@ -57,11 +58,11 @@ function App() {
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route exact path="/about" component={About} />
-            <PrivateRoute exact path="/add-social" component={AddSocial} user={userInfo}/>
-            {/* <Route exact path="/add-social" component={AddSocial} user={userInfo}/> */}
-            <PrivateRoute exact path="/profile" component={UserPage} />
-            <PrivateRoute exact path="/find-social" component={FindSocials} user={userInfo}/>
-            <PrivateRoute exact path="/socials/:id" component={Social} user={userInfo}/>
+            {/* <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/> */}
+            <Route exact path="/add-social" component={AddSocial} user={user}/>
+            <PrivateRoute exact path="/profile" component={UserPage} user={userInfo}/>
+            <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
+            <PrivateRoute exact path="/socials/:id" component={Social} user={user}/>
             <Route component={NoMatch} />
           </Switch>
         {/* </Container> */}

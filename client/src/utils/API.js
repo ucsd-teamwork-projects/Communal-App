@@ -10,10 +10,11 @@ export default {
       name,
       email,
       image
-    });
+  },
+  getAllSocials: function () {
+    return axios.get("/api/socials/");
   },
   getSocials: function () {
-
     return axios.get("/api/socials");
   },
   // Get social by ID
@@ -26,7 +27,6 @@ export default {
   },
   // Add social like to user
   putUserSocialLike: function (userEmail, socialId) {
-
     return axios.put(`/api/user/${userEmail}/likes`, {
       id: socialId
     });
@@ -37,7 +37,6 @@ export default {
     return axios.put(`/api/user/${userEmail}/dislikes`, {
       id: socialId
     });
-
   },
   // Remove social like to user
   pullUserSocialLike: function (userEmail, socialId) {
@@ -78,11 +77,12 @@ export default {
         userId: userId
       }
     });
-
   },
-  createSocial: function (newSocial) {
+  // Create a new Social
+  createSocial: function(newSocial) {
     return axios.post(`/api/socials`, newSocial);
   },
+  // Create a new Communal
   createNewCommunal: function (title, description, members) {
     return axios.post(`/api/communal`, {
       title,

@@ -31,7 +31,7 @@
     "pusher": "^3.0.0",
     "pusher-js": "^5.0.2",
     "react-autosize-textarea": "^7.0.0",
-    "react-datepicker": "^2.10.0",
+    "react-datepicker": "^2.10.1",
     "react-horizontal-scrolling-menu": "^0.7.3",
     "react-images-upload": "^1.2.7",
     "react-moment": "^0.9.6",
