@@ -5,22 +5,24 @@ import "./styles.css";
 import SocialCard from "../SocialCard";
 import API from "../../utils/API";
 
-const list = [];
+const list = [{item: "item1"}];
 
 const MenuItem = ({ children, selected }) => {
   return <div className={`menu-item ${selected ? "active" : ""}`}>{children}</div>;
 };
 
-export const Menu = list =>
+export const Menu = list => {
   list.map((el, idx) => {
 
     return (<MenuItem key={idx} > {el} </MenuItem>);
     
   });
+};
 
 const Arrow = ({ text, className }) => {
   return <div className={className}>{text}</div>;
 };
+
 Arrow.propTypes = {
   text: PropTypes.string,
   className: PropTypes.string
@@ -68,11 +70,22 @@ class HorizontalScroll extends Component {
   }
 
   componentDidMount() {
-    API.getAllSocials().then(socials => {
-      let userSocials = socials.data.filter(social => {
-        if(social.going.includes()){}//need to get user ID then filter socials
-      });
-    });
+    // API.getAllSocials().then(async socials => {
+    //   let userSocials = await socials.data.filter(social => {
+    //     // Need to filter so that only socials that the user is appart of will be returned
+    //     const user = this.props.user;
+    //     return social;
+    //   });
+
+    //   await userSocials.forEach(social => {
+    //     console.log(social)
+    //     list.push(
+    //       <SocialCard title={social.name} img={social.img || "No Image"} location={social.location}  />
+    //     );
+    //   });
+      
+    //   this.setState.itemsCount = list.length;
+    // });
   }
 
   setItemsCount = ev => {
