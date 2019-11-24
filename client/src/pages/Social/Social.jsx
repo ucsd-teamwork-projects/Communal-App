@@ -177,8 +177,8 @@ class Social extends Component {
               style={{ "word-wrap": "break-word" }}
             >
               {" "}
-              <i className="fas fa-user-circle text-info"></i>
-              &nbsp; {this.social.creator}{" "}
+              <i className="fas fa-user-circle text-info mr-1"></i>
+              {this.social.creator}{" "}
             </h6>
             {/* Social Location */}
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.social.location)}`}>
@@ -187,7 +187,7 @@ class Social extends Component {
               style={{ "word-wrap": "break-word" }}
             >
               {" "}
-              <i className="fas fa-thumbtack text-danger"></i> &nbsp;{" "}
+              <i className="fas fa-thumbtack text-danger mr-2"></i>
               {this.social.location}{" "}
             </h6>
             </a>
