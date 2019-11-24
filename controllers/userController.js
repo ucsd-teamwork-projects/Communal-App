@@ -18,12 +18,14 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     update: function(req, res) {
+        
         userDb
-            .findOneAndUpdate({ email: req.params.userEmail }, req.body)
-            .then(dbModel => res.json(dbModel))
-            .catch(err => res.status(422).json(err));
+        .findOneAndUpdate({ email: req.params.userEmail }, req.body)
+        .then(dbModel => res.json(dbModel))
+        .catch(err => res.status(422).json(err));
     },
     pushLikes: function(req, res) {
+
         userDb
             .findOneAndUpdate({ email: req.params.userEmail }, 
             {

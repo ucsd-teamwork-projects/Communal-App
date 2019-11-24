@@ -6,43 +6,44 @@ export default {
     return axios.get(`/api/user/${userEmail}`);
   },
   postNewUser: function (name, email, image) {
-    return axios.post(`/api/user/`, { name, email, image });
+    return axios.post(`/api/user/`, {
+      name,
+      email,
+      image
   },
   getAllSocials: function () {
     return axios.get("/api/socials/");
   },
-  getSocials: function (populateFields) {
-    return axios.get("/api/socials", {
-      fields: populateFields.join(" ")
-    });
+  getSocials: function () {
+    return axios.get("/api/socials");
   },
   // Get social by ID
-  getSocialById: function (socialId, populateFields) {
-    return axios.get(`/api/socials/:${socialId}`, {
-      fields: populateFields.join(" ")
-    });
+  getSocialById: function (socialId) {
+    return axios.get(`/api/socials/${socialId}`);
   },
   // Post comment to Social
   postCommentToSocial: function (socialId, commentObj) {
-    return axios.get(`/api/socials/:${socialId}/comment`, commentObj);
+    return axios.put(`/api/socials/${socialId}/comment`, commentObj);
   },
   // Add social like to user
   putUserSocialLike: function (userEmail, socialId) {
-    return axios.post(`/api/user/${userEmail}/likes`, {
+    return axios.put(`/api/user/${userEmail}/likes`, {
       id: socialId
     });
   },
   // Add social dislike to user
   putUserSocialDislike: function (userEmail, socialId) {
+
     return axios.put(`/api/user/${userEmail}/dislikes`, {
       id: socialId
     });
-
   },
   // Remove social like to user
   pullUserSocialLike: function (userEmail, socialId) {
     return axios.delete(`/api/user/${userEmail}/likes`, {
-      id: socialId
+      data: {
+        id: socialId
+      }
     });
 
   },
@@ -54,23 +55,27 @@ export default {
 
   },
   // Add user to Social going 
-  putSocialUserGoing: function (userEmail, socialId) {
+  putSocialUserGoing: function (userId, socialId) {
     return axios.put(`/api/socials/${socialId}/going`, {
-      email: userEmail
+      userId: userId
     });
 
   },
   // Remove Social to user going
   pullUserSocialGoing: function (userEmail, socialId) {
     return axios.delete(`/api/user/${userEmail}/going`, {
-      id: socialId
+      data: {
+        id: socialId
+      }
     });
 
   },
-  // Remove user to Social going 
-  pullSocialUserGoing: function (userEmail, socialId) {
+  // Remove user from Social going 
+  pullSocialUserGoing: function (userId, socialId) {
     return axios.delete(`/api/socials/${socialId}/going`, {
-      email: userEmail
+      data: {
+        userId: userId
+      }
     });
   },
   // Create a new Social

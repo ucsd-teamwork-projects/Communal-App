@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import DynamicTextArea from 'react-autosize-textarea';
+import moment from "moment";
 import LocationAutocomplete from 'location-autocomplete';
 import { Form, Button, Card, Container, Alert } from "react-bootstrap";
 
@@ -41,7 +42,7 @@ export class AddSocial extends Component {
             [name]: value,
         });
 
-        if (name == "image") {
+        if (name === "image") {
             this.setState({
                 errorImgMsg: ""
             })
@@ -111,6 +112,14 @@ export class AddSocial extends Component {
         // Check startDate and endDate are not blank and are Date objects
         if((!this.state.startDate || Object.prototype.toString.call(this.state.startDate) !== '[object Date]')) { invalid.startDate = true; }
         if(!this.state.endDate || Object.prototype.toString.call(this.state.endDate) !== '[object Date]') { invalid.endDate = true; }
+        // Check to see whether or not startDate is before endDate
+        if(!invalid.startDate && !invalid.endDate) {
+            if(moment(this.state.startDate).isAfter(this.state.endDate)) {
+                invalid.startDate = true;
+                invalid.endDate = true;
+            }
+        }
+        
         // Check if image invalid error is set
         if(this.state.invalid.image || !this.state.image) { invalid.image = true; }
 
@@ -170,7 +179,7 @@ export class AddSocial extends Component {
         return (
             <div>
                 <Container className="mt-5 pb-5">
-                    <Card className="justify-content-center text-center p-3 mx-auto" style={{ "backgroundImage": "radial-gradient(circle, rgb(248, 208, 148), rgb(248, 226, 194))", "boxShadow": "0px 0px 30px 20px rgb(255, 230, 161)", "maxWidth": "700px" }}>
+                    <Card className="justify-content-center text-center p-3 mx-auto" style={{ "backgroundImage": "radial-gradient(circle, #FFD16E, #fff2c9 )", "boxShadow": "0px 0px 30px -10px #000000", "maxWidth": "700px" }}>
                         <h1 className="mt-3"> <strong>Create Social</strong> </h1>
                         <img className="mx-auto" src={Logo} width="100" height="100" alt="logo" />
 
@@ -249,7 +258,7 @@ export class AddSocial extends Component {
                                     ></Form.Control>
                                     <span style={{ "fontSize": "0.8rem" }} className="text-danger">{this.state.errorImgMsg}</span>
                                     <div className="text-center">
-                                        <img onError={this.addDefaultSrc} className="mt-2 img-fluid mx-auto" src={this.state.image} alt={"This is a preview of your image"} />
+                                        <img onError={this.addDefaultSrc} className="mt-2 img-fluid mx-auto" src={this.state.image} />
                                     </div>
                                     {/* <Form.Label> Category:</Form.Label>
                                     <Form.Control as="select"

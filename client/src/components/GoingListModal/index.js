@@ -19,7 +19,7 @@ function GoingListModal(props) {
                 <Card>
                     <ListGroup variant="flush">
                         {props.going.map(user => (
-                            <ListGroup.Item> <UserProfilePicture src={user.image} size={30} /> {user.name}</ListGroup.Item>
+                            <ListGroup.Item> {user.image}<UserProfilePicture src={user.image} size={30} /> {user.name}</ListGroup.Item>
                         ))}
                         
                     </ListGroup>

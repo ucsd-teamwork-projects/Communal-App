@@ -33,14 +33,14 @@ const socialSchema = new Schema({
     type: String,
     required: true
   },
-  going: {
-    type: [Schema.Types.ObjectId], 
+  going: [{
+    type: Schema.Types.ObjectId, 
     ref: "User"   
-  },
-  comments: {
-    type: [Schema.Types.ObjectId], 
+  }],
+  comments: [{
+    type: Schema.Types.ObjectId, 
     ref: "Comment"   
-  }
+  }]
   
 });
 

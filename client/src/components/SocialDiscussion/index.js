@@ -1,6 +1,7 @@
 import React from "react";
 import DynamicTextArea from 'react-autosize-textarea';
 import UserProfilePicture from "../UserProfileCircle";
+import Moment from "react-moment";
 // import { Container, Row, Col, Card, Button, ButtonGroup } from 'react-bootstrap';
 
 
@@ -44,21 +45,21 @@ function SocialDiscussion(props) {
             <h5 className="flow-text text-center"> {props.title} </h5>
             <hr/>
             <div className="input-group mb-3">
-                <DynamicTextArea id="post-input" className=" form-control custom-control" onChange={(e) => props.handleChange(e)} style={textareaStyles} placeholder={props.inputPlaceholder} />
+                <DynamicTextArea value={props.inputValue} id="post-input" className=" form-control custom-control" onChange={(e) => props.handleChange(e)} style={textareaStyles} placeholder={props.inputPlaceholder} />
                 <span onClick={(e) => handleSubmit(e)} style={buttonStyles} id="vertical-align" className="input-group-addon btn btn-secondary "> 
                     <span > Submit </span>
                 </span>
             </div>
 
                 {props.posts.length ? 
-                props.posts.map(post => (
+                props.posts.reverse().map(post => (
                     <div >
-                        <div className="p-3" style={{"background": "#FFFFFF", "border-radius": "10px"}}>
+                        <div className="p-3 mb-3 text-left" style={{"background": "#FFFFFF", "border-radius": "10px"}}>
                             <span>
                                 <UserProfilePicture style={{"margin-top": "-15px"}} src={post.authorPhoto} size={45}/> 
                                 <span className="ml-2" style={{"display": "inline-block"}}> 
                                     <p className="font-weight-bold text-primary" style={{"margin-bottom": "-0.4em"}}>{post.authorName}</p>
-                                    <p style={{"font-size": "0.8rem"}} className="text-muted">{post.created}</p>
+                                    <p style={{"font-size": "0.8rem"}} className="text-muted"><Moment format="dddd, MMMM Do YYYY, h:mm a">{post.created}</Moment></p>
                                 </span>
 
                             </span>

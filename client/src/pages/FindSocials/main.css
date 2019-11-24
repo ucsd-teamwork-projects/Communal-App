@@ -83,7 +83,9 @@ body {
      text-align: center;
      font-weight: 400;
      font-size: 22px;
-     color: #fff;
+     color: black;
+     font-weight: bold;
+     font-family: "Bungee"
  }
 
  .card-content {
@@ -166,7 +168,7 @@ body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    padding-top: 30px;
+    padding-top: 15px;
     min-width: 200px;
 }
  
@@ -350,5 +352,18 @@ body {
   .card-content a {
       text-decoration: none;
       color:white;
+      
 
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+.card-footer::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE and Edge */
+  .card-footer {
+    -ms-overflow-style: none;
+    max-height: 180px;
+    overflow: auto;
   }
