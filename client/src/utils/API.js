@@ -5,10 +5,11 @@ export default {
   getUser: function (userEmail) {
     return axios.get(`/api/user/${userEmail}`);
   },
-  postNewUser: function (name, email) {
+  postNewUser: function (name, email, image) {
     return axios.post(`/api/user/`, {
       name,
-      email
+      email,
+      image
     });
   },
   getSocials: function () {

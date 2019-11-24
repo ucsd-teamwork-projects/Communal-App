@@ -45,6 +45,7 @@ class Social extends Component {
       this.social.description = currSocial.data.description;
       this.social.name = currSocial.data.name;
 
+      console.log(currSocial.data);
       this.setState({
         comments: currSocial.data.comments, 
         going: currSocial.data.going,

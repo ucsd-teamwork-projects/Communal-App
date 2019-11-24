@@ -28,7 +28,7 @@ function App() {
       API.getUser(user.email).then(userQry => {
         if(userQry.data === null){
           //create user account
-          API.postNewUser(user.name, user.email)
+          API.postNewUser(user.name, user.email, user.picture)
           .then(userQry => { userInfo._id = userQry.data._id; });
         } else {
           userInfo._id = userQry.data._id;

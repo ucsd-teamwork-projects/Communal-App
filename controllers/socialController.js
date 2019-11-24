@@ -16,7 +16,9 @@ module.exports = {
 
     socialDb
       .findById(req.params.id)
-      .populate("creator going comments")
+      .populate("creator")
+      .populate("going")
+      .populate("comments")
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
