@@ -44,7 +44,7 @@ function SocialDiscussion(props) {
             <h5 className="flow-text text-center"> {props.title} </h5>
             <hr/>
             <div className="input-group mb-3">
-                <DynamicTextArea id="post-input" className=" form-control custom-control" onChange={(e) => props.handleChange(e)} style={textareaStyles} placeholder={props.inputPlaceholder} />
+                <DynamicTextArea value={props.inputValue} id="post-input" className=" form-control custom-control" onChange={(e) => props.handleChange(e)} style={textareaStyles} placeholder={props.inputPlaceholder} />
                 <span onClick={(e) => handleSubmit(e)} style={buttonStyles} id="vertical-align" className="input-group-addon btn btn-secondary "> 
                     <span > Submit </span>
                 </span>

@@ -54,9 +54,7 @@ class Social extends Component {
     });
   };
 
-  postComment = e => {
-    // Prevent page refresh
-    e.preventDefault();
+  postComment = () => {
     // Create Comment to be inserted
     const newComment = {
       text: this.state.commentInput,
@@ -65,7 +63,12 @@ class Social extends Component {
     };
 
     // Create Comment in database
-    API.postCommentToSocial(this.socialId, newComment);
+    API.postCommentToSocial(this.socialId, newComment)
+    .then(() => {
+      this.setState({
+        commentInput: ""
+      })
+    });
   };
 
   getUserEventInfo = () => {
@@ -151,7 +154,6 @@ class Social extends Component {
     if (this.state.loading) {
       return <Loading />
     } else {
-
     return (
       <div>
         <Card>
@@ -237,6 +239,7 @@ class Social extends Component {
           onHide={() => this.setState({ modalShow: false })}
         />
         <SocialDiscussion
+          inputValue={this.state.commentInput}
           title="Comments"
           inputPlaceholder="Enter your comment here..."
           posts={this.state.comments}

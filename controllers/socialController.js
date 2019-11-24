@@ -60,14 +60,15 @@ module.exports = {
   pushComment: function(req, res) {
     // create Comment
     commentDb
-    .insertOne(req.body)
+    .create(req.body)
     .then(newComment => {
       // Trigger all listening components to retrieve new comment
-      pusher.trigger(`comments`, `social-${socialId}`, newComment);
-
+      // pusher.trigger(`comments`, `social-${socialId}`, newComment);
+      
       // Then push new ID into Social comments
+      console.log(newComment);
       socialDb
-      .findById({ _id: req.params.id }, 
+      .findOneAndUpdate({ _id: req.params.id }, 
         {
             $push: {
                 comments: newComment._id
