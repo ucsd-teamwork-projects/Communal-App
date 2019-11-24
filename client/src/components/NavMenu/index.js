@@ -3,14 +3,14 @@ import LogBtn from "../LogBtn";
 import { useAuth0 } from "../../react-auth0-spa";
 import { Navbar, Nav, NavDropdown, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-
 import Logo from "../../assets/img/logo.png";
 import "./style.css";
 
 function NavMenu() {
   const { user, isAuthenticated } = useAuth0();
+
   return (
-    <Navbar style={{"zIndex": "1000"}} className="bg" expand="lg">
+    <Navbar fixed="top" style={{"zIndex": "1000"}} className="bg" expand="lg">
       <Navbar.Brand href="/">
         <img
           src={Logo}
@@ -19,7 +19,7 @@ function NavMenu() {
           className="d-inline-block align-top"
           alt=""
         />
-        <span style={{"font-family": "'Bungee', cursive"}}>{` Communal`}</span>
+        <span style={{"fontFamily": "'Bungee', cursive"}}>{` Communal`}</span>
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">

@@ -18,14 +18,15 @@ class FindSocials extends Component {
   };
 
   filterSocials = socials => {
+    let socialsList = socials.data;
     // Pull user's likes and dislikes
     API.getUser(this.user.email).then(userObj => {
-      const { likes, dislikes } = userObj;
-      let seen;
+      const { likes, dislikes } = userObj.data;
+      let seen = [];
 
-      if (likes) seen = likes.concat(dislikes);
-
-      const filtered = this.state.socials.filter(function(social) {
+      if (likes && dislikes) {seen = likes.concat(dislikes)};
+      
+      const filtered = socialsList.filter(function(social) {
         if (seen.includes(social._id)) {
           return false;
         } else {
@@ -36,6 +37,11 @@ class FindSocials extends Component {
       this.setState({
         socials: filtered
       });
+
+      console.log(filtered);
+
+      // Call page functions after component rendered
+      documentReady();
     });
   };
 
@@ -44,8 +50,10 @@ class FindSocials extends Component {
     let fields = ["creator"];
     API.getSocials(fields).then(allSocials => {
       //   Filter returned Socials based off what user has already seen
-      this.filterSocials(allSocials);
+      this.filterSocials(allSocials)
+      
     });
+
   };
 
   dislikeSocial = () => {
@@ -84,9 +92,8 @@ class FindSocials extends Component {
 
   componentDidMount() {
     // Get socials from database that user has not seen
-    this.getSocials();
-    // Call page functions after component rendered
-    documentReady();
+    this.getSocials()
+  
 
     // Listen for new Socials (Uncomment when adding socials is complete)
     // const pusher = new Pusher('APP_KEY', {
@@ -114,13 +121,13 @@ class FindSocials extends Component {
             <div className="stackedcards-container">
               {/* Render filtered social cards here */}
 
-              {this.state.socials.map(social => (
-                <div className="card">
-                  <Link to={`socials/${social._id}`}>
+              {this.state.socials.map((social) => (
+                <div key={social._id} className="card">
+                  <Link  to={`socials/${social._id}`}>
                     <div className="card-content">
                       <div className="card-image">
                         <img
-                          src={social.img}
+                          src={social.image}
                           width="100%"
                           height="100%"
                           alt=""
@@ -130,7 +137,7 @@ class FindSocials extends Component {
                         <h4 className="flow-text break-word">{social.name}</h4>
                         <h5 className="flow-text break-word">
                           <i className="fas fa-calendar-week text-secondary"></i>
-                          &nbsp;&nbsp;{social.date}
+                          &nbsp;&nbsp;{social.startDate}
                         </h5>
                       </div>
                     </div>
@@ -233,9 +240,7 @@ class FindSocials extends Component {
             </div>
           </div>
         </div>
-        <h2 className="final-state hidden">
-          There are no more events in your area. <br /> Check again later!
-        </h2>
+        <h2 className="final-state hidden text-dark">There are no more events in your area. <br/> Check again later!</h2>
       </div>
     );
   }

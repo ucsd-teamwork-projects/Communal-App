@@ -5,15 +5,18 @@ import { Col, Card } from "react-bootstrap";
 import ImgCarousel from "../components/ImgCarousel";
 import Logo from "../assets/img/logo.png";
 
+import "../utils/flowHeaders.min.css";
+
+
 function Landing() {
   return (
     // <div>
-    <Container className="my-5">
+    <Container>
       <Row className="justify-content-center">
         <Col xs={10}>
-          <Card>
+          <Card className="mx-auto my-5">
             <Card.Header className="text-center">
-              <h1 className="Display-1"  style={{"font-family": "'Bungee', cursive"}}>COMMUNAL</h1>
+              <h2 className="Display-1"  style={{"fontFamily": "'Bungee', cursive", "color": "black"}}>COMMUNAL</h2>
               <img src={Logo} width="150" height="150" alt="logo" />
               <h3 className="Display-3">Find People, Do Stuff</h3>
             </Card.Header>
