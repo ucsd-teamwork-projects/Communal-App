@@ -38,7 +38,7 @@ class Social extends Component {
   getSocial = () => {
     // Retrieve this Social object
     API.getSocialById(this.socialId).then(currSocial => {
-      this.social.creator = currSocial.data.creator.name;
+      this.social.creator = currSocial.data.creator;
       this.social.startDate = currSocial.data.startDate;
       this.social.endDate = currSocial.data.endDate;
       this.social.location = currSocial.data.location;

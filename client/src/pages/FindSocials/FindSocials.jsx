@@ -160,7 +160,7 @@ class FindSocials extends Component {
                           &nbsp;{" "}
                           <span className="text-muted">
                             {" "}
-                            {social.creator.name}{" "}
+                            {(typeof social === 'undefined')?social.creator:""}{" "}
                           </span>{" "}
                         </div>
                       </Row>

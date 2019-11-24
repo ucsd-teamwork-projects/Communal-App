@@ -4,13 +4,10 @@ import { Row } from "react-bootstrap";
 import { Col, Card } from "react-bootstrap";
 import ImgCarousel from "../components/ImgCarousel";
 import Logo from "../assets/img/logo.png";
-
 import "../utils/flowHeaders.min.css";
-
 
 function Landing() {
   return (
-    // <div>
     <Container>
       <Row className="justify-content-center">
         <Col xs={10}>
@@ -40,7 +37,6 @@ function Landing() {
         </Col>
       </Row>
     </Container>
-    // </div>
   );
 }
 

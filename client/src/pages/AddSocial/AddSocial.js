@@ -173,6 +173,7 @@ export class AddSocial extends Component {
     };
 
     componentDidMount() {
+        console.log(this.props.user)
     }
 
     render() {
