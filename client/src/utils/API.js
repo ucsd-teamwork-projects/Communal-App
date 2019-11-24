@@ -10,6 +10,7 @@ export default {
       name,
       email,
       image
+    })
   },
   getAllSocials: function () {
     return axios.get("/api/socials/");
