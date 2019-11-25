@@ -3,11 +3,11 @@
 /* import font ROBOTO */
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
 
-body {
+/* body {
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
     margin: 0 15px;
-}
+} */
 
 .background-0 { background: #C87D26; }
 .background-1 { background: #569D99; }
@@ -52,7 +52,7 @@ body {
       }
   }
  
- h1, h2, h3 {
+ /* h1, h2, h3 {
    margin: 0;
  }
  
@@ -73,7 +73,7 @@ body {
    font-weight: 300;
    color: #BFBFBE;
    margin-top: 10px;
- }
+ } */
  
  .title {
      width: 100%;
@@ -223,9 +223,9 @@ body {
 /*------ CSS Use Case Example END ------*/
 
 /*----- Stacked Cards component css START -----*/
-body {
+/* body {
     overflow-x: hidden;
-}
+} */
 
 .no-transition {
   -webkit-transition: none ! important;
