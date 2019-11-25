@@ -44,8 +44,8 @@ class Social extends Component {
       this.social.location = currSocial.data.location;
       this.social.description = currSocial.data.description;
       this.social.name = currSocial.data.name;
+      this.social.image = currSocial.data.image;
 
-      console.log(currSocial.data);
       this.setState({
         comments: currSocial.data.comments, 
         going: currSocial.data.going,
@@ -158,10 +158,15 @@ class Social extends Component {
     return (
       <div>
         <Card>
-          <Card.Img
+          {/* <Card.Img
             style={{ "object-fit": "cover", height: "30vh" }}
             variant="top"
             src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&w=1000&q=80"
+          /> */}
+          <Card.Img
+            style={{ "object-fit": "cover", height: "30vh" }}
+            variant="top"
+            src={this.social.image}
           />
           <Card.Body className="text-left">
             {/* Social Date*/}
@@ -177,8 +182,8 @@ class Social extends Component {
               style={{ "word-wrap": "break-word" }}
             >
               {" "}
-              <i className="fas fa-user-circle text-info"></i>
-              &nbsp; {this.social.creator}{" "}
+              <i className="fas fa-user-circle text-info mr-1"></i>
+              {this.social.creator}{" "}
             </h6>
             {/* Social Location */}
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.social.location)}`}>
@@ -187,7 +192,7 @@ class Social extends Component {
               style={{ "word-wrap": "break-word" }}
             >
               {" "}
-              <i className="fas fa-thumbtack text-danger"></i> &nbsp;{" "}
+              <i className="fas fa-thumbtack text-danger mr-2"></i>
               {this.social.location}{" "}
             </h6>
             </a>
