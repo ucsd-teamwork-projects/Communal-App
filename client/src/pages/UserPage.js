@@ -6,27 +6,18 @@ import API from "../utils/API";
 import SocialCard from "../components/SocialCard";
 
 function UserPage(props) {
-  const { user, loading, isAuthenticated } = useAuth0();
-  const [currentUser, setCurrentUser] = useState({});
   const [currentUserSocials, setCurrentUserSocials] = useState([]);
 
-  useEffect(() => {
-    // if (!loading && user && isAuthenticated) {
-    //   API.getUser(props.user.email).then(user => {
-    //     setCurrentUser(user.data);
-    //   });
-    // }
-    setCurrentUser(props.user);
-    console.log(props.user)
-  },[]);
 
   useEffect(() => {
     API.getAllSocials().then(async socials => {
       let list = [];
 
       let userSocials = await socials.data.filter(social => {
-        // Need to filter so that only socials that the user is appart of will be returned
-        return social;
+        //Filters for socials created by user
+        if(social.creator._id === props.user._id)
+          return social;
+        //need to add filter for socials user is attending
       });
 
       await userSocials.forEach(social => {
@@ -54,7 +45,7 @@ function UserPage(props) {
             <Row>
               <Image
                 className="mx-auto d-block rounded-circle mb-3"
-                src={currentUser.image?currentUser.image:Logo}
+                src={props.user.image?props.user.image:Logo}
                 roundedCircle
                 width="225px"
                 height="225px"
@@ -63,8 +54,8 @@ function UserPage(props) {
             {/* User Info */}
             <Row>
               <div className="mx-auto">
-                <h2 className="h2">{currentUser.name}</h2>
-                <h3 className="h3">{currentUser.email}</h3>
+                <h2 className="h2">{props.user.name}</h2>
+                <h3 className="h3">{props.user.email}</h3>
               </div>
             </Row>
             <hr></hr>
