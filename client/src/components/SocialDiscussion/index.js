@@ -14,25 +14,25 @@ function SocialDiscussion(props) {
     const mainContainerStyles = {
         "padding": "10px",
         "background": "#F0F0F0",
-        "min-width": "20vh",
-        "margin-top": "10px",
-        "margin-bottom": "10px"
+        "minWidth": "20vh",
+        "marginTop": "10px",
+        "marginBottom": "10px"
 
     };
 
     const textareaStyles = {
         "width": "70%", 
         "padding":"4px 6px", 
-        "border-top-left": "10px",
-        "border-bottom-left": "10px",
+        "borderTopLeft": "10px",
+        "borderBottomLeft": "10px",
         "size": "0.5 em"
     }
 
     const buttonStyles = {
-        "border-top-left": "0px",
-        "border-bottom-left": "0px",
-        "border-top-right": "10px",
-        "border-bottom-right": "10px"    
+        "borderTopLeft": "0px",
+        "borderBottomLeft": "0px",
+        "borderTopRight": "10px",
+        "borderBottomRight": "10px"    
     }
 
     const handleSubmit = (e) => {

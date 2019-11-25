@@ -5,24 +5,78 @@ import API from "../utils/API";
 import SocialCard from "../components/SocialCard";
 
 function UserPage(props) {
-  const [currentUserSocials, setCurrentUserSocials] = useState([]);
+  const [createdUserSocials, setCreatedUserSocials] = useState([]);
+  const [attendingUserSocials, setAttendingUserSocials] = useState([]);
+  const [likedUserSocials, setLikedUserSocials] = useState([]);
 
   useEffect(() => {
     API.getAllSocials().then(async socials => {
-      let list = [];
+      let createdList = [];
+      let attendingList = [];
+      let likedList = [];
 
-      let userSocials = await socials.data.filter(social => {
+      let createdSocials = await socials.data.filter(social => {
         //Filters for socials created by user
         if(social.creator._id === props.user._id)
           return social;
-        //need to add filter for socials user is attending
       });
 
-      await userSocials.forEach(social => {
-        console.log(social)
-        list.push(
+      let attendingSocials = await socials.data.filter(social => {
+        //Filters for socials user is attending
+        if("going" in social){
+          if(social.going.includes(props.user._id))
+            return social;
+        }
+      });
+
+      let likedSocials = await socials.data.filter(social => {
+        //Filters for socials liked by user
+        if("likes" in props.user){
+          if(props.user.likes.includes(social._id))
+            return social;
+        }
+      });
+
+      // await createdSocials.forEach(social => {
+      //   console.log(social)
+      //   createdList.push(
+      //     <SocialCard
+      //       key={props.user._id + social.name}
+      //       title={social.name}
+      //       img={social.image || Logo}
+      //       location={social.location}
+      //       id={social._id}
+      //     />
+      //   );
+      // });
+      createdList = await createSocialCards(createdSocials);
+      setCreatedUserSocials(createdList);
+
+      attendingList = await createSocialCards(attendingSocials);
+      setAttendingUserSocials(attendingList);
+
+      likedList = await createSocialCards(likedSocials);
+      setLikedUserSocials(likedList);
+    });
+  }, []);
+
+  const createSocialCards = async (socials) => {
+    let List = [];
+
+    if(socials.length === 0){
+      List.push(
+        <SocialCard
+          key="0"
+          title="No Socials Yet, Go find some!"
+          img={Logo}
+          location="Bee Somewhere!"
+        />
+      )
+    } else {
+      await socials.forEach(social => {
+        List.push(
           <SocialCard
-            key={props.user.id + social.name}
+            key={props.user._id + social.name}
             title={social.name}
             img={social.image || Logo}
             location={social.location}
@@ -30,10 +84,9 @@ function UserPage(props) {
           />
         );
       });
-
-      setCurrentUserSocials(list);
-    });
-  }, []);
+    }
+    return List;
+  };
 
   return (
       <Container className="my-5">
@@ -59,13 +112,24 @@ function UserPage(props) {
             <hr></hr>
             {/* Social Info */}
             <Row>
-              <h1 className="h1 col-12 text-center">Your Socials!</h1>
-              <p className="lead col-12 text-center my-4">
+              <h2 className="h1 col-12 text-center">View Your Socials!</h2>
+              <p className="lead col-12 text-center mb-5">
                 Don't forget! Take a pic of your adventure and post it on the
                 Event Page!
               </p>
+              <h2 className="h1 col-12 mt-4 text-right">Social's Liked by You</h2>
               <CardColumns>
-                {currentUserSocials}
+                {likedUserSocials}
+              </CardColumns>
+
+              <h2 className="h1 col-12 mt-4 text-right">Social's You are Attending</h2>
+              <CardColumns>
+                {attendingUserSocials}
+              </CardColumns>
+
+              <h2 className="h1 col-12 mt-4 text-right">Social's Created by You</h2>
+              <CardColumns>
+                {createdUserSocials}
               </CardColumns>
             </Row>
           </Card.Body>
