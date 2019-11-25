@@ -1,9 +1,11 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import Logo from "../../assets/img/logo.png";
+import { Link } from "react-router-dom";
 
 function SocialCard(props) {
   return (
+    <Link to={`socials/${props.id}`}>
       <Card >
         <Card.Img variant="top" src={props.img ? props.img : Logo} alt="Social Image" />
         <Card.Body>
@@ -17,6 +19,7 @@ function SocialCard(props) {
           </Card.Text>
         </Card.Body>
       </Card>
+    </Link>
   );
 }
 

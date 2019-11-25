@@ -26,6 +26,7 @@ function UserPage(props) {
             title={social.name}
             img={social.image || Logo}
             location={social.location}
+            id={social._id}
           />
         );
       });
