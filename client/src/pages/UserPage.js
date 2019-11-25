@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Container, Row, Image, Card, CardColumns } from "react-bootstrap";
 import Logo from "../assets/img/logo.png";
-import { useAuth0 } from "../react-auth0-spa";
 import API from "../utils/API";
 import SocialCard from "../components/SocialCard";
 
 function UserPage(props) {
   const [currentUserSocials, setCurrentUserSocials] = useState([]);
-
 
   useEffect(() => {
     API.getAllSocials().then(async socials => {
