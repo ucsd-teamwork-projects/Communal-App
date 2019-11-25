@@ -37,8 +37,7 @@ function UserPage(props) {
   }, []);
 
   return (
-    <div className="mt-5">
-      <Container>
+      <Container className="my-5">
         <Card className="p-3">
           <Card.Body>
             {/* User Image */}
@@ -73,7 +72,6 @@ function UserPage(props) {
           </Card.Body>
         </Card>
       </Container>
-    </div>
   );
 }
 
