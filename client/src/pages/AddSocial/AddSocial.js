@@ -36,7 +36,6 @@ export class AddSocial extends Component {
 
     handleInputChange = event => {
         let { value, name } = event.target;
-        
 
         this.setState({
             [name]: value,
@@ -48,10 +47,17 @@ export class AddSocial extends Component {
             })
         }
 
-        if (this.state.alertOpen) {
+        if (this.state.alertOpen || this.state.errorAlertOpen) {
             this.setState({
                 alertOpen: false,
-                errorAlertOpen: false
+                errorAlertOpen: false,
+                invalid: {
+                    name: false,
+                    location: false,
+                    startDate: false,
+                    endDate: false,
+                    image: false
+                }
             })
         }
     };
@@ -163,7 +169,8 @@ export class AddSocial extends Component {
                         name: false,
                         location: false,
                         startDate: false,
-                        endDate: false
+                        endDate: false,
+                        image: false
                     }
                 });
             } 
@@ -173,7 +180,6 @@ export class AddSocial extends Component {
     };
 
     componentDidMount() {
-        console.log(this.props.user)
     }
 
     render() {
@@ -209,6 +215,7 @@ export class AddSocial extends Component {
                                         <LocationAutocomplete
                                             className={`form-control ${this.state.invalid.location ? "is-invalid" : ""}`}
                                             style={{ "width": "100%" }}
+                                            value={this.state.location}
                                             name="location"
                                             placeholder="My Social will be at..."
                                             googleAPIKey="AIzaSyDxStRoOM-60GmRhXIWnOgw-MFNnzT8xwc"
@@ -221,7 +228,10 @@ export class AddSocial extends Component {
                                     <DynamicTextArea
                                         className="form-control"
                                         placeholder="I want others to know that..."
-                                        onChange={(e) => this.handleInputChange(e)} />
+                                        value={this.state.description}
+                                        name="description"
+                                        onChange={(e) => this.handleInputChange(e)}
+                                         />
 
                                     <div className="r-form d-inline-block">
                                         <Form.Label className="font-weight-light mt-3 w-100"> Start Date (required)</Form.Label>

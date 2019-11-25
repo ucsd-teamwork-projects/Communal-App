@@ -86,6 +86,7 @@ class FindSocials extends Component {
     );
 
     // Add user to Social going
+    console.log(this.user);
     API.putSocialUserGoing(
       this.user._id,
       this.state.socials[this.currSocialIdx]._id
@@ -120,7 +121,7 @@ class FindSocials extends Component {
         {/* Main card container */}
         <div className="stage">
           <div className="title">
-            <i className="fas fa-street-view"></i>&nbsp;&nbsp;Events Near You {" "}
+            <i className="fas fa-street-view"></i>&nbsp;&nbsp;Events Near You 
           </div>
           <div
             id="stacked-cards-block"
@@ -155,24 +156,24 @@ class FindSocials extends Component {
                     <Container>
                       <Row className="mb-4 mt-3">
                         <div>
-                          {" "}
-                          <i className="fas fa-user-circle fa-lg text-info"></i>{" "}
-                          &nbsp;{" "}
+                          
+                          <i className="fas fa-user-circle fa-lg text-info mr-1"></i>
+                          &nbsp;
                           <span className="text-muted">
-                            {" "}
-                            {(typeof social === 'undefined')?social.creator:""}{" "}
-                          </span>{" "}
+                            
+                            {social.creator.name}
+                          </span>
                         </div>
                       </Row>
                       <Row className="mb-4">
                         <div className="text-left">
-                          {" "}
-                          <i className="fas fa-thumbtack fa-lg text-danger"></i>{" "}
-                          &nbsp;{" "}
+                          
+                          <i className="fas fa-thumbtack fa-lg text-danger mr-2"></i>
+                          &nbsp;
                           <span className="text-muted">
-                            {" "}
-                            {social.location}{" "}
-                          </span>{" "}
+                            
+                            {social.location}
+                          </span>
                         </div>
                       </Row>
                     </Container>
