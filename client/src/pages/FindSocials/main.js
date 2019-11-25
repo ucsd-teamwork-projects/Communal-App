@@ -130,7 +130,7 @@ export function documentReady() {
 				transformUi(0, 0, 0, topObj);
 			}
 
-			setZindex(5);
+			setZindex(10);
 
 			if (!(currentPosition >= maxElements)) {
 				//roll back the opacity of second element
@@ -151,6 +151,7 @@ export function documentReady() {
 		//Keep the active card.
 		function currentElement() {
 			currentElementObj = listElNodesObj[currentPosition];
+
 		};
 
 		//Change background for each swipe.
@@ -297,7 +298,7 @@ export function documentReady() {
 				}
 
 				listElNodesObj[currentPosition].classList.remove('no-transition');
-				listElNodesObj[currentPosition].style.zIndex = 6;
+				listElNodesObj[currentPosition].style.zIndex = 10;
 			}
 
 		};
@@ -339,6 +340,7 @@ export function documentReady() {
 
 					}, 300);
 
+					
 					isFirstTime = false;
 				}
 			}
@@ -546,7 +548,12 @@ export function documentReady() {
 						listElNodesObj[i].style.transform = 'scale(' + elScale + ') translateX(0) translateY(' + (elTrans - elTransInc) + 'px) translateZ(0)';
 						listElNodesObj[i].style.webkitTransform = 'scale(' + elScale + ') translateX(0) translateY(' + (elTrans - elTransInc) + 'px) translateZ(0)';
 						listElNodesObj[i].style.opacity = elOpac;
-						listElNodesObj[i].style.zIndex = elZindex;
+						if(i == currentPosition) {
+							listElNodesObj[i].style.zIndex = 10;
+
+						} else {
+							listElNodesObj[i].style.zIndex = elZindex;
+						}
 
 						elScale = elScale - 0.04;
 						elOpac = elOpac - (1 / items);

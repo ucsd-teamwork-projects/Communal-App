@@ -62,8 +62,8 @@ function App() {
             {/* <PrivateRoute exact path="/add-social" component={AddSocial} user={user}/> */}
             <PrivateRoute exact path="/add-social" component={AddSocial} user={userInfo}/>
             <PrivateRoute exact path="/profile" component={UserPage} user={userInfo}/>
-            <PrivateRoute exact path="/find-social" component={FindSocials} user={user}/>
-            <PrivateRoute exact path="/socials/:id" component={Social} user={user}/>
+            <PrivateRoute exact path="/find-social" component={FindSocials} user={userInfo}/>
+            <PrivateRoute exact path="/socials/:id" component={Social} user={userInfo}/>
             <Route component={NoMatch} />
           </Switch>
         {/* </Container> */}
