@@ -70,6 +70,7 @@ function UserPage(props) {
           title="No Socials Yet, Go find some!"
           img={Logo}
           location="Bee Somewhere!"
+          link="/add-social"
         />
       )
     } else {
@@ -80,7 +81,7 @@ function UserPage(props) {
             title={social.name}
             img={social.image || Logo}
             location={social.location}
-            id={social._id}
+            link={`/socials/${social._id}`}
           />
         );
       });

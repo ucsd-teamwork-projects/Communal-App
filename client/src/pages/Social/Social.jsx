@@ -3,7 +3,7 @@ import API from "../../utils/API";
 import Moment from "react-moment"
 import moment from "moment"
 import "./main.css";
-import { Card, Button, ButtonGroup } from "react-bootstrap";
+import { Card, Button, ButtonGroup, Container } from "react-bootstrap";
 import GoingListModal from "../../components/GoingListModal";
 import Loading from "../../components/Loading";
 import SocialDiscussion from "../../components/SocialDiscussion";
@@ -157,7 +157,7 @@ class Social extends Component {
       return <Loading />
     } else {
     return (
-      <div>
+      <Container className="mt-5">
         <Card>
           {/* <Card.Img
             style={{ "object-fit": "cover", height: "30vh" }}
@@ -250,6 +250,16 @@ class Social extends Component {
               )}
             </ButtonGroup>
           </Card.Body>
+
+          <SocialDiscussion
+            className="mb-5"
+            inputValue={this.state.commentInput}
+            title="Comments"
+            inputPlaceholder="Enter your comment here..."
+            posts={this.state.comments}
+            handleChange={e => this.setState({ commentInput: e.target.value })}
+            handleSubmit={() => this.postComment()}
+          />
         </Card>
 
         <GoingListModal
@@ -257,15 +267,8 @@ class Social extends Component {
           show={this.state.modalShow}
           onHide={() => this.setState({ modalShow: false })}
         />
-        <SocialDiscussion
-          inputValue={this.state.commentInput}
-          title="Comments"
-          inputPlaceholder="Enter your comment here..."
-          posts={this.state.comments}
-          handleChange={e => this.setState({ commentInput: e.target.value })}
-          handleSubmit={() => this.postComment()}
-        />
-      </div>
+        
+      </Container>
     )};
   }
 }

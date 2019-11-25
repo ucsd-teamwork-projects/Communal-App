@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 function SocialCard(props) {
   return (
-    <Link to={`socials/${props.id}`}>
+    <Link to={props.link}>
       <Card >
         <Card.Img variant="top" src={props.img ? props.img : Logo} alt="Social Image" />
         <Card.Body>
