@@ -9,7 +9,7 @@ import NavMenu from "./components/NavMenu";
 import Landing from "./pages/Landing";
 import FindSocials from "./pages/FindSocials/index";
 import Social from "./pages/Social/index";
-import About from "./pages/About";
+import About from "./pages/About/About";
 import AddSocial from "./pages/AddSocial";
 import UserPage from "./pages/UserPage";
 import NoMatch from "./components/NoMatch";
