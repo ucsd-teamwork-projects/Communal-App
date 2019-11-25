@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import Moment from "react-moment"
+import moment from "moment"
 import "./main.css";
 import { Card, Button, ButtonGroup } from "react-bootstrap";
 import GoingListModal from "../../components/GoingListModal";
@@ -169,21 +170,33 @@ class Social extends Component {
             src={this.social.image}
           />
           <Card.Body className="text-left">
-            {/* Social Date*/}
-            <h5 className="flow-text text-danger"> <Moment format="dddd, MMMM Do YYYY, h:mm a">{this.social.startDate}</Moment></h5>
+            {/* Upcoming Social Warning */}
+              {
+              moment(Date.now()).isBetween(this.social.startDate, this.social.endDate) ? 
+              <h6 className="flow-text text-success"> This event is happening right now! </h6> 
+              : moment(this.social.endDate).isBefore(Date.now()) ? 
+              <h6 className="flow-text text-danger"> This event has already passed. </h6> 
+              : 
+              <h6 className="flow-text text-danger"> { moment(this.social.startDate).from(Date.now()) } </h6> 
+              
+            }
+            {/* Social Start Date*/}
+            <h5 className="flow-text text-info font-weight-bold"> <Moment format="dddd, MMMM Do YYYY, h:mm a">{this.social.startDate}</Moment></h5>
+            {/* Social End Date*/}
+            <h6 className="flow-text text-info"> — &nbsp;&nbsp;<Moment format="dddd, MMMM Do YYYY, h:mm a">{this.social.endDate}</Moment></h6>
             {/* Social Title */}
             <h4 className="flow-text" style={{ "word-wrap": "break-word" }}>
-              {" "}
-              {this.social.name}{" "}
+              
+              {this.social.name}
             </h4>
             {/* Social User */}
             <h6
               className="text-secondary"
               style={{ "word-wrap": "break-word" }}
             >
-              {" "}
+              
               <i className="fas fa-user-circle text-info mr-1"></i>
-              {this.social.creator}{" "}
+              {this.social.creator}
             </h6>
             {/* Social Location */}
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.social.location)}`}>
@@ -191,9 +204,9 @@ class Social extends Component {
               className="text-secondary"
               style={{ "word-wrap": "break-word" }}
             >
-              {" "}
+              
               <i className="fas fa-thumbtack text-danger mr-2"></i>
-              {this.social.location}{" "}
+              {this.social.location}
             </h6>
             </a>
             <hr />
@@ -207,7 +220,7 @@ class Social extends Component {
               className="hover-underline mb-1 font-weight-bold"
               onClick={() => this.setState({ modalShow: true })}
             >
-              {" "}
+              
               {this.state.going.length} going
             </p>
             <ButtonGroup className="mt-1" size="sm">
