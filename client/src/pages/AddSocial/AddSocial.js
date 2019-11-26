@@ -180,7 +180,6 @@ export class AddSocial extends Component {
     };
 
     componentDidMount() {
-        console.log(process.env);
     }
 
     render() {

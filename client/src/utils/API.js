@@ -26,6 +26,10 @@ export default {
   postCommentToSocial: function (socialId, commentObj) {
     return axios.put(`/api/socials/${socialId}/comment`, commentObj);
   },
+  // Pull comment from Social
+  pullCommentFromSocial: function (socialId, commentId) {
+    return axios.delete(`/api/socials/${socialId}/comment`, {data: {commentId}});
+  },
   // Add social like to user
   putUserSocialLike: function (userEmail, socialId) {
     return axios.put(`/api/user/${userEmail}/likes`, {

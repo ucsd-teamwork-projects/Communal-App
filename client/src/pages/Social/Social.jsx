@@ -61,6 +61,8 @@ class Social extends Component {
   };
 
   postComment = () => {
+    console.log("PUSHING");
+
     // Create Comment to be inserted
     const newComment = {
       text: this.state.commentInput,
@@ -75,6 +77,13 @@ class Social extends Component {
         commentInput: ""
       })
     });
+  };
+
+  pullComment = (commentId) => {
+    console.log("PULLING");
+
+    // Pull Comment from Social
+    API.pullCommentFromSocial(this.socialId, commentId);
   };
 
   getUserEventInfo = () => {
@@ -166,9 +175,23 @@ class Social extends Component {
       cluster: 'us3',
       encrypted: true
     });
-    const channel = pusher.subscribe(`comments`);
-    channel.bind(`social-${this.socialId}`, data => {
+    const channel = pusher.subscribe(`comment-creation`);
+    channel.bind(`social-${this.socialId}`, (data) => {
       this.setState({ comments: [data, ...this.state.comments] });
+    });
+    const channel2 = pusher.subscribe(`comment-deletion`);
+
+    channel2.bind(`social-${this.socialId}`, rc => {
+      const removed = this.state.comments.filter((c) => {
+
+        if(c._id == rc._id) {
+          return false;
+        } else {
+          return true;
+        }
+      })
+      this.setState({ comments: removed });
+
     });
   }
 
@@ -185,7 +208,7 @@ class Social extends Component {
             src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&w=1000&q=80"
           /> */}
           <Card.Img
-            style={{ "object-fit": "cover", height: "30vh" }}
+            style={{ "objectFit": "cover", height: "30vh" }}
             variant="top"
             src={this.social.image}
           />
@@ -210,14 +233,14 @@ class Social extends Component {
             {/* Social End Date*/}
             <h6 className="flow-text text-info"> — &nbsp;&nbsp;<Moment format="dddd, MMMM Do YYYY, h:mm a">{this.social.endDate}</Moment></h6>
             {/* Social Title */}
-            <h4 className="flow-text" style={{ "word-wrap": "break-word" }}>
+            <h4 className="flow-text" style={{ "wordWrap": "break-word" }}>
               
               {this.social.name}
             </h4>
             {/* Social User */}
             <h6
               className="text-secondary"
-              style={{ "word-wrap": "break-word" }}
+              style={{ "wordWrap": "break-word" }}
             >
               
               <i className="fas fa-user-circle text-info mr-1"></i>
@@ -227,7 +250,7 @@ class Social extends Component {
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.social.location)}`}>
             <h6
               className="text-secondary"
-              style={{ "word-wrap": "break-word" }}
+              style={{ "wordWrap": "break-word" }}
             >
               
               <i className="fas fa-thumbtack text-danger mr-2"></i>
@@ -238,7 +261,7 @@ class Social extends Component {
             <h6 className="flow-text text-muted font-weight-bold">
               Description
             </h6>
-            <p style={{ "word-wrap": "break-word" }}>
+            <p style={{ "wordWrap": "break-word" }}>
               {this.social.description ? this.social.description : "No description was provided."}
             </p>
             <p
@@ -263,13 +286,13 @@ class Social extends Component {
                     onClick={() => this.markGoing()}
                     variant="outline-success"
                   >
-                    <i class="far fa-check-circle"></i>&nbsp;I'm going...
+                    <i className="far fa-check-circle"></i>&nbsp;I'm going...
                   </Button>
                   <Button
                     onClick={() => this.markInterested()}
                     variant="outline-info"
                   >
-                    <i class="far fa-star"></i>&nbsp;I'm interested...
+                    <i className="far fa-star"></i>&nbsp;I'm interested...
                   </Button>
                 </>
               )}
@@ -284,6 +307,7 @@ class Social extends Component {
             posts={this.state.comments}
             handleChange={e => this.setState({ commentInput: e.target.value })}
             handleSubmit={() => this.postComment()}
+            handleDelete={cId => this.pullComment(cId)}
           />
         </Card>
 

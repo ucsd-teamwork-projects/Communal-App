@@ -72,7 +72,7 @@ module.exports = {
       .create(req.body)
       .then(newComment => {
         // Trigger all listening components to retrieve new comment
-        pusher.trigger(`comments`, `social-${req.params.id}`, newComment);
+        pusher.trigger(`comment-creation`, `social-${req.params.id}`, newComment);
 
         // Then push new ID into Social comments
         socialDb
@@ -88,7 +88,33 @@ module.exports = {
       });
 
   },
+  pullComment: function(req, res) {
+    commentDb
+    .findById({
+        _id: req.body.commentId
+    })
+    .then(dbModel => {
+        // // Delete all references to said Comment in social
+        const commentId = dbModel._id;
+        socialDb.update(
+            {
+                _id: req.params.id
+            },
+            {
+                $pull: {
+                    comments: commentId,
+                }
+            })
+            .then(() => {
+                pusher.trigger(`comment-deletion`, `social-${req.params.id}`, dbModel);
+                // Remove the Comment
+                dbModel.remove();
+            })
 
+    })
+    .then(commentDbModel => res.json(commentDbModel))
+    .catch(err => res.status(422).json(err));
+  },
   remove: function (req, res) {
     socialDb
       .findById({ _id: req.params.id })
