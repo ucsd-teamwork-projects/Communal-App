@@ -32,6 +32,8 @@ function UserPage(props) {
       let likedSocials = await socials.data.filter(social => {
         //Filters for socials liked by user
         if("likes" in props.user){
+          console.log(props.user.likes)
+          console.log(socials._id)
           if(props.user.likes.includes(social._id))
             return social;
         }
@@ -46,7 +48,7 @@ function UserPage(props) {
       likedList = await createSocialCards(likedSocials);
       setLikedUserSocials(likedList);
     });
-  }, []);
+  }, [props.user]);
 
   const createSocialCards = async (socials) => {
     let List = [];
@@ -102,6 +104,7 @@ function UserPage(props) {
             {/* Social Info */}
             <Row>
               <h2 className="h1 col-12 text-center">View Your Socials!</h2>
+              <hr />
               <p className="lead col-12 text-center mb-5">
                 Don't forget! Take a pic of your adventure and post it on the
                 Event Page!
