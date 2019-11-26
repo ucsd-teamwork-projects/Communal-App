@@ -18,11 +18,14 @@ import API from './utils/API';
 import "./App.css";
 
 function App() {
-  // const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
   const { loading, user, isAuthenticated } = useAuth0();
   const [userInfo, setUserInfo] = useState();
 
   useEffect(() => {
+    updateUser();
+  }, [loading]);
+
+  const updateUser = () => {
     // Create user account in our DB if one does new exist
     if(isAuthenticated && user && !loading){
       API.getUser(user.email).then(userQry => {
@@ -37,7 +40,7 @@ function App() {
         }
       });
     }
-  }, [loading]);
+  };
 
   if (loading) {
     return (
@@ -53,7 +56,7 @@ function App() {
   return (
       <div className="App">
         <header>
-          <NavMenu />
+          <NavMenu updateUser={updateUser}/>
         </header>
         {/* <Container> */}
           <Switch>

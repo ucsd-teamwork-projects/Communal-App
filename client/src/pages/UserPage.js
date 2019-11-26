@@ -31,11 +31,17 @@ function UserPage(props) {
 
       let likedSocials = await socials.data.filter(social => {
         //Filters for socials liked by user
-        if("likes" in props.user){
-          console.log(props.user.likes)
-          console.log(socials._id)
-          if(props.user.likes.includes(social._id))
-            return social;
+        if("going" in social){
+          if(!social.going.includes(props.user._id))
+            if("likes" in props.user){
+              if(props.user.likes.includes(social._id))
+                return social;
+            }
+        }else{
+          if("likes" in props.user){
+            if(props.user.likes.includes(social._id))
+              return social;
+          }
         }
       });
 
@@ -48,7 +54,7 @@ function UserPage(props) {
       likedList = await createSocialCards(likedSocials);
       setLikedUserSocials(likedList);
     });
-  }, [props.user]);
+  }, [props.user, props.user.likes]);
 
   const createSocialCards = async (socials) => {
     let List = [];

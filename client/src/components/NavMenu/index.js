@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import Logo from "../../assets/img/logo.png";
 import "./style.css";
 
-function NavMenu() {
+function NavMenu(props) {
   const { user, isAuthenticated } = useAuth0();
 
   return (
@@ -27,10 +27,10 @@ function NavMenu() {
           <Nav.Link as={Link} to="/">Home</Nav.Link>
           {isAuthenticated && (
             <React.Fragment>
-              <Nav.Link as={Link} to="/profile">My Profile</Nav.Link>
-              <NavDropdown title="Socials" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/find-social">Explore Socials</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/add-social">Add New Social</NavDropdown.Item>
+              <Nav.Link as={Link} to="/profile" onClick={props.updateUser}>My Profile</Nav.Link>
+              <NavDropdown title="Socials" id="basic-nav-dropdown" onClick={props.updateUser}>
+                <NavDropdown.Item as={Link} to="/find-social" onClick={props.updateUser}>Explore Socials</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/add-social" onClick={props.updateUser}>Add New Social</NavDropdown.Item>
               </NavDropdown>
             </React.Fragment>
           )}

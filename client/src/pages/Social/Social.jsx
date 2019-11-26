@@ -165,7 +165,7 @@ class Social extends Component {
             src="https://images.unsplash.com/photo-1513151233558-d860c5398176?ixlib=rb-1.2.1&w=1000&q=80"
           /> */}
           <Card.Img
-            style={{ "object-fit": "cover", height: "30vh" }}
+            style={{ "objectFit": "cover", height: "30vh" }}
             variant="top"
             src={this.social.image}
           />
@@ -185,14 +185,14 @@ class Social extends Component {
             {/* Social End Date*/}
             <h6 className="flow-text text-info"> — &nbsp;&nbsp;<Moment format="dddd, MMMM Do YYYY, h:mm a">{this.social.endDate}</Moment></h6>
             {/* Social Title */}
-            <h4 className="flow-text" style={{ "word-wrap": "break-word" }}>
+            <h4 className="flow-text" style={{ "wordWrap": "break-word" }}>
               
               {this.social.name}
             </h4>
             {/* Social User */}
             <h6
               className="text-secondary"
-              style={{ "word-wrap": "break-word" }}
+              style={{ "wordWrap": "break-word" }}
             >
               
               <i className="fas fa-user-circle text-info mr-1"></i>
@@ -202,7 +202,7 @@ class Social extends Component {
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.social.location)}`}>
             <h6
               className="text-secondary"
-              style={{ "word-wrap": "break-word" }}
+              style={{ "wordWrap": "break-word" }}
             >
               
               <i className="fas fa-thumbtack text-danger mr-2"></i>
@@ -210,10 +210,10 @@ class Social extends Component {
             </h6>
             </a>
             <hr />
-            <h6 className="flow-text text-muted font-weight-bold">
+            <h4 className="flow-text text-muted font-weight-bold">
               Description
-            </h6>
-            <p style={{ "word-wrap": "break-word" }}>
+            </h4>
+            <p style={{ "wordWrap": "break-word" }}>
               {this.social.description ? this.social.description : "No description was provided."}
             </p>
             <p
@@ -221,32 +221,33 @@ class Social extends Component {
               onClick={() => this.setState({ modalShow: true })}
             >
               
-              {this.state.going.length} going
+              <i className="far fa-handshake"></i> {this.state.going.length} Person Going
             </p>
             <ButtonGroup className="mt-1" size="sm">
               {this.state.userGoing ? (
                 <Button onClick={() => this.unmarkGoing()} variant="success">
-                  <i class="fas fa-check-circle"></i>&nbsp;I'm going!
-                </Button>
-              ) : this.state.userInterested ? (
-                <Button onClick={() => this.unmarkInterested()} variant="info">
-                  <i class="fas fa-star"></i>&nbsp;I'm interested!
+                  <i className="fas fa-check-circle"></i>&nbsp;I'm going!
                 </Button>
               ) : (
-                <>
-                  <Button
-                    onClick={() => this.markGoing()}
-                    variant="outline-success"
-                  >
-                    <i class="far fa-check-circle"></i>&nbsp;I'm going...
-                  </Button>
-                  <Button
-                    onClick={() => this.markInterested()}
-                    variant="outline-info"
-                  >
-                    <i class="far fa-star"></i>&nbsp;I'm interested...
-                  </Button>
-                </>
+                <Button
+                  onClick={() => this.markGoing()}
+                  variant="outline-success"
+                >
+                  <i className="far fa-check-circle"></i>&nbsp;I'm want to go...
+                </Button>
+              )}
+              
+             {this.state.userInterested ? (
+                <Button onClick={() => this.unmarkInterested()} variant="info">
+                  <i className="far fa-thumbs-up"></i>&nbsp;Liked!
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => this.markInterested()}
+                  variant="outline-info"
+                >
+                  <i className="far fa-thumbs-up"></i>&nbsp;Like...
+                </Button>
               )}
             </ButtonGroup>
           </Card.Body>
