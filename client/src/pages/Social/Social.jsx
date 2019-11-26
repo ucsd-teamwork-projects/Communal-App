@@ -8,7 +8,7 @@ import GoingListModal from "../../components/GoingListModal";
 import Loading from "../../components/Loading";
 import SocialDiscussion from "../../components/SocialDiscussion";
 import "../../utils/flowHeaders.min.css";
-// import Pusher from "pusher-js";
+import Pusher from "pusher-js";
 // Import responsive header tags
 
 class Social extends Component {
@@ -48,7 +48,7 @@ class Social extends Component {
       this.social.image = currSocial.data.image;
 
       this.setState({
-        comments: currSocial.data.comments, 
+        comments: currSocial.data.comments.reverse(), 
         going: currSocial.data.going,
         loading: false
       });
@@ -61,7 +61,7 @@ class Social extends Component {
     const newComment = {
       text: this.state.commentInput,
       authorName: this.user.name,
-      authorPhoto: this.user.picture
+      authorPhoto: this.user.image
     };
 
     // Create Comment in database
@@ -142,14 +142,14 @@ class Social extends Component {
     this.getSocial();
 
     // Listen for new comments
-    // const pusher = new Pusher('APP_KEY', {
-    //   cluster: 'APP_CLUSTER',
-    //   encrypted: true
-    // });
-    // const channel = pusher.subscribe(`comments`);
-    // channel.bind(`social-${this.socialId}`, data => {
-    //   this.setState({ comments: [...this.state.comments, data] });
-    // });
+    const pusher = new Pusher('cd62b719442b1118e770', {
+      cluster: 'us3',
+      encrypted: true
+    });
+    const channel = pusher.subscribe(`comments`);
+    channel.bind(`social-${this.socialId}`, data => {
+      this.setState({ comments: [...this.state.comments, data] });
+    });
   }
 
   render() {
@@ -254,7 +254,7 @@ class Social extends Component {
           <SocialDiscussion
             className="mb-5"
             inputValue={this.state.commentInput}
-            title="Comments"
+            title={`Comments (${this.state.comments.length})`}
             inputPlaceholder="Enter your comment here..."
             posts={this.state.comments}
             handleChange={e => this.setState({ commentInput: e.target.value })}

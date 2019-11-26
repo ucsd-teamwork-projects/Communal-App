@@ -23,9 +23,15 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
+    
     socialDb
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
+    .create(req.body)
+    .then(dbModel => {
+      res.json(dbModel);
+      // Trigger all listening components to retrieve new Social
+      pusher.trigger(`socials`, `New Social`, dbModel);
+      
+      })
       .catch(err => res.status(422).json(err));
 
   },
@@ -47,8 +53,6 @@ module.exports = {
             .catch(err => res.status(422).json(err));
   },
   pullGoing: function(req, res) {
-    console.log(req.body);
-    console.log(req.params.id);
     socialDb
             .findOneAndUpdate({ _id: req.params.id }, 
             {
@@ -65,10 +69,9 @@ module.exports = {
     .create(req.body)
     .then(newComment => {
       // Trigger all listening components to retrieve new comment
-      // pusher.trigger(`comments`, `social-${socialId}`, newComment);
+      pusher.trigger(`comments`, `social-${req.params.id}`, newComment);
       
       // Then push new ID into Social comments
-      console.log(newComment);
       socialDb
       .findOneAndUpdate({ _id: req.params.id }, 
         {

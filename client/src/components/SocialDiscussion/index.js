@@ -52,7 +52,7 @@ function SocialDiscussion(props) {
             </div>
 
                 {props.posts.length ? 
-                props.posts.reverse().map(post => (
+                props.posts.map(post => (
                     <div >
                         <div className="p-3 mb-3 text-left" style={{"background": "#FFFFFF", "border-radius": "10px"}}>
                             <span>
