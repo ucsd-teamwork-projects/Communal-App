@@ -1,7 +1,7 @@
 const commentDb = require("../models/Comment");
 
 module.exports = {
-    addToSocial: function(req, res) {
+    addToSocial: function (req, res) {
         const { text, author } = req.body;
 
         commentDb
@@ -13,7 +13,7 @@ module.exports = {
             .then(commentDbModel => res.json(commentDbModel))
             .catch(err => res.status(422).json(err));
     },
-    addToCommunal: function(req, res) {
+    addToCommunal: function (req, res) {
         const { text, author } = req.body;
 
         commentDb
@@ -25,13 +25,7 @@ module.exports = {
             .then(commentDbModel => res.json(commentDbModel))
             .catch(err => res.status(422).json(err));
     },
-    delete: function(req, res) {
-        commentDb
-            .findById({
-                _id: req.params.id
-            })
-            .then(dbModel => dbModel.remove())
-            .then(commentDbModel => res.json(commentDbModel))
-            .catch(err => res.status(422).json(err));
+    delete: function (req, res) {
+       
     }
 }
