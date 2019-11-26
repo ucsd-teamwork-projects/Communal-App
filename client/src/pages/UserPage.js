@@ -37,18 +37,6 @@ function UserPage(props) {
         }
       });
 
-      // await createdSocials.forEach(social => {
-      //   console.log(social)
-      //   createdList.push(
-      //     <SocialCard
-      //       key={props.user._id + social.name}
-      //       title={social.name}
-      //       img={social.image || Logo}
-      //       location={social.location}
-      //       id={social._id}
-      //     />
-      //   );
-      // });
       createdList = await createSocialCards(createdSocials);
       setCreatedUserSocials(createdList);
 
