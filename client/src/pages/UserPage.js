@@ -31,24 +31,20 @@ function UserPage(props) {
 
       let likedSocials = await socials.data.filter(social => {
         //Filters for socials liked by user
-        if("likes" in props.user){
-          if(props.user.likes.includes(social._id))
-            return social;
+        if("going" in social){
+          if(!social.going.includes(props.user._id))
+            if("likes" in props.user){
+              if(props.user.likes.includes(social._id))
+                return social;
+            }
+        }else{
+          if("likes" in props.user){
+            if(props.user.likes.includes(social._id))
+              return social;
+          }
         }
       });
 
-      // await createdSocials.forEach(social => {
-      //   console.log(social)
-      //   createdList.push(
-      //     <SocialCard
-      //       key={props.user._id + social.name}
-      //       title={social.name}
-      //       img={social.image || Logo}
-      //       location={social.location}
-      //       id={social._id}
-      //     />
-      //   );
-      // });
       createdList = await createSocialCards(createdSocials);
       setCreatedUserSocials(createdList);
 
@@ -58,7 +54,7 @@ function UserPage(props) {
       likedList = await createSocialCards(likedSocials);
       setLikedUserSocials(likedList);
     });
-  }, []);
+  }, [props.user, props.user.likes]);
 
   const createSocialCards = async (socials) => {
     let List = [];
@@ -114,6 +110,7 @@ function UserPage(props) {
             {/* Social Info */}
             <Row>
               <h2 className="h1 col-12 text-center">View Your Socials!</h2>
+              <hr />
               <p className="lead col-12 text-center mb-5">
                 Don't forget! Take a pic of your adventure and post it on the
                 Event Page!

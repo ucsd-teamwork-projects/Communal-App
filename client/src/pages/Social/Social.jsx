@@ -257,9 +257,9 @@ class Social extends Component {
             </h6>
             </a>
             <hr />
-            <h6 className="flow-text text-muted font-weight-bold">
+            <h4 className="flow-text text-muted font-weight-bold">
               Description
-            </h6>
+            </h4>
             <p style={{ "wordWrap": "break-word" }}>
               {this.social.description ? this.social.description : "No description was provided."}
             </p>
@@ -268,16 +268,25 @@ class Social extends Component {
               onClick={() => this.setState({ goingModalShow: true })}
             >
               
-              {this.state.going.length} going
+              <i className="far fa-handshake"></i> {this.state.going.length} Person Going
             </p>
             <ButtonGroup className="mt-1" size="sm">
               {this.state.userGoing ? (
                 <Button onClick={() => this.unmarkGoing()} variant="success">
-                  <i class="fas fa-check-circle"></i>&nbsp;I'm going!
+                  <i className="fas fa-check-circle"></i>&nbsp;I'm going!
                 </Button>
-              ) : this.state.userInterested ? (
+              ) : (
+                <Button
+                  onClick={() => this.markGoing()}
+                  variant="outline-success"
+                >
+                  <i className="far fa-check-circle"></i>&nbsp;I'm want to go...
+                </Button>
+              )}
+              
+             {this.state.userInterested ? (
                 <Button onClick={() => this.unmarkInterested()} variant="info">
-                  <i class="fas fa-star"></i>&nbsp;I'm interested!
+                  <i className="far fa-thumbs-up"></i>&nbsp;Liked!
                 </Button>
               ) : (
                 <>
