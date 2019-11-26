@@ -8,6 +8,7 @@ import { Container, Row } from "react-bootstrap";
 import Loading from "../../components/Loading";
 import { documentReady } from "./main.js";
 import "../../utils/flowHeaders.min.css";
+import Pusher from "pusher-js";
 
 
 class FindSocials extends Component {
@@ -24,7 +25,7 @@ class FindSocials extends Component {
   };
 
   filterSocials = socials => {
-    let socialsList = socials.data;
+    // let socialsList = socials.data;
     // Pull user's likes and dislikes
     API.getUser(this.user.email).then(userObj => {
       const { likes, dislikes, going } = userObj.data;
@@ -32,7 +33,7 @@ class FindSocials extends Component {
 
       if (likes && dislikes && going) { seen = likes.concat(dislikes).concat(going) };
 
-      const filtered = socialsList.filter(function (social) {
+      const filtered = socials.filter(function (social) {
         if (seen.includes(social._id) || moment(social.startDate).isBefore(new Date())) {
           return false;
         } else {
@@ -51,10 +52,12 @@ class FindSocials extends Component {
   };
 
   getSocials = () => {
+    this.setState({loading: true});
+
     //   Pull numSocials from the database
     API.getSocials().then(allSocials => {
       //   Filter returned Socials based off what user has already seen
-      this.filterSocials(allSocials)
+      this.filterSocials(allSocials.data)
 
     });
 
@@ -86,7 +89,6 @@ class FindSocials extends Component {
     );
 
     // Add user to Social going
-    console.log(this.user);
     API.putSocialUserGoing(
       this.user._id,
       this.state.socials[this.currSocialIdx]._id
@@ -101,14 +103,14 @@ class FindSocials extends Component {
 
 
     // Listen for new Socials (Uncomment when adding socials is complete)
-    // const pusher = new Pusher('APP_KEY', {
-    //   cluster: 'APP_CLUSTER',
-    //   encrypted: true
-    // });
-    // const channel = pusher.subscribe(`socials`);
-    // channel.bind(`New Social`, data => {
-    //   this.setState({ socials: [...this.state.socials, data] });
-    // });
+    const pusher = new Pusher('cd62b719442b1118e770', {
+      cluster: 'us3',
+      encrypted: true
+    });
+    const channel = pusher.subscribe(`socials`);
+    channel.bind(`New Social`, data => {
+      this.getSocials()
+    });
   }
 
   render() {
