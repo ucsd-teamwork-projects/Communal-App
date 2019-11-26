@@ -75,6 +75,7 @@ function UserPage(props) {
           <SocialCard
             key={props.user._id + social.name}
             title={social.name}
+            date={social.startDate}
             img={social.image || Logo}
             location={social.location}
             link={`/socials/${social._id}`}
