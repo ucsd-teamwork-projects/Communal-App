@@ -289,20 +289,12 @@ class Social extends Component {
                   <i className="far fa-thumbs-up"></i>&nbsp;Liked!
                 </Button>
               ) : (
-                <>
-                  <Button
-                    onClick={() => this.markGoing()}
-                    variant="outline-success"
-                  >
-                    <i className="far fa-check-circle"></i>&nbsp;I'm going...
-                  </Button>
                   <Button
                     onClick={() => this.markInterested()}
                     variant="outline-info"
                   >
                     <i className="far fa-star"></i>&nbsp;I'm interested...
                   </Button>
-                </>
               )}
             </ButtonGroup>
           </Card.Body>
