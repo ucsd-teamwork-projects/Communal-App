@@ -180,6 +180,7 @@ export class AddSocial extends Component {
     };
 
     componentDidMount() {
+        console.log(process.env);
     }
 
     render() {
@@ -218,7 +219,7 @@ export class AddSocial extends Component {
                                             value={this.state.location}
                                             name="location"
                                             placeholder="My Social will be at..."
-                                            googleAPIKey="AIzaSyDxStRoOM-60GmRhXIWnOgw-MFNnzT8xwc"
+                                            googleAPIKey={process.env.REACT_APP_GOOGLE_API_KEY}
                                             onChange={(e) => this.handleInputChange(e)}
                                             onDropdownSelect={(e) => this.handleDropdownSelect(e)}
                                         />
