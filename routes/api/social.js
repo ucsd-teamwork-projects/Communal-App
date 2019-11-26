@@ -10,6 +10,8 @@ router.route("/:id/comment")
 
 router.route("/:id")
   .get(socialController.findOne)
+  .delete(socialController.remove)
+
 
 // Matches with "/api/socials"  
 router.route("/")

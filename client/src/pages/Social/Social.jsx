@@ -5,6 +5,7 @@ import moment from "moment"
 import "./main.css";
 import { Card, Button, ButtonGroup, Container } from "react-bootstrap";
 import GoingListModal from "../../components/GoingListModal";
+import ConfirmModal from "../../components/ConfirmModal";
 import Loading from "../../components/Loading";
 import SocialDiscussion from "../../components/SocialDiscussion";
 import "../../utils/flowHeaders.min.css";
@@ -21,7 +22,7 @@ class Social extends Component {
       startDate: "",
       endDate: "",
       location: "",
-      creator: "",
+      creator: {},
       description: ""
     };
   }
@@ -31,15 +32,17 @@ class Social extends Component {
     commentInput: "",
     userGoing: false,
     userInterested: false,
-    modalShow: false,
+    goingModalShow: false,
+    confirmModalShow: false,
     going: [],
-    loading: true
+    loading: true,
+    confirmMessage: ""
   };
 
   getSocial = () => {
     // Retrieve this Social object
     API.getSocialById(this.socialId).then(currSocial => {
-      this.social.creator = currSocial.data.creator.name;
+      this.social.creator = currSocial.data.creator;
       this.social.startDate = currSocial.data.startDate;
       this.social.endDate = currSocial.data.endDate;
       this.social.location = currSocial.data.location;
@@ -50,7 +53,8 @@ class Social extends Component {
       this.setState({
         comments: currSocial.data.comments.reverse(), 
         going: currSocial.data.going,
-        loading: false
+        loading: false,
+        confirmMessage: `Are you sure you want to delete your Social "${this.social.name}"?`
       });
 
     });
@@ -135,6 +139,22 @@ class Social extends Component {
     API.putUserSocialLike(this.user.email, this.socialId);
   };
 
+  deleteSocial = () => {
+    this.setState({confirmMessage: <i class="fa-spin text-info fas fa-circle-notch"></i>})
+    
+    // Delete Social and all associated content (i.e. Comment, User going/likes/dislikes)
+    API.deleteSocial(this.socialId)
+    .then(() => {
+      // Show message after deletion
+      this.setState({confirmMessage: <span className="text-success">"{this.social.name}" has successfully been deleted!</span>})
+      
+      // Redirect to user profile page
+      setTimeout(() => this.props.history.push(`/profile`), 2000);
+
+    })
+
+  }
+
   componentDidMount() {
     // Grab user social info
     this.getUserEventInfo();
@@ -148,7 +168,7 @@ class Social extends Component {
     });
     const channel = pusher.subscribe(`comments`);
     channel.bind(`social-${this.socialId}`, data => {
-      this.setState({ comments: [...this.state.comments, data] });
+      this.setState({ comments: [data, ...this.state.comments] });
     });
   }
 
@@ -170,6 +190,11 @@ class Social extends Component {
             src={this.social.image}
           />
           <Card.Body className="text-left">
+            {
+            (this.social.creator._id == this.user._id) ?
+            <span id="delete-icon" onClick={() => this.setState({confirmModalShow: true})}><i className="far fa-trash-alt"></i> </span>
+              : ""
+            }
             {/* Upcoming Social Warning */}
               {
               moment(Date.now()).isBetween(this.social.startDate, this.social.endDate) ? 
@@ -196,7 +221,7 @@ class Social extends Component {
             >
               
               <i className="fas fa-user-circle text-info mr-1"></i>
-              {this.social.creator}
+              {this.social.creator.name}
             </h6>
             {/* Social Location */}
             <a target="_blank" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.social.location)}`}>
@@ -218,7 +243,7 @@ class Social extends Component {
             </p>
             <p
               className="hover-underline mb-1 font-weight-bold"
-              onClick={() => this.setState({ modalShow: true })}
+              onClick={() => this.setState({ goingModalShow: true })}
             >
               
               {this.state.going.length} going
@@ -264,9 +289,19 @@ class Social extends Component {
 
         <GoingListModal
           going={this.state.going}
-          show={this.state.modalShow}
-          onHide={() => this.setState({ modalShow: false })}
+          show={this.state.goingModalShow}
+          onHide={() => this.setState({ goingModalShow: false })}
         />
+
+        <ConfirmModal
+          show={this.state.confirmModalShow}
+          onHide={() => this.setState({ confirmModalShow: false })}
+          title={`Delete Social`}
+          message={this.state.confirmMessage}
+          onConfirm={() => this.deleteSocial()}
+          confirmBtn={"Delete"}
+        />  
+
         
       </Container>
     )};

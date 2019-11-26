@@ -6,3 +6,10 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+#delete-icon {
+  position: absolute;
+  right: 15px;
+  color: red;
+  cursor: pointer;
+}

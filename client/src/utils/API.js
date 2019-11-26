@@ -90,5 +90,9 @@ export default {
       description,
       members
     })
-  }
+  },
+  // Delete a Social
+  deleteSocial: function(socialId) {
+    return axios.delete(`/api/socials/${socialId}`);
+  } 
 };
