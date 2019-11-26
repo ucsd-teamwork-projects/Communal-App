@@ -61,13 +61,13 @@ class Social extends Component {
   };
 
   postComment = () => {
-    console.log("PUSHING");
 
     // Create Comment to be inserted
     const newComment = {
       text: this.state.commentInput,
       authorName: this.user.name,
-      authorPhoto: this.user.image
+      authorPhoto: this.user.image,
+      creator: this.user._id
     };
 
     // Create Comment in database
@@ -80,7 +80,6 @@ class Social extends Component {
   };
 
   pullComment = (commentId) => {
-    console.log("PULLING");
 
     // Pull Comment from Social
     API.pullCommentFromSocial(this.socialId, commentId);
@@ -308,6 +307,7 @@ class Social extends Component {
             handleChange={e => this.setState({ commentInput: e.target.value })}
             handleSubmit={() => this.postComment()}
             handleDelete={cId => this.pullComment(cId)}
+            currUser={this.user._id}
           />
         </Card>
 

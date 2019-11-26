@@ -66,7 +66,11 @@ function SocialDiscussion(props) {
                             <p>
                                 {post.text}
                             </p>
+                            { 
+                            (props.currUser == post.creator) ?
                             <span onClick={() => props.handleDelete(post._id)} className="text-danger" style={{"cursor":"pointer"}}> Delete </span>
+                            : ""
+                            }
                         </div>
 
                     </div>
