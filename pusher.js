@@ -2,8 +2,6 @@ require("dotenv").config();
 
 const Pusher = require('pusher');
 
-console.log(process.env);
-
 const pusher = new Pusher({
     appId: '901079',
     key: 'cd62b719442b1118e770',

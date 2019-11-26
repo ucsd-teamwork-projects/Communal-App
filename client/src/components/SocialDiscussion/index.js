@@ -35,10 +35,10 @@ function SocialDiscussion(props) {
         "borderBottomRight": "10px"    
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        props.handleSubmit();
-    }
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     props.handleSubmit();
+    // }
 
     return (
         <div style={mainContainerStyles}>
@@ -46,26 +46,31 @@ function SocialDiscussion(props) {
             <hr/>
             <div className="input-group mb-3">
                 <DynamicTextArea value={props.inputValue} id="post-input" className=" form-control custom-control" onChange={(e) => props.handleChange(e)} style={textareaStyles} placeholder={props.inputPlaceholder} />
-                <span onClick={(e) => handleSubmit(e)} style={buttonStyles} id="vertical-align" className="input-group-addon btn btn-secondary "> 
+                <span onClick={(e) => props.handleSubmit(e)} style={buttonStyles} id="vertical-align" className="input-group-addon btn btn-secondary "> 
                     <span > Submit </span>
                 </span>
             </div>
 
                 {props.posts.length ? 
                 props.posts.map(post => (
-                    <div >
-                        <div className="p-3 mb-3 text-left" style={{"background": "#FFFFFF", "border-radius": "10px"}}>
+                    <div key={post._id}>
+                        <div className="p-3 mb-3 text-left" style={{"background": "#FFFFFF", "borderRadius": "10px"}}>
                             <span>
-                                <UserProfilePicture style={{"margin-top": "-15px"}} src={post.authorPhoto} size={45}/> 
+                                <UserProfilePicture style={{"marginTop": "-15px"}} src={post.authorPhoto} size={45}/> 
                                 <span className="ml-2" style={{"display": "inline-block"}}> 
-                                    <p className="font-weight-bold text-primary" style={{"margin-bottom": "-0.4em"}}>{post.authorName}</p>
-                                    <p style={{"font-size": "0.8rem"}} className="text-muted"><Moment format="dddd, MMMM Do YYYY, h:mm a">{post.created}</Moment></p>
+                                    <p className="font-weight-bold text-primary" style={{"marginBottom": "-0.4em"}}>{post.authorName}</p>
+                                    <p style={{"fontSize": "0.8rem"}} className="text-muted"><Moment format="dddd, MMMM Do YYYY, h:mm a">{post.created}</Moment></p>
                                 </span>
 
                             </span>
                             <p>
                                 {post.text}
                             </p>
+                            { 
+                            (props.currUser == post.creator) ?
+                            <span onClick={() => props.handleDelete(post._id)} className="text-danger" style={{"cursor":"pointer"}}> Delete </span>
+                            : ""
+                            }
                         </div>
 
                     </div>
