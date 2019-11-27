@@ -61,10 +61,14 @@ class Social extends Component {
   };
 
   postComment = () => {
+    // if comment input is blank
+    if(!this.state.commentInput.trim()) {
+      return;
+    }
 
     // Create Comment to be inserted
     const newComment = {
-      text: this.state.commentInput,
+      text: this.state.commentInput.trim(),
       authorName: this.user.name,
       authorPhoto: this.user.image,
       creator: this.user._id
