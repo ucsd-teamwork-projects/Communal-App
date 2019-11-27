@@ -13,3 +13,33 @@
   color: red;
   cursor: pointer;
 }
+
+#edit-icon {
+  position: absolute;
+  right: 35px;
+  color: rgb(255, 208, 0);
+  cursor: pointer;
+}
+
+#cancel-icon {
+  position: absolute;
+  right: 40px;
+  color: red;
+  cursor: pointer;
+}
+
+#save-icon {
+  position: absolute;
+  right: 15px;
+  color: rgb(0, 202, 0);
+  cursor: pointer;
+}
+
+h4 input.form-control, h5 input.form-control, h6 input.form-control, .react-datepicker__input-container input.form-control {
+  font-size: inherit;
+  color: inherit;
+}
+
+.card-body input.form-control {
+  font-size: inherit
+}
