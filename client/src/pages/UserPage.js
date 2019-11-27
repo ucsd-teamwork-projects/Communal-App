@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Row, Image, Card, CardColumns } from "react-bootstrap";
+import { Container, Row, Image, Card, CardColumns, ListGroup } from "react-bootstrap";
 import Logo from "../assets/img/logo.png";
 import API from "../utils/API";
 import SocialCard from "../components/SocialCard";
@@ -101,10 +101,12 @@ function UserPage(props) {
             </Row>
             {/* User Info */}
             <Row>
+              <span className="h1 col-12 text-center">
               <div className="mx-auto">
                 <h2 className="h2">{props.user.name}</h2>
                 <h3 className="h3">{props.user.email}</h3>
               </div>
+              </span>
             </Row>
             <hr></hr>
             {/* Social Info */}
@@ -112,23 +114,25 @@ function UserPage(props) {
               <h2 className="h1 col-12 text-center">View Your Socials!</h2>
               <hr />
               <p className="lead col-12 text-center mb-5">
-                Don't forget! Take a pic of your adventure and post it on the
-                Event Page!
+                Found something worth wild? Don't forget to create a Social to share!
               </p>
-              <h2 className="h1 col-12 mt-4 text-right">Social's Liked by You</h2>
+              </Row>
+              <Row>
+               <h2 className="h1 col-12 mt-4 text-center"><b>Social's Liked by You</b></h2>
               <CardColumns>
                 {likedUserSocials}
               </CardColumns>
 
-              <h2 className="h1 col-12 mt-4 text-right">Social's You are Attending</h2>
+                <h2 className="h1 col-12 mt-4 text-center"><b>Social's You are Attending</b></h2>
               <CardColumns>
                 {attendingUserSocials}
               </CardColumns>
 
-              <h2 className="h1 col-12 mt-4 text-right">Social's Created by You</h2>
+                <h2 className="h1 col-12 mt-4 text-center"><b>Social's Created by You</b></h2>
               <CardColumns>
                 {createdUserSocials}
               </CardColumns>
+              
             </Row>
           </Card.Body>
         </Card>

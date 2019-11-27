@@ -6,6 +6,7 @@ import ImgCarousel from "../components/ImgCarousel";
 import Logo from "../assets/img/logo.png";
 import "../utils/flowHeaders.min.css";
 
+
 function Landing() {
   return (
     <Container className="mt-5">
@@ -16,20 +17,20 @@ function Landing() {
             <Card.Header className="text-center">
               <h2 className="Display-1" style={{ "fontFamily": "'Bungee', cursive", "color": "black" }}>COMMUNAL</h2>
               <img src={Logo} width="150" height="150" alt="logo" />
-              <h3 className="Display-3">Find People, Do Stuff</h3>
+              <h3 className="Display-3"><i>Find People, Do Stuff</i></h3>
             </Card.Header>
             <Card.Body className="text-left mx-auto text-center">
               <Card.Text>
                 <i className="fas fa-binoculars fa-2x mr-4"></i>
-                <span>Find hidden gems in places you visit regularly</span>
+                <span>Find the hidden gems in places you visit regularly that you never noticed were right around the corner!</span>
               </Card.Text>
               <Card.Text>
                 <i className="fas fa-car fa-2x mr-4"></i>
-                <span>Share places you have found for others to explore</span>
+                <span>Found something you want your community to see? Socialize it!</span>
               </Card.Text>
               <Card.Text>
                 <i className="fas fa-users fa-2x mr-4"></i>
-                <span>Create groups for meetups</span>
+                <span>Create groups for meetups. Hold events as often as you want!</span>
               </Card.Text>
             </Card.Body>
             <Card.Footer className="text-muted"></Card.Footer>
