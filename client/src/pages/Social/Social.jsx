@@ -280,7 +280,7 @@ class Social extends Component {
                   onClick={() => this.markGoing()}
                   variant="outline-success"
                 >
-                  <i className="far fa-check-circle"></i>&nbsp;I'm want to go...
+                  <i className="far fa-check-circle"></i>&nbsp;I want to go...
                 </Button>
               )}
               

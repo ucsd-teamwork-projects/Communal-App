@@ -5,7 +5,7 @@ import "./styles.css";
 import SocialCard from "../SocialCard";
 import API from "../../utils/API";
 
-const list = [{item: "item1"}];
+// const list = [{item: "item1"}];
 
 const MenuItem = ({ children, selected }) => {
   return <div className={`menu-item ${selected ? "active" : ""}`}>{children}</div>;
@@ -37,20 +37,23 @@ class HorizontalScroll extends Component {
     clickWhenDrag: false,
     dragging: true,
     hideArrows: true,
+    itemsCount: this.props.posts.length,
     hideSingleArrow: true,
-    itemsCount: list.length,
     selected: "item1",
     translate: 0,
     transition: 0.4,
     wheel: true
   };
-
+  
   constructor(props) {
     super(props);
     this.menu = null;
-    this.menuItems = Menu(list.slice(0, list.length), this.state.selected);
-  }
+    this.list = props.posts;
+    console.log(props.posts);
 
+    this.menuItems = Menu(this.list.slice(0, this.list.length), this.state.selected);
+  }
+  
   onUpdate = ({ translate }) => {
     console.log(`onUpdate: translate: ${translate}`);
     this.setState({ translate });
@@ -70,35 +73,20 @@ class HorizontalScroll extends Component {
   }
 
   componentDidMount() {
-    // API.getAllSocials().then(async socials => {
-    //   let userSocials = await socials.data.filter(social => {
-    //     // Need to filter so that only socials that the user is appart of will be returned
-    //     const user = this.props.user;
-    //     return social;
-    //   });
-
-    //   await userSocials.forEach(social => {
-    //     console.log(social)
-    //     list.push(
-    //       <SocialCard title={social.name} img={social.img || "No Image"} location={social.location}  />
-    //     );
-    //   });
-      
-    //   this.setState.itemsCount = list.length;
-    // });
+    console.log()
   }
 
   setItemsCount = ev => {
-    const { itemsCount = list.length, selected } = this.state;
+    const { itemsCount = this.list.length, selected } = this.state;
     const val = +ev.target.value;
     const itemsCountNew =
-      !isNaN(val) && val <= list.length && val >= 0
+      !isNaN(val) && val <= this.list.length && val >= 0
         ? +ev.target.value
-        : list.length;
+        : this.list.length;
     const itemsCountChanged = itemsCount !== itemsCountNew;
 
     if (itemsCountChanged) {
-      this.menuItems = Menu(list.slice(0, itemsCountNew), selected);
+      this.menuItems = Menu(this.list.slice(0, itemsCountNew), selected);
       this.setState({
         itemsCount: itemsCountNew
       });
@@ -111,6 +99,7 @@ class HorizontalScroll extends Component {
   };
 
   render() {
+
     const {
       alignCenter,
       clickWhenDrag,
@@ -160,6 +149,8 @@ class HorizontalScroll extends Component {
           clickWhenDrag={clickWhenDrag}
           wheel={wheel}
         />
+
+        {/* {props.posts} */}
         <hr />
     
       </div>

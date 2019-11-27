@@ -3,6 +3,7 @@ import { Container, Row, Image, Card, CardColumns, ListGroup } from "react-boots
 import Logo from "../assets/img/logo.png";
 import API from "../utils/API";
 import SocialCard from "../components/SocialCard";
+import HorizontalScroll from "../components/HorizontalScroll";
 
 function UserPage(props) {
   const [createdUserSocials, setCreatedUserSocials] = useState([]);
@@ -53,6 +54,7 @@ function UserPage(props) {
 
       likedList = await createSocialCards(likedSocials);
       setLikedUserSocials(likedList);
+
     });
   }, [props.user, props.user.likes]);
 
@@ -75,6 +77,7 @@ function UserPage(props) {
           <SocialCard
             key={props.user._id + social.name}
             title={social.name}
+            date={social.startDate}
             img={social.image || Logo}
             location={social.location}
             link={`/socials/${social._id}`}
@@ -128,11 +131,13 @@ function UserPage(props) {
                 {attendingUserSocials}
               </CardColumns>
 
-                <h2 className="h1 col-12 mt-4 text-center"><b>Social's Created by You</b></h2>
-              <CardColumns>
-                {createdUserSocials}
-              </CardColumns>
-              
+              <h2 className="h1 col-12 mt-4 text-center">Social's Created by You</h2>
+              {/* <CardColumns> */}
+              {createdUserSocials ? (
+                <HorizontalScroll
+                posts={createdUserSocials} />
+              ): ""}
+              {/* </CardColumns> */}
             </Row>
           </Card.Body>
         </Card>
