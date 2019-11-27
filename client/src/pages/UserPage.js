@@ -132,12 +132,9 @@ function UserPage(props) {
               </CardColumns>
 
               <h2 className="h1 col-12 mt-4 text-center">Social's Created by You</h2>
-              {/* <CardColumns> */}
-              {createdUserSocials ? (
-                <HorizontalScroll
-                posts={createdUserSocials} />
-              ): ""}
-              {/* </CardColumns> */}
+              <CardColumns>
+                {createdUserSocials}
+              </CardColumns>
             </Row>
           </Card.Body>
         </Card>
