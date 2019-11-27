@@ -10,7 +10,7 @@ function NavMenu(props) {
   const { user, isAuthenticated } = useAuth0();
 
   return (
-    <Navbar fixed="top" style={{"zIndex": "1000"}} className="bg" expand="lg">
+    <Navbar fixed="top" style={{"zIndex": "1000"}} className="bg" expand="lg" collapseOnSelect>
       <Navbar.Brand href="/">
         <img
           src={Logo}

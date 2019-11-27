@@ -1,11 +1,12 @@
 import React from "react";
-import { Carousel, Badge } from "react-bootstrap";
+import { Carousel, Badge, Image } from "react-bootstrap";
 import Balboa from "../../assets/img/Balboa.jpg";
 import Midway from "../../assets/img/midway.png";
 import SunsetCliffs from "../../assets/img/SunsetCliffs.jpg";
 import BorregoFlowers from "../../assets/img/BorregoFlowers.jpg";
 import MountLaguna from "../../assets/img/MountLaguna.jpg";
 import Lajollacaves from "../../assets/img/Lajollacaves.jpg";
+import "../../utils/flowHeaders.min.css";
 
 function ImgCarousel() {
     const images = [
@@ -43,20 +44,21 @@ function ImgCarousel() {
 
     const CarouselItems = images.map((image, index) => 
         <Carousel.Item key={index}>
-          <img
+          <Image
             className="d-block w-100 rounded-lg"
             src={image.img}
             width="300"
             height="500"
             alt="First slide"
+            fluid
           />
-          <Carousel.Caption>
-              <Badge pill variant="dark" className="p-4" style={{opacity: 0.8}}>
-            <h1>
+          <Carousel.Caption style={{backgroundColor: "darkgray", opacity: 0.8, borderRadius: "50px"}}>
+              {/* <Badge pill variant="dark" className="p-4" style={{opacity: 0.8}}> */}
+            <h3 className="h1 flow-text">
                 {image.name}
-            </h1>
-            <h3 style={{color: "#ffc038"}}>{image.caption}</h3>
-              </Badge>
+            </h3>
+            <p className="h3 flow-text" style={{color: "#ffc038"}}>{image.caption}</p>
+              {/* </Badge> */}
           </Carousel.Caption>
       </Carousel.Item>
     );
