@@ -64,6 +64,7 @@ function UserPage(props) {
     if(socials.length === 0){
       List.push(
         <SocialCard
+          cardStyle={{"width": "300px", "height":"33vh"}}
           key="0"
           title="No Socials Yet, Go find some!"
           img={Logo}
@@ -75,6 +76,7 @@ function UserPage(props) {
       await socials.forEach(social => {
         List.push(
           <SocialCard
+            cardStyle={{"width": "300px", "height":"33vh"}}
             key={props.user._id + social.name}
             title={social.name}
             date={social.startDate}
@@ -90,7 +92,10 @@ function UserPage(props) {
 
   return (
       <Container className="my-5">
-        <Card className="p-3">
+        <Card className="p-3" >
+        {/* <Card className="p-3" style={{"background": "url(../../userProfile.jpg) no-repeat center center", "backgroundSize": "cover"}}> */}
+          {/* <div className="overlay"></div> */}
+
           <Card.Body>
             {/* User Image */}
             <Row>
@@ -122,22 +127,22 @@ function UserPage(props) {
               </Row>
               <Row>
                <h2 className="h1 col-12 mt-4 text-center"><b>Social's Liked by You</b></h2>
-              <CardColumns>
-                {likedUserSocials}
-              </CardColumns>
+               {likedUserSocials.length ? (
+                <HorizontalScroll
+                posts={likedUserSocials} />
+              ): ""} 
 
                 <h2 className="h1 col-12 mt-4 text-center"><b>Social's You are Attending</b></h2>
-              <CardColumns>
-                {attendingUserSocials}
-              </CardColumns>
+                {attendingUserSocials.length ? (
+                <HorizontalScroll
+                posts={attendingUserSocials} />
+              ): ""} 
 
               <h2 className="h1 col-12 mt-4 text-center">Social's Created by You</h2>
-              {/* <CardColumns> */}
-              {createdUserSocials ? (
+              {createdUserSocials.length ? (
                 <HorizontalScroll
                 posts={createdUserSocials} />
-              ): ""}
-              {/* </CardColumns> */}
+              ): ""} 
             </Row>
           </Card.Body>
         </Card>

@@ -12,7 +12,7 @@ const MenuItem = ({ children, selected }) => {
 };
 
 export const Menu = list => {
-  list.map((el, idx) => {
+  return list.map((el, idx) => {
 
     return (<MenuItem key={idx} > {el} </MenuItem>);
     
@@ -33,13 +33,13 @@ export const ArrowRight = Arrow({ text: ">", className: "arrow-next" });
 
 class HorizontalScroll extends Component {
   state = {
-    alignCenter: true,
+    alignCenter: false,
     clickWhenDrag: false,
     dragging: true,
     hideArrows: true,
     itemsCount: this.props.posts.length,
     hideSingleArrow: true,
-    selected: "item1",
+    selected: "0",
     translate: 0,
     transition: 0.4,
     wheel: true
@@ -49,18 +49,18 @@ class HorizontalScroll extends Component {
     super(props);
     this.menu = null;
     this.list = props.posts;
-    console.log(props.posts);
 
     this.menuItems = Menu(this.list.slice(0, this.list.length), this.state.selected);
+
   }
   
   onUpdate = ({ translate }) => {
-    console.log(`onUpdate: translate: ${translate}`);
+    // console.log(`onUpdate: translate: ${translate}`);
     this.setState({ translate });
   };
 
   onSelect = key => {
-    console.log(`onSelect: ${key}`);
+    // console.log(`onSelect: ${key}`);
     this.setState({ selected: key });
   };
 
@@ -73,7 +73,7 @@ class HorizontalScroll extends Component {
   }
 
   componentDidMount() {
-    console.log()
+    this.setState({itemsCount: this.menuItems.length});
   }
 
   setItemsCount = ev => {
@@ -106,7 +106,7 @@ class HorizontalScroll extends Component {
       hideArrows,
       dragging,
       hideSingleArrow,
-      // itemsCount,
+      itemsCount,
       selected,
       translate,
       transition,
@@ -124,14 +124,8 @@ class HorizontalScroll extends Component {
     // };
 
     return (
-      <div className="scrollApp">
-        <header className="App-header">
-          <h1 className="App-title h1">Your Socials!</h1>
-        </header>
-        <p className="App-intro">
-         Don't forget! Take a pic of your adventure and post it on the Event Page!
-        </p>
-
+      <div className="scrollApp" style={{"width": "100%"}}>
+        
         <ScrollMenu
           ref={el => (this.menu = el)}
           data={menu}
@@ -148,11 +142,7 @@ class HorizontalScroll extends Component {
           dragging={dragging}
           clickWhenDrag={clickWhenDrag}
           wheel={wheel}
-        />
-
-        {/* {props.posts} */}
-        <hr />
-    
+        />    
       </div>
     );
   }
