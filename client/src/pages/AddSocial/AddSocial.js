@@ -43,7 +43,10 @@ export class AddSocial extends Component {
 
         if (name === "image") {
             this.setState({
-                errorImgMsg: ""
+                errorImgMsg: "",
+                invalid: {
+                    image: false
+                }
             })
         }
 
