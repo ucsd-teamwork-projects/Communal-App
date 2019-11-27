@@ -8,12 +8,13 @@ import "../utils/flowHeaders.min.css";
 
 function Landing() {
   return (
-    <Container>
+    <Container className="mt-5">
+      <ImgCarousel />
       <Row className="justify-content-center">
-        <Col xs={10}>
-          <Card className="mx-auto my-5">
+        <Col xs={12}>
+          <Card className="mx-auto my-3">
             <Card.Header className="text-center">
-              <h2 className="Display-1"  style={{"fontFamily": "'Bungee', cursive", "color": "black"}}>COMMUNAL</h2>
+              <h2 className="Display-1" style={{ "fontFamily": "'Bungee', cursive", "color": "black" }}>COMMUNAL</h2>
               <img src={Logo} width="150" height="150" alt="logo" />
               <h3 className="Display-3">Find People, Do Stuff</h3>
             </Card.Header>
@@ -30,7 +31,6 @@ function Landing() {
                 <i className="fas fa-users fa-2x mr-4"></i>
                 <span>Create groups for meetups</span>
               </Card.Text>
-              <ImgCarousel />
             </Card.Body>
             <Card.Footer className="text-muted"></Card.Footer>
           </Card>
