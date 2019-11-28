@@ -5,6 +5,7 @@ import API from "../utils/API";
 import SocialCard from "../components/SocialCard";
 import HorizontalScroll from "../components/HorizontalScroll";
 import Loading from "../components/Loading";
+import moment from "moment";
 
 
 function UserPage(props) {
@@ -57,7 +58,7 @@ function UserPage(props) {
 
       likedList = await createSocialCards(likedSocials);
       setLikedUserSocials(likedList);
-      
+
       setLoading(false);
 
     });
@@ -95,68 +96,102 @@ function UserPage(props) {
     return List;
   };
 
+  const containerStyles = {
+    "backgroundImage": "url(https://i.pinimg.com/originals/66/20/d6/6620d6402b8e756a4848ff5c0872c6fe.jpg)",
+    "overflow": "hidden",
+    "backgroundRepeat": "no-repeat",
+    "backgroundSize": "cover",
+    "backgroundColor": "background-color: rgba(238, 238, 238, 0.51)!important",
+    "backgroundBlendMode": "color"
+  }
+
+  const glowStyle = {
+    "color": "#ffffff!important",
+    "textShadow": "#ffffff 1px 0px 15px"
+  }
+
+  const scrollContainerStyle = {
+    "max-width": "1200px",
+    "margin": "0 auto"
+  }
+
+  const userGreetingStyles = {
+    "backgroundImage": "linear-gradient( rgb(0,0,0, 0.70), transparent)"
+  }
 
   if (loading) {
     return <Loading />
   } else {
     return (
-      <Container className="my-5">
-        <Card className="p-3" >
-          {/* <Card className="p-3" style={{"background": "url(../../userProfile.jpg) no-repeat center center", "backgroundSize": "cover"}}> */}
-          {/* <div className="overlay"></div> */}
+      <div className="pb-5" style={containerStyles}>
+        {/* <Card className="p-3" > */}
+        {/* <Card className="p-3" style={{"background": "url(../../userProfile.jpg) no-repeat center center", "backgroundSize": "cover"}}> */}
+        {/* <div className="overlay"></div> */}
 
-          <Card.Body>
-            {/* User Image */}
-            <Row>
-              <Image
-                className="mx-auto d-block rounded-circle mb-3"
-                src={props.user.image ? props.user.image : Logo}
-                roundedCircle
-                width="225px"
-                height="225px"
-              />
-            </Row>
-            {/* User Info */}
-            <Row>
-              <span className="h1 col-12 text-center">
-                <div className="mx-auto">
-                  <h2 className="h2">{props.user.name}</h2>
-                  <h3 className="h3">{props.user.email}</h3>
-                </div>
-              </span>
-            </Row>
-            <hr></hr>
-            {/* Social Info */}
-            <Row>
+        {/* <Card.Body> */}
+        {/* User Info */}
+        <Row>
+          <span className="h1 col-12 text-center">
+            <div className="p-3 pt-5 mx-auto" style={userGreetingStyles}>
+              <h4 style={glowStyle} className="h4 text-white font-weight-bold flow-text">
+              {
+
+                ( moment().isBetween(moment(`${moment().format("MM-DD-YYYY")} 06:00:00`), moment(`${moment().format("MM-DD-YYYY")} 11:59:59`)) ) ?
+                "good morning"
+                : ( moment().isBetween(moment(`${moment().format("MM-DD-YYYY")} 12:00:00`), moment(`${moment().format("MM-DD-YYYY")} 17:59:59`)) ) ?
+                "good afternoon"
+                : 
+                "good evening"
+
+                }
+
+                
+              </h4>
+              <span style={{ "color": "rgb(255, 215, 0)", "textShadow": "rgb(255, 255, 255) 1px 0 10px" }}>{props.user.name.split(" ")[0]}</span>
+          <Image
+            className="mx-auto d-block rounded-circle mt-3 mb-3"
+            src={props.user.image ? props.user.image : Logo}
+            roundedCircle
+            style={{ "boxShadow": "#ffffff 0px 0px 30px", "maxWidth": "175px", "maxHeight": "175px", "width": "30vw", "height": "30vw" }, { "boxShadow": "0px 0px 30px #888888" }}
+            height="150px"
+          />
+            </div>
+          </span>
+        </Row>
+        {/* Social Info */}
+        {/* <Row>
               <h2 className="h1 col-12 text-center">View Your Socials!</h2>
               <hr />
               <p className="lead col-12 text-center mb-5">
                 Found something worth wild? Don't forget to create a Social to share!
               </p>
-            </Row>
-            <Row>
-              <h2 className="h1 col-12 mt-4 text-center"><b>Social's Liked by You</b></h2>
-              {likedUserSocials.length ? (
-                <HorizontalScroll
-                  posts={likedUserSocials} />
-              ) : ""}
+            </Row> */}
+            <div>
+              
+        <Row className="px-3 pt-0" style={scrollContainerStyle}>
+            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-2 font-weight-bold text-left">Going ({attendingUserSocials.length})</h4>
+            {attendingUserSocials.length ? (
+              <HorizontalScroll
+                posts={attendingUserSocials} />
+            ) : ""}
 
-              <h2 className="h1 col-12 mt-4 text-center"><b>Social's You are Attending</b></h2>
-              {attendingUserSocials.length ? (
-                <HorizontalScroll
-                  posts={attendingUserSocials} />
-              ) : ""}
+        
+            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-4 font-weight-bold text-left">Interested ({likedUserSocials.length})</h4>
+            {likedUserSocials.length ? (
+              <HorizontalScroll
+                posts={likedUserSocials} />
+            ) : ""}
+        
 
-              <h2 className="h1 col-12 mt-4 text-center">Social's Created by You</h2>
-              {createdUserSocials.length ? (
-                <HorizontalScroll
-                  posts={createdUserSocials} />
-              ) : ""}
+            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-4 font-weight-bold text-left">Hosting ({createdUserSocials.length})</h4>
+            {createdUserSocials.length ? (
+              <HorizontalScroll
+                posts={createdUserSocials} />
+            ) : ""}
+        </Row>
+            </div>
 
-            </Row>
-          </Card.Body>
-        </Card>
-      </Container>
+      </div>
     );
   }
 }
