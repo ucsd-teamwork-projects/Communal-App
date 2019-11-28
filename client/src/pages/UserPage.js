@@ -50,13 +50,29 @@ function UserPage(props) {
         }
       });
 
-      createdList = await createSocialCards(createdSocials);
+      // Sort all events by descending order 
+      const dateComparisonFn = (firstS, secondS) => {
+        // ORDER = -1 FOR DESCENDING
+        // ORDER = 1 FOR ASCENDING
+        const ORDER = 1;
+        if (moment(firstS.startDate).isAfter(secondS.startDate)) {
+          return -1 * ORDER;
+        }
+        else if (moment(firstS.startDate).isBefore(secondS.startDate)) {
+          return 1 * ORDER;
+        } 
+
+        return 0;
+
+      }
+
+      createdList = await createSocialCards(createdSocials.sort(dateComparisonFn));
       setCreatedUserSocials(createdList);
 
-      attendingList = await createSocialCards(attendingSocials);
+      attendingList = await createSocialCards(attendingSocials.sort(dateComparisonFn));
       setAttendingUserSocials(attendingList);
 
-      likedList = await createSocialCards(likedSocials);
+      likedList = await createSocialCards(likedSocials.sort(dateComparisonFn));
       setLikedUserSocials(likedList);
 
       setLoading(false);
@@ -70,7 +86,7 @@ function UserPage(props) {
     if (socials.length === 0) {
       List.push(
         <SocialCard
-          cardStyle={{ "width": "300px", "height": "33vh" }}
+          cardStyle={{ "width": "300px", "height": "200px"}}
           key="0"
           title="No Social's yet, go find some!"
           img={"https://lh3.googleusercontent.com/QhL5dNG9pMr0I3ABM2TWT6yjyieVwdNDWRX7P3Ia1zplwfhwcpPbfLPKOR3OQi0wMdwdVC7P=w1080-h608-p-no-v0"}
@@ -82,7 +98,7 @@ function UserPage(props) {
       await socials.forEach(social => {
         List.push(
           <SocialCard
-            cardStyle={{ "width": "300px", "height": "33vh" }}
+            cardStyle={{ "width": "300px", "height": "200px" }}
             key={props.user._id + social.name}
             title={social.name}
             date={social.startDate}
