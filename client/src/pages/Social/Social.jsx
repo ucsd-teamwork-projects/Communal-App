@@ -6,6 +6,7 @@ import "./main.css";
 import { Card, Button, ButtonGroup, Container } from "react-bootstrap";
 import GoingListModal from "../../components/GoingListModal";
 import ConfirmModal from "../../components/ConfirmModal";
+import AlertModal from "../../components/AlertModal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import LocationAutocomplete from 'location-autocomplete';
@@ -38,14 +39,17 @@ class Social extends Component {
     userInterested: false,
     goingModalShow: false,
     confirmModalShow: false,
+    updateModalShow: false,
     going: [],
     loading: true,
     confirmMessage: "",
+    updateMessage: "",
     isCreator: false,
-    editMode: false
+    editMode: false,
+    hideUpdateModalBtn: true
   };
 
-  getSocial = () => {
+  getSocial = (cb) => {
     // Retrieve this Social object
     API.getSocialById(this.socialId).then(currSocial => {
       this.social.creator = currSocial.data.creator;
@@ -64,6 +68,9 @@ class Social extends Component {
         isCreator: (this.social.creator._id == this.user._id) ? true : false
       });
 
+      if(cb) {
+        cb();
+      }
     });
   };
 
@@ -159,7 +166,7 @@ class Social extends Component {
   };
 
   deleteSocial = () => {
-    this.setState({ confirmMessage: <i class="fa-spin text-info fas fa-circle-notch"></i> })
+    this.setState({ confirmMessage: <i className="fa-spin text-info fas fa-circle-notch"></i> })
 
     // Delete Social and all associated content (i.e. Comment, User going/likes/dislikes)
     API.deleteSocial(this.socialId)
@@ -169,46 +176,45 @@ class Social extends Component {
 
         // Redirect to user profile page
         setTimeout(() => this.props.history.push(`/profile`), 2000);
-
+        
       })
-
-  }
-
-  updateSocial = () => {
-    // Form validation (setting invalid object in STATE)
-    // Form Validation
-    let invalid = {};
-
-    // Check name and location are not blank
-    if (!this.state.nameEdit) { invalid.name = true; }
-    if (!this.state.locationEdit) { invalid.location = true; }
-
-    // Check startDate and endDate are not blank and are Date objects
-    if ((!this.state.startDateEdit || Object.prototype.toString.call(this.state.startDateEdit) !== '[object Date]')) { invalid.startDateEdit = true; }
-    if (!this.state.endDateEdit || Object.prototype.toString.call(this.state.endDateEdit) !== '[object Date]') { invalid.endDateEdit = true; }
-    // Check to see whether or not startDate is before endDate
-    if (!invalid.startDate && !invalid.endDate) {
-      if (moment(this.state.startDateEdit).isAfter(this.state.endDateEdit)) {
-        invalid.startDate = true;
-        invalid.endDate = true;
-      }
+      
     }
+    
+    updateSocial = () => {
+      
+      // Form Validation
+      let invalid = {};
+      
+      // Check name and location are not blank
+      if (!this.state.nameEdit) { invalid.name = true; }
+      if (!this.state.locationEdit) { invalid.location = true; }
+      
+      // Check startDate and endDate are not blank and are Date objects
+      if ((!this.state.startDateEdit || Object.prototype.toString.call(this.state.startDateEdit) !== '[object Date]')) { invalid.startDate = true; }
+      if (!this.state.endDateEdit || Object.prototype.toString.call(this.state.endDateEdit) !== '[object Date]') { invalid.endDate = true; }
+      // Check to see whether or not startDate is before endDate
+      if (!invalid.startDate && !invalid.endDate) {
+        if (moment(this.state.startDateEdit).isAfter(this.state.endDateEdit)) {
+          invalid.startDate = true;
+          invalid.endDate = true;
+        }
+      }
 
-    // Check if image invalid error is set
-    if (this.state.invalid.image || !this.state.imageEdit) { invalid.image = true; }
-
-    // If any errors, open errorAlert
-    if (Object.keys(invalid).length) {
-      this.setState({
-        // errorAlertOpen: true,
-        invalid
-      })
+      // Check if image invalid error is set
+      if (this.state.invalid.image || !this.state.imageEdit) { invalid.image = true; }
+      
+      // If any errors, open errorAlert
+      if (Object.keys(invalid).length) {
+        this.setState({
+          // errorAlertOpen: true,
+          invalid
+        })
       return;
     }
 
     // Submit Social object to API
     const updatedSocial = {
-      creator: this.props.user._id,
       name: this.state.nameEdit,
       startDate: this.state.startDateEdit,
       endDate: this.state.endDateEdit,
@@ -218,19 +224,24 @@ class Social extends Component {
       description: this.state.descriptionEdit
     }
 
-    API.updateSocial(updatedSocial)
+
+    //Show loading screen
+    this.setState({ updateModalShow: true, updateMessage: <i className="fa-spin text-info fas fa-circle-notch"></i>, hideUpdateModalBtn: true });
+
+    API.updateSocial(this.socialId, updatedSocial)
       .then((obj) => {
         if (obj.data) {
           // Reset state variables
-          this.setState({
-            editMode: false
-          });
+          this.getSocial(() =>
+            this.setState({
+              editMode: false,
+              updateMessage: <span className="text-success">"{this.social.name}" has successfully been updated!</span> ,
+              hideUpdateModalBtn: false
+            })
+          )
+
         }
       })
-
-
-
-    this.setState({ editMode: false });
 
   }
 
@@ -240,8 +251,8 @@ class Social extends Component {
     this.setState({
       locationEdit: this.social.location,
       nameEdit: this.social.name,
-      startDateEdit: this.social.startDate,
-      endDateEdit: this.social.endDate,
+      startDateEdit: new Date(this.social.startDate),
+      endDateEdit: new Date(this.social.endDate),
       descriptionEdit: this.social.description,
       imageEdit: this.social.image,
       editMode: true,
@@ -368,7 +379,7 @@ class Social extends Component {
                     onError={this.addDefaultSrc}
                   />
                   <input
-                    className={`form-control ${this.state.invalid.image ? "is-invalid": ""}`} name="imageEdit" value={this.state.imageEdit} onChange={(e) => this.handleInputChange(e)} />
+                    className={`form-control ${this.state.invalid.image ? "is-invalid" : ""}`} name="imageEdit" value={this.state.imageEdit} onChange={(e) => this.handleInputChange(e)} />
                 </>
                 :
                 <Card.Img
@@ -410,8 +421,8 @@ class Social extends Component {
                   this.state.editMode ?
                     <DatePicker
                       width={"90%"}
-                      selected={new Date(this.state.startDateEdit)}
-                      onChange={(d) => this.handleDateChange("startDate", d)}
+                      selected={this.state.startDateEdit}
+                      onChange={(d) => this.handleDateChange("startDateEdit", d)}
                       showTimeInput
                       timeInputLabel="Time: "
                       dateFormat="MMMM d, yyyy h:mm aa"
@@ -430,8 +441,8 @@ class Social extends Component {
                   this.state.editMode ?
                     <DatePicker
                       width={"90%"}
-                      selected={new Date(this.state.endDateEdit)}
-                      onChange={(d) => this.handleDateChange("endDate", d)}
+                      selected={this.state.endDateEdit}
+                      onChange={(d) => this.handleDateChange("endDateEdit", d)}
                       showTimeInput
                       timeInputLabel="Time: "
                       dateFormat="MMMM d, yyyy h:mm aa"
@@ -446,7 +457,7 @@ class Social extends Component {
               {/* Social Title */}
               <h4 className="flow-text" style={{ "wordWrap": "break-word" }}>
                 {(this.state.editMode) ?
-                  <input className="form-control" name="nameEdit" value={this.state.nameEdit} onChange={(e) => this.handleInputChange(e)} />
+                  <input className={`form-control ${this.state.invalid.name ? "is-invalid" : ""}`} name="nameEdit" value={this.state.nameEdit} onChange={(e) => this.handleInputChange(e)} />
                   :
                   <>
                     {this.social.name}
@@ -541,14 +552,14 @@ class Social extends Component {
 
                 {this.state.userInterested ? (
                   <Button onClick={() => this.unmarkInterested()} variant="info">
-                    <i className="far fa-thumbs-up"></i>&nbsp;Liked!
+                    <i className="fas fa-thumbs-up"></i>&nbsp;Liked!
                 </Button>
                 ) : (
                     <Button
                       onClick={() => this.markInterested()}
                       variant="outline-info"
                     >
-                      <i className="far fa-star"></i>&nbsp;I'm interested...
+                      <i className="far fa-thumbs-up"></i>&nbsp;I'm interested...
                   </Button>
                   )}
               </ButtonGroup>
@@ -580,6 +591,14 @@ class Social extends Component {
             message={this.state.confirmMessage}
             onConfirm={() => this.deleteSocial()}
             confirmBtn={"Delete"}
+          />
+
+          <AlertModal
+            show={this.state.updateModalShow}
+            onHide={() => this.setState({ updateModalShow: false })}
+            title={`Update Social`}
+            message={this.state.updateMessage}
+            hideBtn={this.state.hideUpdateModalBtn}
           />
 
 

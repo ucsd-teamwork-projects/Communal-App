@@ -12,6 +12,7 @@ router.route("/:id/comment")
 router.route("/:id")
   .get(socialController.findOne)
   .delete(socialController.remove)
+  .put(socialController.update)
 
 
 // Matches with "/api/socials"  
