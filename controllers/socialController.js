@@ -52,7 +52,15 @@ module.exports = {
             going: req.body.userId
           }
         })
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => { 
+        userDb.findOne({
+          _id: req.body.userId
+        })
+        .then(newGoingUser => {
+          pusher.trigger(`add-going`, `social-${req.params.id}`, newGoingUser);
+          res.json(newGoingUser)
+        })
+      })
       .catch(err => res.status(422).json(err));
   },
   pullGoing: function (req, res) {
@@ -63,7 +71,11 @@ module.exports = {
             going: req.body.userId
           }
         })
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => 
+        {
+          pusher.trigger(`remove-going`, `social-${req.params.id}`, req.body.userId);
+          res.json(dbModel)
+        })
       .catch(err => res.status(422).json(err));
   },
   pushComment: function (req, res) {

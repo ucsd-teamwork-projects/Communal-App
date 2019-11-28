@@ -111,7 +111,7 @@ function UserPage(props) {
   }
 
   const scrollContainerStyle = {
-    "max-width": "1200px",
+    "maxWidth": "1200px",
     "margin": "0 auto"
   }
 

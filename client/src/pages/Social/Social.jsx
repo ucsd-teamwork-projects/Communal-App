@@ -341,8 +341,8 @@ class Social extends Component {
     channel.bind(`social-${this.socialId}`, (data) => {
       this.setState({ comments: [data, ...this.state.comments] });
     });
-    const channel2 = pusher.subscribe(`comment-deletion`);
 
+    const channel2 = pusher.subscribe(`comment-deletion`);
     channel2.bind(`social-${this.socialId}`, rc => {
       const removed = this.state.comments.filter((c) => {
 
@@ -355,6 +355,24 @@ class Social extends Component {
       this.setState({ comments: removed });
 
     });
+
+    const channel3 = pusher.subscribe(`add-going`);
+    channel3.bind(`social-${this.socialId}`, (data) => {
+      this.setState({ going: [...this.state.going, data] });
+    });  
+
+    const channel4 = pusher.subscribe(`remove-going`);
+    channel4.bind(`social-${this.socialId}`, (ru_id) => {
+      const removed = this.state.going.filter((u) => {
+
+        if (u._id == ru_id) {
+          return false;
+        } else {
+          return true;
+        }
+      })
+      this.setState({ going: removed });
+    });  
   }
 
   render() {
@@ -534,7 +552,7 @@ class Social extends Component {
                 onClick={() => this.setState({ goingModalShow: true })}
               >
 
-                <i className="far fa-handshake"></i> {this.state.going.length} Person Going
+                <i className="far fa-handshake"></i> {this.state.going.length} {this.state.going.length == 1 ? "person": "people"} going
             </p>
               <ButtonGroup className="mt-1" size="sm">
                 {this.state.userGoing ? (
