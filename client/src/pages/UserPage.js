@@ -72,10 +72,10 @@ function UserPage(props) {
         <SocialCard
           cardStyle={{ "width": "300px", "height": "33vh" }}
           key="0"
-          title="No Socials Yet, Go find some!"
-          img={Logo}
+          title="No Social's yet, go find some!"
+          img={"https://lh3.googleusercontent.com/QhL5dNG9pMr0I3ABM2TWT6yjyieVwdNDWRX7P3Ia1zplwfhwcpPbfLPKOR3OQi0wMdwdVC7P=w1080-h608-p-no-v0"}
           location="Bee Somewhere!"
-          link="/add-social"
+          link="/find-social"
         />
       )
     } else {
@@ -101,7 +101,7 @@ function UserPage(props) {
     "overflow": "hidden",
     "backgroundRepeat": "no-repeat",
     "backgroundSize": "cover",
-    "backgroundColor": "background-color: rgba(238, 238, 238, 0.51)!important",
+    "backgroundColor": "rgba(238, 238, 238, 0.35)",
     "backgroundBlendMode": "color"
   }
 
