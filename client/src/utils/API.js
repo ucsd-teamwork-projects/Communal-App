@@ -95,6 +95,10 @@ export default {
       members
     })
   },
+  // Update a Social
+  updateSocial: function(socialId, updatedSocial) {
+    return axios.put(`/api/socials/${socialId}`, updatedSocial);
+  },
   // Delete a Social
   deleteSocial: function(socialId) {
     return axios.delete(`/api/socials/${socialId}`);

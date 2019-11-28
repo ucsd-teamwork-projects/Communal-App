@@ -24,8 +24,8 @@ function SocialCard(props) {
           </Card.Text>
         </Card.Body>
       </Card> */}
-      <Card className="text-white">
-        <Card.Img width="100%" src={props.img ? props.img : Logo} alt="Card image cap" />
+      <Card style={props.cardStyle} className="text-white">
+        <Card.Img width="100%" height="100%" style={{"objectFit": "cover"}} src={props.img ? props.img : Logo} alt="Card image cap" />
         <Card.ImgOverlay>
           <div className="overlay-container" >
             <div className="text-left overlay-title-container">

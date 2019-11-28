@@ -34,7 +34,7 @@ class FindSocials extends Component {
       if (likes && dislikes && going) { seen = likes.concat(dislikes).concat(going) };
 
       const filtered = socials.filter(function (social) {
-        if (seen.includes(social._id) || moment(social.startDate).isBefore(new Date())) {
+        if (seen.includes(social._id) || moment(social.endDate).isBefore(new Date())) {
           return false;
         } else {
           return true;

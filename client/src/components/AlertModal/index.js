@@ -1,8 +1,8 @@
 import React from "react";
-import { Modal, Button} from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import "../../utils/flowHeaders.min.css";
 
-function ConfirmModal(props) {
+function AlertModal(props) {
     return (
         <Modal
             show={props.show}
@@ -20,11 +20,14 @@ function ConfirmModal(props) {
                 <h5 className="flow-text">{props.message}</h5>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={props.onHide}>Close</Button>
-                <Button variant="danger" onClick={props.onConfirm}>{props.confirmBtn}</Button>
+                {
+                    !props.hideBtn ?
+                        <Button variant="secondary" onClick={props.onHide}>Close</Button>
+                    : ""
+                }
             </Modal.Footer>
         </Modal>
     );
 }
 
-export default ConfirmModal;
+export default AlertModal;

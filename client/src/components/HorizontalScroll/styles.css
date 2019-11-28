@@ -33,7 +33,7 @@ form {
 }
 
 .menu-item {
-  padding: 0 40px;
+  padding: 0 0px;
   margin: 5px 10px;
   user-select: none;
   cursor: pointer;
@@ -41,18 +41,35 @@ form {
 }
 
 .menu-item-wrapper.active {
-  border: 1px blue solid;
+  border: 0px blue solid;
 }
 
 .menu-item.active {
-  border: 1px green solid;
+  border: 0px green solid;
+}
+
+.menu-item-wrapper:focus,
+.menu-item:focus {
+  outline: none;
 }
 
 .scroll-menu-arrow {
-  padding: 20px;
+  padding: 0px;
   cursor: pointer;
+  color: #ecb442;
+  font-weight: bold;
 }
 
 .scroll-menu-arrow--disabled {
   visibility: hidden;
+}
+
+.arrow-next {
+  position: relative;
+  right: -10px;
+}
+
+.arrow-prev {
+  position: relative;
+  left: -10px;
 }
