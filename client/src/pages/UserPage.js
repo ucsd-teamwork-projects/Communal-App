@@ -152,6 +152,7 @@ function UserPage(props) {
                 <HorizontalScroll
                   posts={createdUserSocials} />
               ) : ""}
+
             </Row>
           </Card.Body>
         </Card>

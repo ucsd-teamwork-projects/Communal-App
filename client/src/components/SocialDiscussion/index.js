@@ -36,7 +36,7 @@ function SocialDiscussion(props) {
 
     const handleEnter = (event) => {
         if (event.key === 'Enter') {
-            props.handleSubmit(event);
+            document.getElementById("vertical-align").click();
         }
     }
 
