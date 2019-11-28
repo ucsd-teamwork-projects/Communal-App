@@ -26,28 +26,33 @@ function Landing() {
       <Col lg={4}>
         <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
           <div className="features-icons-icon d-flex">
-            <i className="fas fa-binoculars m-auto text-primary"></i>
+            {/* <i className="fas fa-binoculars m-auto text-primary"></i> */}
+            <img className="img-fluid mx-auto" src="https://i.ibb.co/hHWJzbn/Singapore-Airlines-Manila-Flat-clear-1.png" />
           </div>
-          <h3>Stay Updated</h3>
-          <p className="lead mb-0">Find the hidden gems in places you visit regularly that you never noticed were right around the corner! </p>
+          <h3 className="font-weight-bold">Explore</h3>
+          <p className="lead mb-0">Travel the globe and see all the beautiful sights the world has to offer! </p>
         </div>
       </Col>
       <Col lg={4}>
         <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
           <div className="features-icons-icon d-flex">
-            <i className="fas fa-car m-auto text-primary"></i>
+            {/* <i className="fas fa-car m-auto text-primary"></i> */}
+            <img className="img-fluid mx-auto" src="https://i.ibb.co/Rpsw2WS/157496977582723970.png" />
+
           </div>
-          <h3>Stay Updated</h3>
-          <p className="lead mb-0">Found something you want your community to see? Socialize it!</p>
+          <h3 className="font-weight-bold">Learn</h3>
+          <p className="lead mb-0">Find a tour or class and learn something new with amazing people!</p>
         </div>
       </Col>
       <Col lg={4}>
         <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
           <div className="features-icons-icon d-flex">
-            <i className="fas fa-users m-auto text-primary"></i>
+            {/* <i className="fas fa-users m-auto text-primary"></i> */}
+            <img className="img-fluid mx-auto" src="https://i.ibb.co/jy2dr5j/157496977582723970k.png" />
+
           </div>
-          <h3>Stay Updated</h3>
-          <p className="lead mb-0">Create groups for meetups. Hold events as often as you want! </p>
+          <h3 className="font-weight-bold">Discover</h3>
+          <p className="lead mb-0">Discover new sights and foods in your area and make lifelong connections </p>
         </div>
       </Col>
     </Row>

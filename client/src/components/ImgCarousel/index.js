@@ -43,7 +43,7 @@ function ImgCarousel(props) {
     ];
 
     const carouselItemStyle = {
-      "height": "50vh",
+      "height": "60vh",
       "width": "100%",
       "backgroundRepeat": "no-repeat",
       "backgroundSize": "cover"

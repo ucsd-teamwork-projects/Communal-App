@@ -3,9 +3,9 @@
     width: 100%;
     bottom: 5%;
     /* left: 25%; */
-    color: #ffffff!important;
+    color: #ffffff !important;
     /* text-shadow: #ffffff 1px 0px 15px; */
-        text-shadow: #424242 1px 0px 15px;
+    text-shadow: #424242 1px 0px 15px;
 
     font-weight: lighter;
     text-align: center;
@@ -24,20 +24,21 @@
 .features-icons {
     padding-top: 7rem;
     padding-bottom: 7rem;
-  }
-  
-  .features-icons .features-icons-item {
+}
+
+.features-icons .features-icons-item {
     max-width: 20rem;
-  }
-  
-  .features-icons .features-icons-item .features-icons-icon {
+}
+
+/* .features-icons .features-icons-item .features-icons-icon {
     height: 7rem;
-  }
-  
-  .features-icons .features-icons-item .features-icons-icon i {
+} */
+
+/* .features-icons .features-icons-item .features-icons-icon i {
     font-size: 4.5rem;
-  }
-  
-  .features-icons .features-icons-item:hover .features-icons-icon i {
-    font-size: 5rem;
-  }
+} */
+
+
+.features-icons-icon .img-fluid {
+    max-height: 200px;
+}

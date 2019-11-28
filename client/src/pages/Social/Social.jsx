@@ -552,7 +552,7 @@ class Social extends Component {
                 onClick={() => this.setState({ goingModalShow: true })}
               >
 
-                <i className="far fa-handshake"></i> {this.state.going.length} {this.state.going.length == 1 ? "person": "people"} going
+                <i className="fas fa-users"></i> {this.state.going.length} {this.state.going.length == 1 ? "person": "people"} going
             </p>
               <ButtonGroup className="mt-1" size="sm">
                 {this.state.userGoing ? (
