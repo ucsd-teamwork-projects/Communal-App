@@ -41,8 +41,25 @@ class FindSocials extends Component {
         }
       });
 
+
+      // Sort Social in ascending order      
+      const dateComparisonFn = (firstS, secondS) => {
+        // ORDER = -1 FOR DESCENDING
+        // ORDER = 1 FOR ASCENDING
+        const ORDER = 1;
+        if (moment(firstS.startDate).isAfter(secondS.startDate)) {
+          return 1 * ORDER;
+        }
+        else if (moment(firstS.startDate).isBefore(secondS.startDate)) {
+          return -1 * ORDER;
+        } 
+
+        return 0;
+
+      }
+
       this.setState({
-        socials: filtered,
+        socials: filtered.sort(dateComparisonFn),
         loading: false
       });
 

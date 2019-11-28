@@ -1,17 +1,26 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import { Row } from "react-bootstrap";
-import { Col, Card } from "react-bootstrap";
-import ImgCarousel from "../components/ImgCarousel";
-import Logo from "../assets/img/logo.png";
-import "../utils/flowHeaders.min.css";
+// import { Container } from "react-bootstrap";
+// import { Row } from "react-bootstrap";
+// import { Col, Card } from "react-bootstrap";
+import ImgCarousel from "../../components/ImgCarousel";
+import Logo from "../../assets/img/logo.png";
+import "../../utils/flowHeaders.min.css";
+import "./main.css";
 
 
 function Landing() {
   return (
-    <Container className="mt-5">
-      <ImgCarousel />
-      <Row className="justify-content-center">
+    // <Container className="mt-5">
+    <div >
+      <ImgCarousel>
+        <h3 className="landing-greeting mx-auto flow-text">
+          welcome to <span className="d-block brand-greeting">communal </span>
+        </h3>
+        <div style={{"width": "100%", "height": "100%", "backgroundImage": "linear-gradient( transparent 30%, rgb(255, 192, 56, 0.8))", "position": "absolute", "top": "0"}}>
+
+        </div>
+      </ImgCarousel>
+      {/* <Row className="justify-content-center">
         <Col xs={12}>
           <Card className="mx-auto my-3">
             <Card.Header className="text-center">
@@ -36,8 +45,10 @@ function Landing() {
             <Card.Footer className="text-muted"></Card.Footer>
           </Card>
         </Col>
-      </Row>
-    </Container>
+      </Row> */}
+      </div>
+
+    /* </Container> */
   );
 }
 

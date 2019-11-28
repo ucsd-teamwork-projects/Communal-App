@@ -50,16 +50,16 @@ function UserPage(props) {
         }
       });
 
-      // Sort all events by descending order 
+      // Sort all events by ascending order 
       const dateComparisonFn = (firstS, secondS) => {
         // ORDER = -1 FOR DESCENDING
         // ORDER = 1 FOR ASCENDING
-        const ORDER = -1;
+        const ORDER = 1;
         if (moment(firstS.startDate).isAfter(secondS.startDate)) {
-          return -1 * ORDER;
+          return 1 * ORDER;
         }
         else if (moment(firstS.startDate).isBefore(secondS.startDate)) {
-          return 1 * ORDER;
+          return -1 * ORDER;
         } 
 
         return 0;
