@@ -1,7 +1,7 @@
 import React from "react";
-// import { Container } from "react-bootstrap";
-// import { Row } from "react-bootstrap";
-// import { Col, Card } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import { Row } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import ImgCarousel from "../../components/ImgCarousel";
 import Logo from "../../assets/img/logo.png";
 import "../../utils/flowHeaders.min.css";
@@ -20,6 +20,39 @@ function Landing() {
 
         </div>
       </ImgCarousel>
+      <section className="features-icons bg-light text-center">
+  <Container>
+    <Row>
+      <Col lg={4}>
+        <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div className="features-icons-icon d-flex">
+            <i className="fas fa-binoculars m-auto text-primary"></i>
+          </div>
+          <h3>Stay Updated</h3>
+          <p className="lead mb-0">Find the hidden gems in places you visit regularly that you never noticed were right around the corner! </p>
+        </div>
+      </Col>
+      <Col lg={4}>
+        <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div className="features-icons-icon d-flex">
+            <i className="fas fa-car m-auto text-primary"></i>
+          </div>
+          <h3>Stay Updated</h3>
+          <p className="lead mb-0">Found something you want your community to see? Socialize it!</p>
+        </div>
+      </Col>
+      <Col lg={4}>
+        <div className="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+          <div className="features-icons-icon d-flex">
+            <i className="fas fa-users m-auto text-primary"></i>
+          </div>
+          <h3>Stay Updated</h3>
+          <p className="lead mb-0">Create groups for meetups. Hold events as often as you want! </p>
+        </div>
+      </Col>
+    </Row>
+  </Container>
+</section>
       {/* <Row className="justify-content-center">
         <Col xs={12}>
           <Card className="mx-auto my-3">
