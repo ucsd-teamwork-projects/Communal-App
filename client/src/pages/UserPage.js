@@ -54,7 +54,7 @@ function UserPage(props) {
       const dateComparisonFn = (firstS, secondS) => {
         // ORDER = -1 FOR DESCENDING
         // ORDER = 1 FOR ASCENDING
-        const ORDER = 1;
+        const ORDER = -1;
         if (moment(firstS.startDate).isAfter(secondS.startDate)) {
           return -1 * ORDER;
         }
