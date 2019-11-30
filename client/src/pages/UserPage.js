@@ -12,6 +12,9 @@ function UserPage(props) {
   const [createdUserSocials, setCreatedUserSocials] = useState([]);
   const [attendingUserSocials, setAttendingUserSocials] = useState([]);
   const [likedUserSocials, setLikedUserSocials] = useState([]);
+  const [createdIsEmpty, setCreatedIsEmpty] = useState([]);
+  const [attendingIsEmpty, setAttendingIsEmpty] = useState([]);
+  const [likedIsEmpty, setLikedIsEmpty] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -66,14 +69,17 @@ function UserPage(props) {
 
       }
 
-      createdList = await createSocialCards(createdSocials.sort(dateComparisonFn));
-      setCreatedUserSocials(createdList);
+      let { list: createdListArr, isEmpty: createdEmpty } = await createSocialCards(createdSocials.sort(dateComparisonFn));
+      setCreatedUserSocials(createdListArr);
+      setCreatedIsEmpty(createdEmpty);
 
-      attendingList = await createSocialCards(attendingSocials.sort(dateComparisonFn));
-      setAttendingUserSocials(attendingList);
+      let { list: attendingListArr, isEmpty: attendingEmpty } = await createSocialCards(attendingSocials.sort(dateComparisonFn));
+      setAttendingUserSocials(attendingListArr);
+      setAttendingIsEmpty(attendingEmpty);
 
-      likedList = await createSocialCards(likedSocials.sort(dateComparisonFn));
-      setLikedUserSocials(likedList);
+      let { list: likedListArr, isEmpty: likedEmpty } = await createSocialCards(likedSocials.sort(dateComparisonFn));
+      setLikedUserSocials(likedListArr);
+      setLikedIsEmpty(likedEmpty);
 
       setLoading(false);
 
@@ -81,24 +87,27 @@ function UserPage(props) {
   }, [props.user, props.user.likes]);
 
   const createSocialCards = async (socials) => {
-    let List = [];
+    let list = [];
+    let isEmpty = false;
 
     if (socials.length === 0) {
-      List.push(
+      list.push(
         <SocialCard
-          cardStyle={{ "width": "300px", "height": "200px"}}
+          cardStyle={{ "width": "300px", "height": "200px", "backgroundColor": "transparent", "borderRadius": "10px","boxShadow": "#eee 0px 0px 10px"}}
           key="0"
           title="No Social's yet, go find some!"
           img={"https://lh3.googleusercontent.com/QhL5dNG9pMr0I3ABM2TWT6yjyieVwdNDWRX7P3Ia1zplwfhwcpPbfLPKOR3OQi0wMdwdVC7P=w1080-h608-p-no-v0"}
           location="Bee Somewhere!"
           link="/find-social"
         />
-      )
+
+        )
+        isEmpty = true;
     } else {
       await socials.forEach(social => {
-        List.push(
+        list.push(
           <SocialCard
-            cardStyle={{ "width": "300px", "height": "200px" }}
+            cardStyle={{ "width": "300px", "height": "200px", "backgroundColor": "transparent", "borderRadius": "10px", "boxShadow": "#eee 0px 0px 10px" }}
             key={props.user._id + social.name}
             title={social.name}
             date={social.startDate}
@@ -109,7 +118,7 @@ function UserPage(props) {
         );
       });
     }
-    return List;
+    return { list, isEmpty};
   };
 
   const containerStyles = {
@@ -185,21 +194,21 @@ function UserPage(props) {
             <div>
               
         <Row className="px-3 pt-0" style={scrollContainerStyle}>
-            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-2 font-weight-bold text-left">Going ({attendingUserSocials.length})</h4>
+            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-2 font-weight-bold text-left">Going ({attendingIsEmpty ? "0": attendingUserSocials.length})</h4>
             {attendingUserSocials.length ? (
               <HorizontalScroll
                 posts={attendingUserSocials} />
             ) : ""}
 
         
-            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-4 font-weight-bold text-left">Interested ({likedUserSocials.length})</h4>
+            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-4 font-weight-bold text-left">Interested ({likedIsEmpty ? "0": likedUserSocials.length})</h4>
             {likedUserSocials.length ? (
               <HorizontalScroll
                 posts={likedUserSocials} />
             ) : ""}
         
 
-            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-4 font-weight-bold text-left">Hosting ({createdUserSocials.length})</h4>
+            <h4 style={glowStyle} className="h4 text-white flow-text col-12 mt-4 font-weight-bold text-left">Hosting ({createdIsEmpty ? "0": createdUserSocials.length})</h4>
             {createdUserSocials.length ? (
               <HorizontalScroll
                 posts={createdUserSocials} />

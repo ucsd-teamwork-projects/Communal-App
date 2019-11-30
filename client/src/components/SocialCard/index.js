@@ -25,9 +25,9 @@ function SocialCard(props) {
         </Card.Body>
       </Card> */}
       <Card style={props.cardStyle} className="text-white">
-        <Card.Img width="100%" height="100%" style={{"objectFit": "cover"}} src={props.img ? props.img : Logo} alt="Card image cap" />
-        <Card.ImgOverlay>
-          <div className="overlay-container" >
+        <Card.Img width="100%" height="100%" style={{"objectFit": "cover", "borderRadius": "inherit"}} src={props.img ? props.img : Logo} alt="Card image cap" />
+        <Card.ImgOverlay style={{"borderRadius": "inherit"}}>
+          <div style={{"borderRadius": "inherit"}} className="overlay-container" >
             <div className="text-left overlay-title-container">
               <h6 className="mb-0 font-weight-bolder flow-text ellipsis-overflow"><Moment format="dddd, MMMM Do YYYY, h:mm a">{props.date}</Moment></h6>
               <h5 style={{"color": "#fff468"}} className="mt-0 mb-1 font-weight-bold ellipsis-overflow flow-text">{props.title}</h5>
