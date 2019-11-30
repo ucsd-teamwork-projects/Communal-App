@@ -12,11 +12,11 @@
 }
 
 .container-about {
-    position: relative;
+    /* position: relative; */
     margin: auto;
     width: 80%;
     top: 50%;
-    transform: translateY(-50%);
+    /* transform: translateY(-50%); */
     border-radius: 5px;
     background-color: rgb(206, 140, 97, 0.7);
     padding: 15px;
