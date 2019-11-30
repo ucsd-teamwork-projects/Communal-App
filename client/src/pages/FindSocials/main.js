@@ -713,6 +713,8 @@ export function documentReady() {
 								backToMiddle();
 							}
 
+						} else {
+							backToMiddle();
 						}
 					}
 				}
