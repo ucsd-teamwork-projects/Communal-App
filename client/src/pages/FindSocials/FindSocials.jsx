@@ -138,7 +138,7 @@ class FindSocials extends Component {
     return (
       <div>
         {/* Main card container */}
-        <div className="stage">
+        <div className="p-3 stage">
           <div className="title">
             <i className="fas fa-street-view"></i>&nbsp;&nbsp;Events Near You 
           </div>
@@ -150,7 +150,7 @@ class FindSocials extends Component {
               {/* Render filtered social cards here */}
 
               {this.state.socials.map((social) => (
-                <div key={social._id} className="card">
+                <div key={social._id} className="card" >
                   <Link to={`socials/${social._id}`}>
                     <div className="card-content" style={{ "padding": "0px" }}>
                       <div className="card-image">
@@ -269,7 +269,7 @@ class FindSocials extends Component {
             </div>
           </div>
         </div>
-        <h2 className="final-state hidden text-dark">There are no more events in your area. <br /> Check again later!</h2>
+        <h2 className="final-state hidden text-center text-dark">There are no more events in your area. <br /> Check again later!</h2>
       </div>
     )};
   }

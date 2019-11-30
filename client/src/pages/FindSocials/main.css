@@ -31,6 +31,7 @@
 
 /* class created only for a better preview*/
 .stage {
+    overflow-x: hidden;
     position: absolute;
     opacity: 1;
     max-width: 600px;
@@ -223,9 +224,9 @@
 /*------ CSS Use Case Example END ------*/
 
 /*----- Stacked Cards component css START -----*/
-/* body {
+body {
     overflow-x: hidden;
-} */
+}
 
 .no-transition {
   -webkit-transition: none ! important;
@@ -365,5 +366,14 @@
   .card-footer {
     -ms-overflow-style: none;
     max-height: 180px;
+    height: 100%;
     overflow: auto;
+  }
+
+  #stacked-cards-block {
+    /* overflow-x: hidden; */
+  }
+
+  .card {
+    height: initial;
   }

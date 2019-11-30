@@ -24,19 +24,19 @@ function NavMenu(props) {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link as={Link} to="/">Home</Nav.Link>
+          <Nav.Link eventKey="1" as={Link} to="/">Home</Nav.Link>
           {isAuthenticated && (
             <React.Fragment>
-              <Nav.Link as={Link} to="/profile" onClick={props.updateUser}>My Profile</Nav.Link>
+              <Nav.Link eventKey="2" as={Link} to="/profile" onClick={props.updateUser}>My Profile</Nav.Link>
               <NavDropdown title="Socials" id="basic-nav-dropdown" onClick={props.updateUser}>
-                <NavDropdown.Item as={Link} to="/find-social" onClick={props.updateUser}>Explore Socials</NavDropdown.Item>
-                <NavDropdown.Item as={Link} to="/add-social" onClick={props.updateUser}>Add New Social</NavDropdown.Item>
+                <NavDropdown.Item eventKey="3" as={Link} to="/find-social" onClick={props.updateUser}>Explore Socials</NavDropdown.Item>
+                <NavDropdown.Item eventKey="4" as={Link} to="/add-social" onClick={props.updateUser}>Add New Social</NavDropdown.Item>
               </NavDropdown>
             </React.Fragment>
           )}
-          <Nav.Link as={Link} to="/about">About</Nav.Link>
+          <Nav.Link eventKey="5" as={Link} to="/about">About</Nav.Link>
         </Nav>
-        <Form inline>
+        <Form inline style={{"justifyContent": "left"}}>
           <span className="mr-4">{user?"Welcome, " + user.name:""}</span>
           <LogBtn />
         </Form>

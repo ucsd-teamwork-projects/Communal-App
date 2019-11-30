@@ -14,8 +14,7 @@ function SocialDiscussion(props) {
         "padding": "10px",
         "background": "#F0F0F0",
         "minWidth": "20vh",
-        "marginTop": "10px",
-        "marginBottom": "10px"
+        "marginTop": "10px"
 
     };
 
