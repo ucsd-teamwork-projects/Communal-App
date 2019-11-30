@@ -1,0 +1,44 @@
+.landing-greeting {
+    position: absolute;
+    width: 100%;
+    bottom: 5%;
+    /* left: 25%; */
+    color: #ffffff !important;
+    /* text-shadow: #ffffff 1px 0px 15px; */
+    text-shadow: #424242 1px 0px 15px;
+
+    font-weight: lighter;
+    text-align: center;
+    z-index: 100;
+    padding: 1rem;
+
+}
+
+.brand-greeting {
+    color: rgb(250, 250, 250);
+    font-weight: 100;
+    font-family: Bungee, cursive;
+}
+
+
+.features-icons {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+}
+
+.features-icons .features-icons-item {
+    max-width: 20rem;
+}
+
+/* .features-icons .features-icons-item .features-icons-icon {
+    height: 7rem;
+} */
+
+/* .features-icons .features-icons-item .features-icons-icon i {
+    font-size: 4.5rem;
+} */
+
+
+.features-icons-icon .img-fluid {
+    max-height: 200px;
+}

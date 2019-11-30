@@ -6,7 +6,7 @@ import { useAuth0 } from "./react-auth0-spa";
 import PrivateRoute from "./components/PrivateRoute";
 import Loading from "./components/Loading";
 import NavMenu from "./components/NavMenu";
-import Landing from "./pages/Landing";
+import Landing from "./pages/Landing/index";
 import FindSocials from "./pages/FindSocials/index";
 import Social from "./pages/Social/index";
 import About from "./pages/About/About";
