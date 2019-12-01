@@ -37,7 +37,11 @@ function NavMenu(props) {
           <Nav.Link eventKey="5" as={Link} to="/about">About</Nav.Link>
         </Nav>
         <Form inline style={{"justifyContent": "left"}}>
-          <span className="mr-4">{user?"Welcome, " + user.name:""}</span>
+          {
+            user? 
+            <span className="mr-4">{"Welcome, " + user.name}</span>
+            : ""
+          }
           <LogBtn />
         </Form>
       </Navbar.Collapse>
