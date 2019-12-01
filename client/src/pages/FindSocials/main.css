@@ -31,7 +31,7 @@
 
 /* class created only for a better preview*/
 .stage {
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     position: absolute;
     opacity: 1;
     max-width: 600px;
@@ -376,4 +376,9 @@ body {
 
   .card {
     height: initial;
+  }
+
+  .App {
+    overflow: hidden;
+    position: relative;
   }
