@@ -1,25 +1,27 @@
-.about {
+/* .about {
     height: 100vh;
     width: 100vw;
+    height: 100%;
+    width: 100%;
     background-image: url("https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9");
     background-size: cover;
     background-repeat: no-repeat;
     font-weight: bold;
+} */
+
+.logo-name {
+    font-family: 'Bungee', cursive;
 }
 
-.logo {
-    font-family: 'Roboto Condensed', sans-serif;
-}
-
-.container-about {
+/* .container-about {
     position: relative;
     margin: auto;
     width: 80%;
     top: 50%;
-    transform: translateY(-50%);
     border-radius: 5px;
     background-color: rgb(206, 140, 97, 0.7);
     padding: 15px;
     text-align: center;
+    transform: translateY(-50%);
     font-size: 20px;
-}
+} */
