@@ -97,7 +97,7 @@ export default function About() {
                 <Col xs={6} md={3} className="text-center">
                     <Image
                     className="mx-auto rounded-circle mt-3 mb-3"
-                    src={"https://i.ibb.co/vzQVfPn/about-tech.png"}
+                    src={"https://i.ibb.co/TcXPfH4/THKK1-RQ20-UK9-F8-PEQ5-6bff7a33eb4b-512-2.jpg"}
                     roundedCircle
                     height="125px"
                     /> 
