@@ -15,14 +15,10 @@ function UserPage(props) {
   const [createdIsEmpty, setCreatedIsEmpty] = useState([]);
   const [attendingIsEmpty, setAttendingIsEmpty] = useState([]);
   const [likedIsEmpty, setLikedIsEmpty] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState([true]);
 
   useEffect(() => {
     API.getAllSocials().then(async socials => {
-      let createdList = [];
-      let attendingList = [];
-      let likedList = [];
-
       let createdSocials = await socials.data.filter(social => {
         //Filters for socials created by user
         if (social.creator._id === props.user._id)
