@@ -105,7 +105,7 @@ export default function About() {
                         Colin <a href="https://www.linkedin.com/in/colin-cason-566416156/"><i className="fab fa-linkedin fa-sm"></i></a>
                     </p>
                     <span className="d-block font-italic text-secondary">
-                        New dad
+                        Human dad
                     </span>
                     </Col>
                 <Col xs={6} md={3} className="text-center">
