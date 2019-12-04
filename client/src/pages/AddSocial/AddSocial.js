@@ -143,8 +143,6 @@ export class AddSocial extends Component {
             return;
         }
 
-
-
         // Upload image to firebase, return URL 
         const image = new Blob([this.state.image], { type: `image/${this.state.image.name.split(".")[1]}` });
         const uploadTask = storage.ref(`images/${this.state.image.name}`).put(image);
@@ -314,7 +312,7 @@ export class AddSocial extends Component {
                                             <section className="container">
                                                 <div {...getRootProps({ className: 'dropzone' })}>
                                                     <input {...getInputProps({ multiple: false })} />
-                                                    <p>Drag 'n' drop some files here, or click to select files</p>
+                                                    <p>Drag 'n' drop an image here, or click to select one</p>
                                                 </div>
                                             </section>
                                         )}
