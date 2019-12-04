@@ -5,6 +5,9 @@ import DynamicTextArea from 'react-autosize-textarea';
 import moment from "moment";
 import LocationAutocomplete from 'location-autocomplete';
 import { Form, Button, Card, Container, Alert } from "react-bootstrap";
+import Dropzone from 'react-dropzone';
+import storage from "../../utils/firebaseConfig";
+
 
 // Import responsive header tags
 import "../../utils/flowHeaders.min.css";
@@ -20,7 +23,6 @@ export class AddSocial extends Component {
         description: "",
         category: "",
         location: "",
-        image: "",
         alertOpen: false,
         errorAlertOpen: false,
         startDate: new Date(),
@@ -115,22 +117,22 @@ export class AddSocial extends Component {
         let invalid = {};
 
         // Check name and location are not blank
-        if(!this.state.name) { invalid.name = true; }
-        if(!this.state.location) { invalid.location = true; }
+        if (!this.state.name) { invalid.name = true; }
+        if (!this.state.location) { invalid.location = true; }
 
         // Check startDate and endDate are not blank and are Date objects
-        if((!this.state.startDate || Object.prototype.toString.call(this.state.startDate) !== '[object Date]')) { invalid.startDate = true; }
-        if(!this.state.endDate || Object.prototype.toString.call(this.state.endDate) !== '[object Date]') { invalid.endDate = true; }
+        if ((!this.state.startDate || Object.prototype.toString.call(this.state.startDate) !== '[object Date]')) { invalid.startDate = true; }
+        if (!this.state.endDate || Object.prototype.toString.call(this.state.endDate) !== '[object Date]') { invalid.endDate = true; }
         // Check to see whether or not startDate is before endDate
-        if(!invalid.startDate && !invalid.endDate) {
-            if(moment(this.state.startDate).isAfter(this.state.endDate)) {
+        if (!invalid.startDate && !invalid.endDate) {
+            if (moment(this.state.startDate).isAfter(this.state.endDate)) {
                 invalid.startDate = true;
                 invalid.endDate = true;
             }
         }
-        
+
         // Check if image invalid error is set
-        if(this.state.invalid.image || !this.state.image) { invalid.image = true; }
+        if (this.state.invalid.image || !this.state.image) { invalid.image = true; }
 
         // If any errors, open errorAlert
         if (Object.keys(invalid).length) {
@@ -141,46 +143,90 @@ export class AddSocial extends Component {
             return;
         }
 
-        // Submit Social object to API
-        const newSocial = {
-            creator: this.props.user._id,
-            name: this.state.name,
-            startDate: this.state.startDate,
-            endDate: this.state.endDate,
-            location: this.state.location,
-            image: this.state.image,
-            category: "this.state.category",
-            description: this.state.description
-        }
+        // Upload image to firebase, return URL 
+        const image = new Blob([this.state.image], { type: `image/${this.state.image.name.split(".")[1]}` });
+        const uploadTask = storage.ref(`images/${this.state.image.name}`).put(image);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {
+                // progress function ...
+                const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                // this.setState({ progress });
+                // console.log(progress);
+            },
+            error => {
+                // Error function ...
+                console.log(error);
+            },
+            () => {
+                // complete function ...
+                storage
+                    .ref("images")
+                    .child(this.state.image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        // Submit Social object to API
+                        const newSocial = {
+                            creator: this.props.user._id,
+                            name: this.state.name,
+                            startDate: this.state.startDate,
+                            endDate: this.state.endDate,
+                            location: this.state.location,
+                            image: url,
+                            category: "this.state.category",
+                            description: this.state.description
+                        }
 
-        API.createSocial(newSocial)
-            .then((obj) => {
-                if(obj.data) {
-                // Reset state variables
-                this.setState({
-                    name: "",
-                    description: "",
-                    category: "",
-                    location: "",
-                    image: "",
-                    errorImgMsg: "",
-                    alertOpen: true,
-                    errorAlertOpen: false,
-                    startDate: new Date(),
-                    endDate: new Date(),
-                    invalid: {
-                        name: false,
-                        location: false,
-                        startDate: false,
-                        endDate: false,
-                        image: false
-                    }
-                });
-            } 
-            })
+                        API.createSocial(newSocial)
+                            .then((obj) => {
+                                if (obj.data) {
+                                    // Reset state variables
+                                    this.setState({
+                                        name: "",
+                                        description: "",
+                                        category: "",
+                                        location: "",
+                                        image: "",
+                                        errorImgMsg: "",
+                                        alertOpen: true,
+                                        errorAlertOpen: false,
+                                        startDate: new Date(),
+                                        endDate: new Date(),
+                                        invalid: {
+                                            name: false,
+                                            location: false,
+                                            startDate: false,
+                                            endDate: false,
+                                            image: false
+                                        }
+                                    });
+                                }
+                            })
+
+
+                    });
+            }
+        );
+
+
 
 
     };
+
+    handleDrop = (imageFiles) => {
+        this.setState({
+            image: imageFiles[0],
+            invalid: {
+                name: false,
+                location: false,
+                startDate: false,
+                endDate: false,
+                image: false
+            }
+        })
+    }
 
     componentDidMount() {
     }
@@ -234,7 +280,7 @@ export class AddSocial extends Component {
                                         value={this.state.description}
                                         name="description"
                                         onChange={(e) => this.handleInputChange(e)}
-                                         />
+                                    />
 
                                     <div className="r-form d-inline-block">
                                         <Form.Label className="font-weight-light mt-3 w-100"> Start Date (required)</Form.Label>
@@ -261,32 +307,29 @@ export class AddSocial extends Component {
                                         />
                                     </div>
 
-                                    <Form.Label className="font-weight-light mt-3 w-100"> Social Image URL (required)</Form.Label>
-                                    <Form.Control
+                                    <Form.Label className="font-weight-light mt-3 w-100"> Social Image (required)</Form.Label>
+                                    {/* <Form.Control
                                         isInvalid={this.state.invalid.image}
-                                        value={this.state.image}
+                                        value={this.state.image.name}
                                         name="image"
                                         onChange={(e) => this.handleInputChange(e)}
                                         type="text"
                                         placeholder="My social's cover photo can be found at..."
-                                    ></Form.Control>
+                                    ></Form.Control> */}
+                                    <Dropzone onDrop={(img) => this.handleDrop(img)}>
+                                        {({ getRootProps, getInputProps }) => (
+                                            <section className="container">
+                                                <div {...getRootProps({ className: `${this.state.invalid.image ? 'dropzone-error' : 'dropzone'}` })}>
+                                                    <input {...getInputProps({ multiple: false, accept: 'image/*' })} />
+                                                    <p>Drag 'n' drop an image here, or click to select one</p>
+                                                </div>
+                                            </section>
+                                        )}
+                                    </Dropzone>
                                     <span style={{ "fontSize": "0.8rem" }} className="text-danger">{this.state.errorImgMsg}</span>
                                     <div className="text-center">
-                                        <img onError={this.addDefaultSrc} className="mt-2 img-fluid mx-auto" src={this.state.image} />
+                                        <img onError={this.addDefaultSrc} className="mt-2 img-fluid mx-auto" src={this.state.image ? URL.createObjectURL(this.state.image) : "https://pbs.twimg.com/media/DnE2oP6UYAAJr8R.jpg"} />
                                     </div>
-                                    {/* <Form.Label> Category:</Form.Label>
-                                    <Form.Control as="select"
-                                        name="category"
-                                        onChange={this.handleInputChange}>
-                                        <option value={this.state.category}>Hobbies</option>
-                                        <option value={this.state.category}>Outdoors Life</option>
-                                        <option value={this.state.category}>Nightlife</option>
-                                        <option value={this.state.category}>Sports</option>
-                                        <option value={this.state.category}>Social</option>
-                                        <option value={this.state.category}>Events</option>
-                                    </Form.Control> */}
-
-
                                     <div className="text-center">
                                         <Button onClick={this.handleFormSubmit} className="mt-3" variant="light" size="lg">Create</Button>
 
