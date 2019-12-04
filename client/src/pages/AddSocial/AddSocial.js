@@ -216,7 +216,16 @@ export class AddSocial extends Component {
     };
 
     handleDrop = (imageFiles) => {
-        this.setState({ image: imageFiles[0] })
+        this.setState({
+            image: imageFiles[0],
+            invalid: {
+                name: false,
+                location: false,
+                startDate: false,
+                endDate: false,
+                image: false
+            }
+        })
     }
 
     componentDidMount() {
@@ -310,8 +319,8 @@ export class AddSocial extends Component {
                                     <Dropzone onDrop={(img) => this.handleDrop(img)}>
                                         {({ getRootProps, getInputProps }) => (
                                             <section className="container">
-                                                <div {...getRootProps({ className: 'dropzone' })}>
-                                                    <input {...getInputProps({ multiple: false })} />
+                                                <div {...getRootProps({ className: `${this.state.invalid.image ? 'dropzone-error' : 'dropzone'}` })}>
+                                                    <input {...getInputProps({ multiple: false, accept: 'image/*' })} />
                                                     <p>Drag 'n' drop an image here, or click to select one</p>
                                                 </div>
                                             </section>
