@@ -102,7 +102,7 @@ export default function About() {
                     height="125px"
                     /> 
                     <p className="flow-text mb-0">
-                        Colin <a href="https://www.linkedin.com/in/colin-cason-566416156/"><i className="fab fa-linkedin fa-sm"></i></a>
+                    <a href="https://www.linkedin.com/in/colin-cason-566416156/" style={{"color": "black"}}>Colin</a> <a href="https://www.linkedin.com/in/colin-cason-566416156/"><i className="fab fa-linkedin fa-sm"></i></a>
                     </p>
                     <span className="d-block font-italic text-secondary">
                         Human dad
@@ -116,7 +116,7 @@ export default function About() {
                     height="125px"
                     /> 
                     <p className="flow-text mb-0">
-                        Edel <a href="https://www.linkedin.com/in/edel-marcelino/" target="_blank"><i className="fab fa-linkedin fa-sm"></i></a>
+                        <a href="https://marcelinomade.com/" style={{"color": "black"}}>Edel</a> <a href="https://www.linkedin.com/in/edel-marcelino/" target="_blank"><i className="fab fa-linkedin fa-sm"></i></a>
                     </p>
                     <span className="d-block font-italic text-secondary">
                         MTG prodigy 
@@ -130,7 +130,7 @@ export default function About() {
                     height="125px"
                     /> 
                     <p className="flow-text mb-0">
-                        Johnathan <a href="https://www.linkedin.com/in/johnathan-mundt-430105115/" target="_blank"><i className="fab fa-linkedin fa-sm"></i></a>
+                        <a href="https://mundtdev.com/" style={{"color": "black"}}>Johnathan</a> <a href="https://www.linkedin.com/in/johnathan-mundt-430105115/" target="_blank"><i className="fab fa-linkedin fa-sm"></i></a>
                     </p>
                     <span className="d-block font-italic text-secondary">
                         Dog dad 
@@ -144,7 +144,7 @@ export default function About() {
                     height="125px"
                     /> 
                     <p className="flow-text mb-0">
-                        Matt <a href="https://www.linkedin.com/in/matthew-chen-1ba818155/" target="_blank"><i className="fab fa-linkedin fa-sm"></i></a>
+                        <a href="https://www.linkedin.com/in/matthew-chen-1ba818155/" style={{"color": "black"}}>Matt</a> <a href="https://www.linkedin.com/in/matthew-chen-1ba818155/" target="_blank"><i className="fab fa-linkedin fa-sm"></i></a>
                     </p>
                     <span className="d-block font-italic text-secondary">
                         Broke college student 
