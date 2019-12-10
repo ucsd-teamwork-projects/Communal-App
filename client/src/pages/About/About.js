@@ -102,7 +102,7 @@ export default function About() {
                     height="125px"
                     /> 
                     <p className="flow-text mb-0">
-                    <a href="https://www.linkedin.com/in/colin-cason-566416156/" style={{"color": "black"}}>Colin</a> <a href="https://www.linkedin.com/in/colin-cason-566416156/"><i className="fab fa-linkedin fa-sm"></i></a>
+                    <a href="https://colinjcason.github.io/Updated-Portfolio/" style={{"color": "black"}}>Colin</a> <a href="https://www.linkedin.com/in/colin-cason-566416156/"><i className="fab fa-linkedin fa-sm"></i></a>
                     </p>
                     <span className="d-block font-italic text-secondary">
                         Human dad
